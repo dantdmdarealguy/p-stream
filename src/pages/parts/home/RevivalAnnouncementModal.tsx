@@ -39,7 +39,7 @@ export function RevivalAnnouncementModal() {
               <Flare.Child className="pointer-events-auto relative">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-xl font-bold text-white">
-                    P-Stream is Back
+                    Viva La P-Stream
                   </h2>
                   <button
                     type="button"
@@ -51,8 +51,8 @@ export function RevivalAnnouncementModal() {
                 </div>
                 <div className="space-y-4 text-base text-type-secondary">
                   <p className="text-white font-bold border-l-2 border-white pl-3">
-                    This is a fork of the original P-Stream. XP Technologies
-                    holds no ownership over the original project and makes no
+                    This is a fork of the original P-Stream. I (dantdmdarealguy)
+                    hold no ownership over the original project and make no
                     claim to it.
                   </p>
                   <p>
@@ -61,15 +61,15 @@ export function RevivalAnnouncementModal() {
                     their decision and wish to keep their identity private.
                   </p>
                   <p>
-                    The XP Technologies team has taken on the responsibility of
-                    continuing their legacy. We are committed to keeping
+                    I have taken on the responsibility of
+                    continuing their legacy. I am committed to keeping
                     P-Stream <strong className="text-white">open source</strong>{" "}
                     and{" "}
                     <strong className="text-white">completely ad-free</strong>.
                   </p>
                   <p>
                     <a
-                      href="https://github.com/xp-technologies-dev/p-stream"
+                      href="https://github.com/dantdmdarealguy/p-stream"
                       target="_blank"
                       rel="noreferrer"
                       className="text-blue-400 hover:text-blue-300 underline transition-colors"

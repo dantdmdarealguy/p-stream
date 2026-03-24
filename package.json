@@ -3,7 +3,7 @@
   "name": "P-Stream",
   "version": "5.3.7",
   "private": true,
-  "homepage": "https://github.com/xp-technologies-dev/p-stream",
+  "homepage": "https://github.com/dantdmdarealguy/p-stream",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

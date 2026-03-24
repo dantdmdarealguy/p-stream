@@ -132,7 +132,7 @@ export function LegalPage() {
                 <br />
                 <br />
                 P-Stream is entirely self hostable, and can be run on any
-                server. Even by yourself.
+                server. Even by yourself. In fact, I am selfhosting this.
               </Paragraph>
             }
           />

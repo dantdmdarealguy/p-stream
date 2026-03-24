@@ -41,6 +41,7 @@ import { OnboardingPage } from "@/pages/onboarding/Onboarding";
 import { OnboardingExtensionPage } from "@/pages/onboarding/OnboardingExtension";
 import { OnboardingProxyPage } from "@/pages/onboarding/OnboardingProxy";
 import { PasPage } from "@/pages/Pas";
+import { VaibhavPage } from "@/pages/Vaibhav";
 import { RegisterPage } from "@/pages/Register";
 import { SupportPage } from "@/pages/Support";
 import { WatchHistory } from "@/pages/watchHistory/WatchHistory";
@@ -194,6 +195,7 @@ function App() {
           <Route path="/support" element={<SupportPage />} />
           <Route path="/jip" element={<JipPage />} />
           <Route path="/pas" element={<PasPage />} />
+          <Route path="/vaibhav" element={<VaibhavPage />} />
           {/* Discover pages */}
           <Route path="/discover" element={<Discover />} />
           <Route

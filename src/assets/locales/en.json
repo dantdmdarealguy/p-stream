@@ -38,7 +38,7 @@
     },
     "q6": {
       "title": "Is there a P-Stream app?",
-      "body": "Yes! We now have an official desktop app available for download! https://github.com/xp-technologies-dev/p-stream-desktop/releases",
+      "body": "Yes! We now have an official desktop app available for download! https://github.com/dantdmdarealguy/p-stream-desktop/releases",
       "section": "general"
     },
     "q7": {
@@ -267,7 +267,8 @@
       "settings": "Settings",
       "migration": "Migrate Account",
       "jip": "Jip",
-      "pas": "Pas"
+      "pas": "Pas",
+      "vaibhav": "Vaibhav"
     },
     "keyboardShortcuts": {
       "title": "Keyboard Shortcuts",
@@ -1127,6 +1128,10 @@
   "pas": {
     "title": "Pas",
     "text": "P-Stream was a dream and Pas made it a reality."
+  },
+  "vaibhav": {
+    "title": "Vaibhav Vaidish",
+    "text": "Built with care by <bold>Vaibhav Vaidish</bold> (dantdmdarealguy)."
   },
   "screens": {
     "legal": {

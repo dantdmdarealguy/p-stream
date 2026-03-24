@@ -29,17 +29,17 @@ function Button(props: {
   );
 }
 
-export function PasPage() {
+export function VaibhavPage() {
   const { t } = useTranslation();
 
   return (
     <SubPageLayout>
-      <PageTitle subpage k="global.pages.pas" />
+      <PageTitle subpage k="global.pages.vaibhav" />
       <ThinContainer>
-        <Heading1>{t("pas.title")}</Heading1>
+        <Heading1>{t("vaibhav.title")}</Heading1>
         <Paragraph className="flex flex-col gap-6">
           <Trans
-            i18nKey="pas.text"
+            i18nKey="vaibhav.text"
             components={{
               bold: <span className="font-bold" style={{ color: "#cfcfcf" }} />,
             }}
@@ -47,13 +47,14 @@ export function PasPage() {
           <Button
             className="box-content w-full py-1 text-lg bg-buttons-secondary hover:bg-buttons-secondaryHover bg-opacity-90 text-buttons-secondaryText justify-center items-center inline-block"
             onClick={() =>
-              window.open("https://github.com/Pasithea0", "_blank")
+              window.open("https://github.com/dantdmdarealguy", "_blank")
             }
           >
-            Ran in honor of Pasithea0 on GitHub
+            dantdmdarealguy on GitHub
           </Button>
         </Paragraph>
       </ThinContainer>
     </SubPageLayout>
   );
 }
+

@@ -185,7 +185,7 @@ export function OnboardingPage() {
           <Card
             onClick={() =>
               window.open(
-                "https://github.com/xp-technologies-dev/p-stream-desktop/releases",
+                "https://github.com/dantdmdarealguy/p-stream-desktop/releases",
                 "_blank",
               )
             }
@@ -259,7 +259,7 @@ export function OnboardingPage() {
           {/* <Card
             onClick={() =>
               window.open(
-                "https://github.com/xp-technologies-dev/p-stream-desktop/releases",
+                "https://github.com/dantdmdarealguy/p-stream-desktop/releases",
                 "_blank",
               )
             }
