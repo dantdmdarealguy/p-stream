@@ -6,11 +6,17 @@ import { downloadCaption } from "@/backend/helpers/subs";
 import { Button } from "@/components/buttons/Button";
 import { Icon, Icons } from "@/components/Icon";
 import { OverlayPage } from "@/components/overlays/OverlayPage";
+import {
+  DownloadModal,
+  DownloadSource,
+} from "@/components/overlays/DownloadModal";
+import { useModal } from "@/components/overlays/Modal";
 import { Menu } from "@/components/player/internals/ContextMenu";
 import { convertSubtitlesToSrtDataurl } from "@/components/player/utils/captions";
 import { useIsDesktopApp } from "@/hooks/useIsDesktopApp";
 import { useOverlayRouter } from "@/hooks/useOverlayRouter";
 import { usePlayerStore } from "@/stores/player/store";
+import { qualityToString } from "@/stores/player/utils/qualities";
 
 export function useDownloadLink() {
   const source = usePlayerStore((s) => s.source);
@@ -138,13 +144,67 @@ export function DownloadView({ id }: { id: string }) {
     window.open(dataUrl);
   }, [selectedCaption]);
 
+  // Build DownloadSource list for the smart download modal
+  const downloadSources = useMemo<DownloadSource[]>(() => {
+    if (!source) return [];
+    const headers = {
+      ...(source.headers ?? {}),
+      ...(source.preferredHeaders ?? {}),
+    };
+    if (source.type === "hls") {
+      return [
+        {
+          qualityLabel: "Auto",
+          url: source.url,
+          type: "hls" as const,
+          headers,
+        },
+      ];
+    }
+    if (source.type === "file") {
+      return Object.entries(source.qualities)
+        .filter(([, q]) => !!q?.url)
+        .map(([quality, q]) => ({
+          qualityLabel: qualityToString(quality as any),
+          url: q!.url,
+          type: "mp4" as const,
+          headers,
+        }));
+    }
+    return [];
+  }, [source]);
+
+  const smartDownloadModal = useModal("smart-download-modal");
+
   return (
     <>
+      <DownloadModal
+        id="smart-download-modal"
+        sources={downloadSources}
+        title={meta?.title ?? "Video"}
+      />
       <Menu.BackLink onClick={() => router.navigate("/")}>
         {t("player.menus.downloads.title")}
       </Menu.BackLink>
       <Menu.Section>
         <div className="mb-4">
+          {/* Smart browser download button */}
+          {downloadSources.length > 0 && (
+            <div className="mb-4">
+              <Button
+                className="w-full"
+                theme="purple"
+                icon={Icons.DOWNLOAD}
+                onClick={() => smartDownloadModal.show()}
+              >
+                Smart Download
+              </Button>
+              <p className="text-xs text-type-secondary mt-2 mb-2 text-center">
+                Downloads directly to your device. Picks the fastest source automatically.
+              </p>
+              <Menu.Divider />
+            </div>
+          )}
           {sourceType === "hls" ? (
             <div className="mb-6">
               {isDesktopApp ? (

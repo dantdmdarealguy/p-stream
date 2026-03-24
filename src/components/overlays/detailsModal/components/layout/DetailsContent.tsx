@@ -468,6 +468,12 @@ export function DetailsContent({ data, minimal = false }: DetailsContentProps) {
             mediaTitle={data.title}
             mediaPosterUrl={data.posterUrl}
             totalEpisodes={data.episodes}
+            releaseYear={
+              data.releaseDate
+                ? new Date(data.releaseDate).getFullYear()
+                : undefined
+            }
+            imdbId={data.imdbId}
           />
         )}
 
