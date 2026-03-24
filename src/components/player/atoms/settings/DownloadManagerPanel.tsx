@@ -23,7 +23,7 @@ function formatEta(seconds: number | null) {
 }
 
 function TaskRow({ task }: { task: DownloadTask }) {
-  const { pauseTask, resumeTask, cancelTask } = useDownloadManager();
+  const { pauseTask, resumeTask, retryTask, cancelTask } = useDownloadManager();
 
   const statusColor =
     task.status === "completed"
@@ -61,8 +61,22 @@ function TaskRow({ task }: { task: DownloadTask }) {
       );
     }
 
+    if (task.status === "error") {
+      return (
+        <Button
+          className="px-2 py-1 text-xs"
+          theme="purple"
+          onClick={() => {
+            retryTask(task.id).catch(() => {});
+          }}
+        >
+          <Icon icon={Icons.RELOAD} className="mr-1 text-xs" /> Retry
+        </Button>
+      );
+    }
+
     return null;
-  }, [pauseTask, resumeTask, task.id, task.status]);
+  }, [pauseTask, resumeTask, retryTask, task.id, task.status]);
 
   return (
     <div className="rounded-lg border border-video-context-border bg-black/20 p-3">
