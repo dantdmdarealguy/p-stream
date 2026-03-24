@@ -16,9 +16,9 @@
 | ------------- | ----------------------------------------------- | ------------------------------------------------------- |
 | P-Stream Docs | [docs](https://p-stream.github.io/docs/)                | [source code](https://github.com/p-stream/docs)         |
 | Extension     | [extension](https://p-stream.github.io/docs/extension) | [source code](https://github.com/p-stream/browser-ext)  |
-| Proxy         | [simple-proxy](https://p-stream.github.io/docs/proxy)  | [source code](https://github.com/p-stream/simple-proxy) |
+| Proxy         | [simple-proxy](https://p-stream.github.io/docs/proxy)  | [source code](https://github.com/dantdmdarealguy/simple-proxy) |
 | Backend       | [backend](https://github.com/p-stream/backend)          | [source code](https://github.com/p-stream/backend)      |
-| Frontend      | [P-Stream](https://p-stream.github.io/docs/instances)  | [source code](https://github.com/p-stream/p-stream)     |
+| Frontend      | [P-Stream](https://p-stream.github.io/docs/instances)  | [source code](https://github.com/dantdmdarealguy/p-stream)     |
 | Weblate       | [weblate](https://p-stream.github.io/docs/weblate)          |                                                         |
 
 ## Referrers
@@ -30,7 +30,7 @@
 Type the following commands into your terminal / command line to run P-Stream locally
 
 ```bash
-git clone https://github.com/p-stream/p-stream.git
+git clone https://github.com/dantdmdarealguy/p-stream.git
 cd smov
 git pull
 pnpm install
@@ -44,7 +44,7 @@ Then you can visit the local instance [here](http://localhost:5173) or, at local
 To update a P-Stream instance you can type the below commands into a terminal at the root of your project.
 
 ```bash
-git remote add upstream https://github.com/p-stream/p-stream.git
+git remote add upstream https://github.com/dantdmdarealguy/p-stream.git
 git fetch upstream # Grab the contents of the new remote source
 git checkout <YOUR_MAIN_BRANCH>  # Most likely this would be `origin/production`
 git merge upstream/production
