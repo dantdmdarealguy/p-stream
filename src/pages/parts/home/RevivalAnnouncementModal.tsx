@@ -61,10 +61,9 @@ export function RevivalAnnouncementModal() {
                     their decision and wish to keep their identity private.
                   </p>
                   <p>
-                    I have taken on the responsibility of
-                    continuing their legacy. I am committed to keeping
-                    P-Stream <strong className="text-white">open source</strong>{" "}
-                    and{" "}
+                    I have taken on the responsibility of continuing their
+                    legacy. I am committed to keeping P-Stream{" "}
+                    <strong className="text-white">open source</strong> and{" "}
                     <strong className="text-white">completely ad-free</strong>.
                   </p>
                   <p>
