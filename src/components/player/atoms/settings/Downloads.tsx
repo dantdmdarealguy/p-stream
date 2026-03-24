@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useCopyToClipboard } from "react-use";
 
@@ -6,6 +6,9 @@ import { downloadCaption } from "@/backend/helpers/subs";
 import { Button } from "@/components/buttons/Button";
 import { Icon, Icons } from "@/components/Icon";
 import { OverlayPage } from "@/components/overlays/OverlayPage";
+import { DownloadManagerPanel } from "@/components/player/atoms/settings/DownloadManagerPanel";
+import { ResolutionDropdown } from "@/components/player/atoms/settings/ResolutionDropdown";
+import { useDownloadManager } from "@/components/player/download/DownloadManagerContext";
 import { Menu } from "@/components/player/internals/ContextMenu";
 import { convertSubtitlesToSrtDataurl } from "@/components/player/utils/captions";
 import { useIsDesktopApp } from "@/hooks/useIsDesktopApp";
@@ -78,6 +81,19 @@ export function DownloadView({ id }: { id: string }) {
   const duration = usePlayerStore((s) => s.progress.duration);
   const source = usePlayerStore((s) => s.source);
   const isDesktopApp = useIsDesktopApp();
+  const [preparedTaskId, setPreparedTaskId] = useState<string | null>(null);
+  const {
+    tasks,
+    createTaskFromSource,
+    setResolution,
+    startTask,
+    activeTaskId,
+  } = useDownloadManager();
+
+  const preparedTask = useMemo(
+    () => tasks.find((task) => task.id === preparedTaskId),
+    [tasks, preparedTaskId],
+  );
 
   const startOfflineDownload = useCallback(async () => {
     if (!downloadUrl) return;
@@ -137,6 +153,39 @@ export function DownloadView({ id }: { id: string }) {
     if (!dataUrl) return;
     window.open(dataUrl);
   }, [selectedCaption]);
+
+  const prepareClientDownload = useCallback(async () => {
+    if (!source || (source.type !== "file" && source.type !== "hls")) return;
+
+    const mediaType = meta?.type ?? "movie";
+    const title = meta?.title ?? "P-Stream";
+    const seasonNumber = meta?.season?.number;
+    const episodeNumber = meta?.episode?.number;
+    const episodeTitle = meta?.episode?.title;
+    const fileName =
+      mediaType === "show" && seasonNumber && episodeNumber
+        ? `${title}.S${String(seasonNumber).padStart(2, "0")}E${String(episodeNumber).padStart(2, "0")}.${episodeTitle ?? "episode"}.mp4`
+        : `${title}.mp4`;
+
+    const taskId = await createTaskFromSource(
+      source,
+      {
+        mediaType,
+        title,
+        seasonNumber,
+        episodeNumber,
+        episodeTitle,
+      },
+      fileName,
+    );
+
+    setPreparedTaskId(taskId);
+  }, [createTaskFromSource, meta, source]);
+
+  const startPreparedTask = useCallback(() => {
+    if (!preparedTask) return;
+    startTask(preparedTask.id).catch(() => {});
+  }, [preparedTask, startTask]);
 
   return (
     <>
@@ -208,6 +257,51 @@ export function DownloadView({ id }: { id: string }) {
               >
                 {t("player.menus.downloads.downloadSubtitle")}
               </Button>
+
+              {!isDesktopApp ? (
+                <div className="mt-6 space-y-3 rounded-lg border border-video-context-border bg-black/20 p-3">
+                  <p className="text-sm font-medium text-white">
+                    Browser Download (Client-Side)
+                  </p>
+                  <p className="text-xs text-type-secondary">
+                    Streams are tested in-browser and downloaded directly to
+                    your disk.
+                  </p>
+                  <Button
+                    className="w-full"
+                    theme="purple"
+                    onClick={prepareClientDownload}
+                  >
+                    Prepare Sources
+                  </Button>
+                  {preparedTask?.sourceOptions.length ? (
+                    <ResolutionDropdown
+                      options={preparedTask.sourceOptions}
+                      selected={preparedTask.selectedResolution}
+                      onChange={(resolution) => {
+                        if (!preparedTask) return;
+                        setResolution(preparedTask.id, resolution);
+                      }}
+                      disabled={preparedTask.status === "running"}
+                    />
+                  ) : null}
+                  {preparedTask ? (
+                    <Button
+                      className="w-full"
+                      theme="secondary"
+                      onClick={startPreparedTask}
+                      disabled={
+                        preparedTask.status === "running" ||
+                        preparedTask.status === "probing" ||
+                        activeTaskId === preparedTask.id
+                      }
+                    >
+                      Start Download
+                    </Button>
+                  ) : null}
+                  <DownloadManagerPanel />
+                </div>
+              ) : null}
             </div>
           ) : sourceType === "file" ? (
             <div className="mb-6">
@@ -261,6 +355,51 @@ export function DownloadView({ id }: { id: string }) {
               >
                 {t("player.menus.downloads.downloadSubtitle")}
               </Button>
+
+              {!isDesktopApp ? (
+                <div className="mt-6 space-y-3 rounded-lg border border-video-context-border bg-black/20 p-3">
+                  <p className="text-sm font-medium text-white">
+                    Browser Download (Client-Side)
+                  </p>
+                  <p className="text-xs text-type-secondary">
+                    Streams are tested in-browser and downloaded directly to
+                    your disk.
+                  </p>
+                  <Button
+                    className="w-full"
+                    theme="purple"
+                    onClick={prepareClientDownload}
+                  >
+                    Prepare Sources
+                  </Button>
+                  {preparedTask?.sourceOptions.length ? (
+                    <ResolutionDropdown
+                      options={preparedTask.sourceOptions}
+                      selected={preparedTask.selectedResolution}
+                      onChange={(resolution) => {
+                        if (!preparedTask) return;
+                        setResolution(preparedTask.id, resolution);
+                      }}
+                      disabled={preparedTask.status === "running"}
+                    />
+                  ) : null}
+                  {preparedTask ? (
+                    <Button
+                      className="w-full"
+                      theme="secondary"
+                      onClick={startPreparedTask}
+                      disabled={
+                        preparedTask.status === "running" ||
+                        preparedTask.status === "probing" ||
+                        activeTaskId === preparedTask.id
+                      }
+                    >
+                      Start Download
+                    </Button>
+                  ) : null}
+                  <DownloadManagerPanel />
+                </div>
+              ) : null}
             </div>
           ) : (
             <>
