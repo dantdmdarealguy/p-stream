@@ -7,6 +7,10 @@ import { Button } from "@/components/buttons/Button";
 import { Dropdown } from "@/components/form/Dropdown";
 import { Icon, Icons } from "@/components/Icon";
 import { Modal, ModalCard, useModal } from "@/components/overlays/Modal";
+import {
+  EpisodeDownloadButton,
+  SeasonDownloadButton,
+} from "@/components/overlays/DownloadModal/EpisodeDownloadButton";
 import { hasAired } from "@/components/player/utils/aired";
 import { useBookmarkStore } from "@/stores/bookmarks";
 import { getProgressPercentage, useProgressStore } from "@/stores/progress";
@@ -26,6 +30,8 @@ export function EpisodeCarousel({
   mediaTitle,
   mediaPosterUrl,
   totalEpisodes,
+  releaseYear,
+  imdbId,
 }: EpisodeCarouselProps) {
   const [showEpisodeMenu, setShowEpisodeMenu] = useState(false);
   const [customSeason, setCustomSeason] = useState("");
@@ -245,6 +251,10 @@ export function EpisodeCarousel({
 
   const currentSeasonEpisodes = episodes.filter(
     (ep) => ep.season_number === selectedSeason,
+  );
+
+  const currentSeasonData = seasons.find(
+    (s) => s.season_number === selectedSeason,
   );
 
   // Get favorite episodes for this show
@@ -561,6 +571,26 @@ export function EpisodeCarousel({
             }}
             setSelectedItem={handleSeasonOrFavoritesChange}
           />
+          {/* Download Season button */}
+          {!showFavorites &&
+            mediaId &&
+            mediaTitle &&
+            releaseYear &&
+            currentSeasonData && (
+              <SeasonDownloadButton
+                episodes={currentSeasonEpisodes}
+                showTitle={mediaTitle}
+                showTmdbId={mediaId.toString()}
+                releaseYear={releaseYear}
+                imdbId={imdbId}
+                seasonNumber={selectedSeason}
+                seasonTmdbId={currentSeasonData.id.toString()}
+                seasonTitle={
+                  currentSeasonData.name ??
+                  `Season ${selectedSeason}`
+                }
+              />
+            )}
         </div>
       </div>
 
@@ -672,6 +702,29 @@ export function EpisodeCarousel({
                         {/* Mark as watched and favorite buttons */}
                         {isAired && (
                           <div className="absolute top-2 right-2 flex gap-1">
+                            {mediaId &&
+                              mediaTitle &&
+                              releaseYear &&
+                              currentSeasonData && (
+                                <EpisodeDownloadButton
+                                  scrapeMeta={{
+                                    showTmdbId: mediaId.toString(),
+                                    showTitle: mediaTitle,
+                                    releaseYear,
+                                    imdbId,
+                                    seasonNumber: episode.season_number,
+                                    seasonTmdbId:
+                                      currentSeasonData.id.toString(),
+                                    seasonTitle:
+                                      currentSeasonData.name ??
+                                      `Season ${episode.season_number}`,
+                                    episodeNumber: episode.episode_number,
+                                    episodeTmdbId: episode.id.toString(),
+                                    episodeTitle: episode.name,
+                                  }}
+                                  label={`${mediaTitle} S${episode.season_number.toString().padStart(2, "0")}E${episode.episode_number.toString().padStart(2, "0")} - ${episode.name}`}
+                                />
+                              )}
                             <button
                               type="button"
                               onClick={(e) =>

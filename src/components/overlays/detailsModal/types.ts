@@ -106,6 +106,10 @@ export interface EpisodeCarouselProps {
   mediaTitle?: string;
   mediaPosterUrl?: string;
   totalEpisodes?: number;
+  /** Release year of the show – used for download scraping */
+  releaseYear?: number;
+  /** IMDb ID of the show – used for download scraping */
+  imdbId?: string;
 }
 
 export interface DetailsBodyProps {
