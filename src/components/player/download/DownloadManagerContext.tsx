@@ -53,6 +53,7 @@ interface DownloadManagerContextValue {
   startTask: (taskId: string) => Promise<void>;
   pauseTask: (taskId: string) => void;
   resumeTask: (taskId: string) => Promise<void>;
+  retryTask: (taskId: string) => Promise<void>;
   cancelTask: (taskId: string) => void;
 }
 
@@ -504,6 +505,25 @@ export function DownloadManagerProvider({ children }: PropsWithChildren) {
     [runTask, tasks],
   );
 
+  const retryTask = useCallback(
+    async (taskId: string) => {
+      const task = tasks.find((t) => t.id === taskId);
+      if (!task || task.status !== "error") return;
+      // Clear the previous error and resume from the last known position.
+      // runtime.segmentIndex and task.metrics.bytesDownloaded are preserved
+      // from the failed run, so the download continues rather than restarting.
+      updateTask(taskId, (prev) => ({
+        ...prev,
+        status: "queued",
+        error: undefined,
+        updatedAt: Date.now(),
+      }));
+      setActiveTaskId(taskId);
+      await runTask(taskId, true);
+    },
+    [runTask, tasks, updateTask],
+  );
+
   const cancelTask = useCallback(
     (taskId: string) => {
       const runtime = runtimeRef.current[taskId];
@@ -546,6 +566,7 @@ export function DownloadManagerProvider({ children }: PropsWithChildren) {
       startTask,
       pauseTask,
       resumeTask,
+      retryTask,
       cancelTask,
     }),
     [
@@ -557,6 +578,7 @@ export function DownloadManagerProvider({ children }: PropsWithChildren) {
       startTask,
       pauseTask,
       resumeTask,
+      retryTask,
       cancelTask,
     ],
   );
