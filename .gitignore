@@ -33,3 +33,6 @@ sync-fork.bat
 # docs (separate repo)
 pstream-docs/
 
+# local proxy workspace (separate repo)
+mov-proxy/
+

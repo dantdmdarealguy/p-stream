@@ -202,9 +202,17 @@ export async function testTorboxToken(
 
       console.log("Torbox API response:", data);
 
-      // Torbox returns user object with id field on successful auth
-      if (data && typeof data === "object" && data.id) {
-        console.log(`Torbox token confirmed valid (user id: ${data.id})`);
+      // Accept both shapes seen in the wild:
+      // 1) { id: ... }
+      // 2) { success: true, data: { id: ... } }
+      const torboxUserId =
+        data && typeof data === "object"
+          ? ((data as any).id ??
+            ((data as any).success ? (data as any).data?.id : undefined))
+          : undefined;
+
+      if (torboxUserId) {
+        console.log(`Torbox token confirmed valid (user id: ${torboxUserId})`);
         return "success";
       }
 
