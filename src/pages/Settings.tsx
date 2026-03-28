@@ -881,7 +881,8 @@ export function SettingsPage() {
               sourceOrder: state.sourceOrder.state,
               enableSourceOrder: state.enableSourceOrder.state,
               lastSuccessfulSource: state.lastSuccessfulSource.state,
-              enableLastSuccessfulSource: state.enableLastSuccessfulSource.state,
+              enableLastSuccessfulSource:
+                state.enableLastSuccessfulSource.state,
               proxyTmdb: state.proxyTmdb.state,
               enableCarouselView: state.enableCarouselView.state,
               enableMinimalCards: state.enableMinimalCards.state,
