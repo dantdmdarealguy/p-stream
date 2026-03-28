@@ -186,8 +186,55 @@ export async function testTorboxToken(
     return "unset";
   }
 
-  // TODO: Implement Torbox token test
-  return "success";
+  const maxAttempts = 2;
+  let attempts = 0;
+
+  while (attempts < maxAttempts) {
+    try {
+      console.log(`Torbox API attempt ${attempts + 1}`);
+      const data = await proxiedFetch("https://api.torbox.app/v1/api/user/me", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${torboxToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (data && typeof data === "object" && data.success === true) {
+        console.log("Torbox token confirmed valid");
+        return "success";
+      }
+
+      console.log("Torbox response did not confirm valid token");
+      attempts += 1;
+      if (attempts === maxAttempts) {
+        return "invalid_token";
+      }
+      await sleep(3000);
+    } catch (error) {
+      console.error("Torbox API error:", error);
+
+      if (error instanceof FetchError) {
+        if (error.statusCode === 401 || error.statusCode === 403) {
+          console.log("Torbox token is invalid");
+          return "invalid_token";
+        }
+
+        if (error.statusCode && error.statusCode >= 500) {
+          console.log(`Torbox API down (status ${error.statusCode})`);
+          return "api_down";
+        }
+      }
+
+      attempts += 1;
+      if (attempts === maxAttempts) {
+        return "api_down";
+      }
+      await sleep(3000);
+    }
+  }
+
+  return "api_down";
 }
 
 function useIsSetup() {
