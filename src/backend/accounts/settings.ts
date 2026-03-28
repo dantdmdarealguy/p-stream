@@ -1,4 +1,4 @@
-import { ofetch } from "ofetch";
+import { FetchError, ofetch } from "ofetch";
 
 import { getAuthHeaders } from "@/backend/accounts/auth";
 import { AccountWithToken } from "@/stores/auth";
@@ -103,7 +103,7 @@ export interface SettingsResponse {
   customTheme?: CustomThemeSettings;
 }
 
-export function updateSettings(
+function putSettings(
   url: string,
   account: AccountWithToken,
   settings: SettingsInput,
@@ -114,6 +114,44 @@ export function updateSettings(
     baseURL: url,
     headers: getAuthHeaders(account.token),
   });
+}
+
+export async function updateSettings(
+  url: string,
+  account: AccountWithToken,
+  settings: SettingsInput,
+) {
+  try {
+    return await putSettings(url, account, settings);
+  } catch (error) {
+    if (
+      !(error instanceof FetchError) ||
+      error.statusCode !== 400 ||
+      settings.debridService !== "torbox"
+    ) {
+      throw error;
+    }
+
+    try {
+      const { debridService: _unsupportedService, ...compatSettings } =
+        settings;
+      return await putSettings(url, account, compatSettings);
+    } catch (compatError) {
+      if (
+        !(compatError instanceof FetchError) ||
+        compatError.statusCode !== 400
+      ) {
+        throw compatError;
+      }
+
+      const {
+        debridService: _unsupportedService,
+        debridToken: _unsupportedToken,
+        ...legacySafeSettings
+      } = settings;
+      return putSettings(url, account, legacySafeSettings);
+    }
+  }
 }
 
 export function getSettings(url: string, account: AccountWithToken) {

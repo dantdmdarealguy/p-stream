@@ -1,4 +1,4 @@
-import { ofetch } from "ofetch";
+import { FetchError, ofetch } from "ofetch";
 
 import { getAuthHeaders } from "@/backend/accounts/auth";
 import { AccountWithToken } from "@/stores/auth";
@@ -60,7 +60,7 @@ export function importWatchHistory(
   });
 }
 
-export function importSettings(
+function putImportedSettings(
   url: string,
   account: AccountWithToken,
   settings: SettingsInput,
@@ -71,4 +71,42 @@ export function importSettings(
     baseURL: url,
     headers: getAuthHeaders(account.token),
   });
+}
+
+export async function importSettings(
+  url: string,
+  account: AccountWithToken,
+  settings: SettingsInput,
+) {
+  try {
+    return await putImportedSettings(url, account, settings);
+  } catch (error) {
+    if (
+      !(error instanceof FetchError) ||
+      error.statusCode !== 400 ||
+      settings.debridService !== "torbox"
+    ) {
+      throw error;
+    }
+
+    try {
+      const { debridService: _unsupportedService, ...compatSettings } =
+        settings;
+      return await putImportedSettings(url, account, compatSettings);
+    } catch (compatError) {
+      if (
+        !(compatError instanceof FetchError) ||
+        compatError.statusCode !== 400
+      ) {
+        throw compatError;
+      }
+
+      const {
+        debridService: _unsupportedService,
+        debridToken: _unsupportedToken,
+        ...legacySafeSettings
+      } = settings;
+      return putImportedSettings(url, account, legacySafeSettings);
+    }
+  }
 }
