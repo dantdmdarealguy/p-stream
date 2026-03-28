@@ -830,6 +830,8 @@ export function SettingsPage() {
 
   const saveChanges = useCallback(async () => {
     try {
+      let shouldReloadForDebridChange = false;
+
       if (account && backendUrl) {
         if (
           state.appLanguage.changed ||
@@ -987,6 +989,7 @@ export function SettingsPage() {
               }
 
               await updateSettings(backendUrl, account, debridPayload);
+              shouldReloadForDebridChange = true;
 
               delete settingsPayload.debridToken;
               delete settingsPayload.debridService;
@@ -1086,6 +1089,12 @@ export function SettingsPage() {
         }
         // User is not logged in - just update without confirmation
         setBackendUrl(url);
+      }
+
+      if (shouldReloadForDebridChange) {
+        // Debrid provider availability is computed from persisted preferences.
+        // Reload so scraper source list reflects newly saved token/service.
+        window.location.reload();
       }
     } catch (error) {
       console.error("Unexpected error in saveChanges:", error);
