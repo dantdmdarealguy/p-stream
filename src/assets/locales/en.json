@@ -1522,7 +1522,8 @@
   "fedapi": {
     "onboarding": {
       "title": "Febbox token",
-      "description": "Bring your own FREE Febbox account to gain access to FED API, the best sources with 4K quality, Dolby Atmos, skip intro and the fastest load times! Highly recommended option!"
+      "description": "Bring your own FREE Febbox account to gain access to FED API, the best sources with 4K quality, Dolby Atmos, skip intro and the fastest load times! Highly recommended option!",
+      "note": "Note: FED API was a scraper originally created by OG P-Stream Developer Nemo. XP Technologies recreated the scraper to match its functionalities — it does not take any credit for the name or the original scraper."
     },
     "setup": {
       "title": "To get your UI token:",
