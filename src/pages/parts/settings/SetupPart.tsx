@@ -191,7 +191,7 @@ export async function testTorboxToken(
 
   while (attempts < maxAttempts) {
     try {
-      console.log(`Torbox API attempt ${attempts + 1}`);
+      console.log(`Torbox API attempt ${attempts + 1}/${maxAttempts}`);
       const data = await proxiedFetch("https://api.torbox.app/v1/api/user/me", {
         method: "GET",
         headers: {
@@ -200,29 +200,33 @@ export async function testTorboxToken(
         },
       });
 
-      if (data && typeof data === "object" && data.success === true) {
-        console.log("Torbox token confirmed valid");
+      console.log("Torbox API response:", data);
+
+      // Torbox returns user object with id field on successful auth
+      if (data && typeof data === "object" && data.id) {
+        console.log(`Torbox token confirmed valid (user id: ${data.id})`);
         return "success";
       }
 
-      console.log("Torbox response did not confirm valid token");
+      console.warn(
+        "Torbox response did not return expected user data structure",
+      );
       attempts += 1;
       if (attempts === maxAttempts) {
         return "invalid_token";
       }
       await sleep(3000);
     } catch (error) {
-      console.error("Torbox API error:", error);
+      console.error(`Torbox API error (attempt ${attempts + 1}):`, error);
 
       if (error instanceof FetchError) {
         if (error.statusCode === 401 || error.statusCode === 403) {
-          console.log("Torbox token is invalid");
+          console.warn("Torbox token is invalid (401/403)");
           return "invalid_token";
         }
 
         if (error.statusCode && error.statusCode >= 500) {
-          console.log(`Torbox API down (status ${error.statusCode})`);
-          return "api_down";
+          console.warn(`Torbox API down (status ${error.statusCode})`);
         }
       }
 

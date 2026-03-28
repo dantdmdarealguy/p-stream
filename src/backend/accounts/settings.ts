@@ -122,6 +122,9 @@ export async function updateSettings(
   settings: SettingsInput,
 ) {
   try {
+    console.log(
+      `Attempting to save settings with debridService: ${settings.debridService}`,
+    );
     return await putSettings(url, account, settings);
   } catch (error) {
     if (
@@ -129,8 +132,13 @@ export async function updateSettings(
       error.statusCode !== 400 ||
       settings.debridService !== "torbox"
     ) {
+      console.error("Settings update failed (not a Torbox 400 error):", error);
       throw error;
     }
+
+    console.warn(
+      "Got 400 error for Torbox settings, trying compatibility fallback 1: removing debridService",
+    );
 
     try {
       const { debridService: _unsupportedService, ...compatSettings } =
@@ -141,8 +149,16 @@ export async function updateSettings(
         !(compatError instanceof FetchError) ||
         compatError.statusCode !== 400
       ) {
+        console.error(
+          "Fallback 1 failed with non-400 error:",
+          compatError,
+        );
         throw compatError;
       }
+
+      console.warn(
+        "Fallback 1 still returned 400, trying fallback 2: removing debridService and debridToken",
+      );
 
       const {
         debridService: _unsupportedService,

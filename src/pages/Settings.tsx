@@ -861,43 +861,48 @@ export function SettingsPage() {
         state.enablePauseOverlay.changed ||
         state.customTheme.changed
       ) {
-        await updateSettings(backendUrl, account, {
-          applicationLanguage: state.appLanguage.state,
-          applicationTheme: state.theme.state,
-          proxyUrls: state.proxyUrls.state?.filter((v) => v !== "") ?? null,
-          febboxKey: state.febboxKey.state,
-          debridToken: state.debridToken.state,
-          debridService: state.debridService.state,
-          enableThumbnails: state.enableThumbnails.state,
-          enableAutoplay: state.enableAutoplay.state,
-          enableSkipCredits: state.enableSkipCredits.state,
-          enableAutoSkipSegments: state.enableAutoSkipSegments.state,
-          enableDiscover: state.enableDiscover.state,
-          enableFeatured: state.enableFeatured.state,
-          enableDetailsModal: state.enableDetailsModal.state,
-          enableImageLogos: state.enableImageLogos.state,
-          sourceOrder: state.sourceOrder.state,
-          enableSourceOrder: state.enableSourceOrder.state,
-          lastSuccessfulSource: state.lastSuccessfulSource.state,
-          enableLastSuccessfulSource: state.enableLastSuccessfulSource.state,
-          proxyTmdb: state.proxyTmdb.state,
-          enableCarouselView: state.enableCarouselView.state,
-          enableMinimalCards: state.enableMinimalCards.state,
-          forceCompactEpisodeView: state.forceCompactEpisodeView.state,
-          enableLowPerformanceMode: state.enableLowPerformanceMode.state,
-          enableHoldToBoost: state.enableHoldToBoost.state,
-          homeSectionOrder: state.homeSectionOrder.state,
-          manualSourceSelection: state.manualSourceSelection.state,
-          enableDoubleClickToSeek: state.enableDoubleClickToSeek.state,
-          enableAutoResumeOnPlaybackError:
-            state.enableAutoResumeOnPlaybackError.state,
-          enablePauseOverlay: state.enablePauseOverlay.state,
-          customTheme: {
-            activeTheme: state.customTheme.state,
-            savedCustomThemes: state.savedCustomThemes.state,
-            hiddenDefaultThemes: state.hiddenDefaultThemes.state,
-          },
-        });
+        try {
+          await updateSettings(backendUrl, account, {
+            applicationLanguage: state.appLanguage.state,
+            applicationTheme: state.theme.state,
+            proxyUrls: state.proxyUrls.state?.filter((v) => v !== "") ?? null,
+            febboxKey: state.febboxKey.state,
+            debridToken: state.debridToken.state,
+            debridService: state.debridService.state,
+            enableThumbnails: state.enableThumbnails.state,
+            enableAutoplay: state.enableAutoplay.state,
+            enableSkipCredits: state.enableSkipCredits.state,
+            enableAutoSkipSegments: state.enableAutoSkipSegments.state,
+            enableDiscover: state.enableDiscover.state,
+            enableFeatured: state.enableFeatured.state,
+            enableDetailsModal: state.enableDetailsModal.state,
+            enableImageLogos: state.enableImageLogos.state,
+            sourceOrder: state.sourceOrder.state,
+            enableSourceOrder: state.enableSourceOrder.state,
+            lastSuccessfulSource: state.lastSuccessfulSource.state,
+            enableLastSuccessfulSource: state.enableLastSuccessfulSource.state,
+            proxyTmdb: state.proxyTmdb.state,
+            enableCarouselView: state.enableCarouselView.state,
+            enableMinimalCards: state.enableMinimalCards.state,
+            forceCompactEpisodeView: state.forceCompactEpisodeView.state,
+            enableLowPerformanceMode: state.enableLowPerformanceMode.state,
+            enableHoldToBoost: state.enableHoldToBoost.state,
+            homeSectionOrder: state.homeSectionOrder.state,
+            manualSourceSelection: state.manualSourceSelection.state,
+            enableDoubleClickToSeek: state.enableDoubleClickToSeek.state,
+            enableAutoResumeOnPlaybackError:
+              state.enableAutoResumeOnPlaybackError.state,
+            enablePauseOverlay: state.enablePauseOverlay.state,
+            customTheme: {
+              activeTheme: state.customTheme.state,
+              savedCustomThemes: state.savedCustomThemes.state,
+              hiddenDefaultThemes: state.hiddenDefaultThemes.state,
+            },
+          });
+        } catch (error) {
+          console.error("Failed to save settings:", error);
+          throw error;
+        }
       }
       if (state.deviceName.changed) {
         const newDeviceName = await encryptData(

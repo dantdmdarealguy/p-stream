@@ -29,3 +29,7 @@ package-lock.json
 # config
 .env
 sync-fork.bat
+
+# docs (separate repo)
+pstream-docs/
+
