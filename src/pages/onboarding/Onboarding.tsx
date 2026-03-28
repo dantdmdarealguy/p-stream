@@ -148,6 +148,9 @@ export function OnboardingPage() {
                   {t(
                     "onboarding.start.moreInfo.explainer.fedapi.fedapiDescription",
                   )}
+                  <p className="mt-2 text-sm italic opacity-75">
+                    {t("fedapi.onboarding.note")}
+                  </p>
                 </Item>
               </div>
             )}
