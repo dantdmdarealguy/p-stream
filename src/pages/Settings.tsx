@@ -974,7 +974,27 @@ export function SettingsPage() {
               };
             }
 
-            await updateSettings(backendUrl, account, settingsPayload);
+            const hasDebridChanges =
+              state.debridToken.changed || state.debridService.changed;
+
+            if (hasDebridChanges) {
+              const debridPayload: SettingsInput = {};
+              if (state.debridToken.changed) {
+                debridPayload.debridToken = state.debridToken.state;
+              }
+              if (state.debridService.changed) {
+                debridPayload.debridService = state.debridService.state;
+              }
+
+              await updateSettings(backendUrl, account, debridPayload);
+
+              delete settingsPayload.debridToken;
+              delete settingsPayload.debridService;
+            }
+
+            if (Object.keys(settingsPayload).length > 0) {
+              await updateSettings(backendUrl, account, settingsPayload);
+            }
           } catch (settingsError) {
             console.error("Failed to save settings:", settingsError);
             // Don't re-throw - let the app continue so other settings can still save

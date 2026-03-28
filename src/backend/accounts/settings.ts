@@ -136,20 +136,20 @@ export async function updateSettings(
     );
     return await putSettings(url, account, settings);
   } catch (error) {
-    if (
-      !(error instanceof FetchError) ||
-      error.statusCode !== 400 ||
-      settings.debridService !== "torbox"
-    ) {
+    if (!(error instanceof FetchError) || error.statusCode !== 400) {
       console.error(
-        `[Settings] Error (not Torbox 400): ${error instanceof FetchError ? error.statusCode : "unknown"}`,
+        `[Settings] Error (not debrid-compat 400): ${error instanceof FetchError ? error.statusCode : "unknown"}`,
         error,
       );
       throw error;
     }
 
+    if (!settings.debridService && !settings.debridToken) {
+      throw error;
+    }
+
     console.warn(
-      "[Settings] Got 400 for Torbox settings, trying fallback 1: removing debridService",
+      "[Settings] Got 400 for debrid settings, trying fallback 1: removing debridService",
     );
 
     try {
