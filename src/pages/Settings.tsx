@@ -10,6 +10,7 @@ import {
 } from "@/backend/accounts/crypto";
 import { getSessions, updateSession } from "@/backend/accounts/sessions";
 import { getSettings, updateSettings } from "@/backend/accounts/settings";
+import type { SettingsInput } from "@/backend/accounts/settings";
 import { editUser } from "@/backend/accounts/user";
 import { getAllProviders } from "@/backend/providers/providers";
 import { Button } from "@/components/buttons/Button";
@@ -863,44 +864,117 @@ export function SettingsPage() {
           state.customTheme.changed
         ) {
           try {
-            await updateSettings(backendUrl, account, {
-              applicationLanguage: state.appLanguage.state,
-              applicationTheme: state.theme.state,
-              proxyUrls: state.proxyUrls.state?.filter((v) => v !== "") ?? null,
-              febboxKey: state.febboxKey.state,
-              debridToken: state.debridToken.state,
-              debridService: state.debridService.state,
-              enableThumbnails: state.enableThumbnails.state,
-              enableAutoplay: state.enableAutoplay.state,
-              enableSkipCredits: state.enableSkipCredits.state,
-              enableAutoSkipSegments: state.enableAutoSkipSegments.state,
-              enableDiscover: state.enableDiscover.state,
-              enableFeatured: state.enableFeatured.state,
-              enableDetailsModal: state.enableDetailsModal.state,
-              enableImageLogos: state.enableImageLogos.state,
-              sourceOrder: state.sourceOrder.state,
-              enableSourceOrder: state.enableSourceOrder.state,
-              lastSuccessfulSource: state.lastSuccessfulSource.state,
-              enableLastSuccessfulSource:
-                state.enableLastSuccessfulSource.state,
-              proxyTmdb: state.proxyTmdb.state,
-              enableCarouselView: state.enableCarouselView.state,
-              enableMinimalCards: state.enableMinimalCards.state,
-              forceCompactEpisodeView: state.forceCompactEpisodeView.state,
-              enableLowPerformanceMode: state.enableLowPerformanceMode.state,
-              enableHoldToBoost: state.enableHoldToBoost.state,
-              homeSectionOrder: state.homeSectionOrder.state,
-              manualSourceSelection: state.manualSourceSelection.state,
-              enableDoubleClickToSeek: state.enableDoubleClickToSeek.state,
-              enableAutoResumeOnPlaybackError:
-                state.enableAutoResumeOnPlaybackError.state,
-              enablePauseOverlay: state.enablePauseOverlay.state,
-              customTheme: {
+            const settingsPayload: SettingsInput = {};
+
+            if (state.appLanguage.changed) {
+              settingsPayload.applicationLanguage = state.appLanguage.state;
+            }
+            if (state.theme.changed) {
+              settingsPayload.applicationTheme = state.theme.state;
+            }
+            if (state.proxyUrls.changed) {
+              settingsPayload.proxyUrls =
+                state.proxyUrls.state?.filter((v) => v !== "") ?? null;
+            }
+            if (state.febboxKey.changed) {
+              settingsPayload.febboxKey = state.febboxKey.state;
+            }
+            if (state.debridToken.changed) {
+              settingsPayload.debridToken = state.debridToken.state;
+            }
+            if (state.debridService.changed) {
+              settingsPayload.debridService = state.debridService.state;
+            }
+            if (state.enableThumbnails.changed) {
+              settingsPayload.enableThumbnails = state.enableThumbnails.state;
+            }
+            if (state.enableAutoplay.changed) {
+              settingsPayload.enableAutoplay = state.enableAutoplay.state;
+            }
+            if (state.enableSkipCredits.changed) {
+              settingsPayload.enableSkipCredits = state.enableSkipCredits.state;
+            }
+            if (state.enableAutoSkipSegments.changed) {
+              settingsPayload.enableAutoSkipSegments =
+                state.enableAutoSkipSegments.state;
+            }
+            if (state.enableDiscover.changed) {
+              settingsPayload.enableDiscover = state.enableDiscover.state;
+            }
+            if (state.enableFeatured.changed) {
+              settingsPayload.enableFeatured = state.enableFeatured.state;
+            }
+            if (state.enableDetailsModal.changed) {
+              settingsPayload.enableDetailsModal =
+                state.enableDetailsModal.state;
+            }
+            if (state.enableImageLogos.changed) {
+              settingsPayload.enableImageLogos = state.enableImageLogos.state;
+            }
+            if (state.sourceOrder.changed) {
+              settingsPayload.sourceOrder = state.sourceOrder.state;
+            }
+            if (state.enableSourceOrder.changed) {
+              settingsPayload.enableSourceOrder = state.enableSourceOrder.state;
+            }
+            if (state.lastSuccessfulSource.changed) {
+              settingsPayload.lastSuccessfulSource =
+                state.lastSuccessfulSource.state;
+            }
+            if (state.enableLastSuccessfulSource.changed) {
+              settingsPayload.enableLastSuccessfulSource =
+                state.enableLastSuccessfulSource.state;
+            }
+            if (state.proxyTmdb.changed) {
+              settingsPayload.proxyTmdb = state.proxyTmdb.state;
+            }
+            if (state.enableCarouselView.changed) {
+              settingsPayload.enableCarouselView =
+                state.enableCarouselView.state;
+            }
+            if (state.enableMinimalCards.changed) {
+              settingsPayload.enableMinimalCards =
+                state.enableMinimalCards.state;
+            }
+            if (state.forceCompactEpisodeView.changed) {
+              settingsPayload.forceCompactEpisodeView =
+                state.forceCompactEpisodeView.state;
+            }
+            if (state.enableLowPerformanceMode.changed) {
+              settingsPayload.enableLowPerformanceMode =
+                state.enableLowPerformanceMode.state;
+            }
+            if (state.enableHoldToBoost.changed) {
+              settingsPayload.enableHoldToBoost = state.enableHoldToBoost.state;
+            }
+            if (state.homeSectionOrder.changed) {
+              settingsPayload.homeSectionOrder = state.homeSectionOrder.state;
+            }
+            if (state.manualSourceSelection.changed) {
+              settingsPayload.manualSourceSelection =
+                state.manualSourceSelection.state;
+            }
+            if (state.enableDoubleClickToSeek.changed) {
+              settingsPayload.enableDoubleClickToSeek =
+                state.enableDoubleClickToSeek.state;
+            }
+            if (state.enableAutoResumeOnPlaybackError.changed) {
+              settingsPayload.enableAutoResumeOnPlaybackError =
+                state.enableAutoResumeOnPlaybackError.state;
+            }
+            if (state.enablePauseOverlay.changed) {
+              settingsPayload.enablePauseOverlay =
+                state.enablePauseOverlay.state;
+            }
+            if (state.customTheme.changed) {
+              settingsPayload.customTheme = {
                 activeTheme: state.customTheme.state,
                 savedCustomThemes: state.savedCustomThemes.state,
                 hiddenDefaultThemes: state.hiddenDefaultThemes.state,
-              },
-            });
+              };
+            }
+
+            await updateSettings(backendUrl, account, settingsPayload);
           } catch (settingsError) {
             console.error("Failed to save settings:", settingsError);
             // Don't re-throw - let the app continue so other settings can still save
