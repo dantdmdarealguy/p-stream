@@ -828,165 +828,172 @@ export function SettingsPage() {
   );
 
   const saveChanges = useCallback(async () => {
-    if (account && backendUrl) {
-      if (
-        state.appLanguage.changed ||
-        state.theme.changed ||
-        state.proxyUrls.changed ||
-        state.febboxKey.changed ||
-        state.debridToken.changed ||
-        state.debridService.changed ||
-        state.enableThumbnails.changed ||
-        state.enableAutoplay.changed ||
-        state.enableSkipCredits.changed ||
-        state.enableAutoSkipSegments.changed ||
-        state.enableDiscover.changed ||
-        state.enableFeatured.changed ||
-        state.enableDetailsModal.changed ||
-        state.enableImageLogos.changed ||
-        state.sourceOrder.changed ||
-        state.enableSourceOrder.changed ||
-        state.lastSuccessfulSource.changed ||
-        state.enableLastSuccessfulSource.changed ||
-        state.proxyTmdb.changed ||
-        state.enableCarouselView.changed ||
-        state.enableMinimalCards.changed ||
-        state.forceCompactEpisodeView.changed ||
-        state.enableLowPerformanceMode.changed ||
-        state.enableHoldToBoost.changed ||
-        state.homeSectionOrder.changed ||
-        state.manualSourceSelection.changed ||
-        state.enableDoubleClickToSeek.changed ||
-        state.enableAutoResumeOnPlaybackError.changed ||
-        state.enablePauseOverlay.changed ||
-        state.customTheme.changed
-      ) {
-        try {
-          await updateSettings(backendUrl, account, {
-            applicationLanguage: state.appLanguage.state,
-            applicationTheme: state.theme.state,
-            proxyUrls: state.proxyUrls.state?.filter((v) => v !== "") ?? null,
-            febboxKey: state.febboxKey.state,
-            debridToken: state.debridToken.state,
-            debridService: state.debridService.state,
-            enableThumbnails: state.enableThumbnails.state,
-            enableAutoplay: state.enableAutoplay.state,
-            enableSkipCredits: state.enableSkipCredits.state,
-            enableAutoSkipSegments: state.enableAutoSkipSegments.state,
-            enableDiscover: state.enableDiscover.state,
-            enableFeatured: state.enableFeatured.state,
-            enableDetailsModal: state.enableDetailsModal.state,
-            enableImageLogos: state.enableImageLogos.state,
-            sourceOrder: state.sourceOrder.state,
-            enableSourceOrder: state.enableSourceOrder.state,
-            lastSuccessfulSource: state.lastSuccessfulSource.state,
-            enableLastSuccessfulSource: state.enableLastSuccessfulSource.state,
-            proxyTmdb: state.proxyTmdb.state,
-            enableCarouselView: state.enableCarouselView.state,
-            enableMinimalCards: state.enableMinimalCards.state,
-            forceCompactEpisodeView: state.forceCompactEpisodeView.state,
-            enableLowPerformanceMode: state.enableLowPerformanceMode.state,
-            enableHoldToBoost: state.enableHoldToBoost.state,
-            homeSectionOrder: state.homeSectionOrder.state,
-            manualSourceSelection: state.manualSourceSelection.state,
-            enableDoubleClickToSeek: state.enableDoubleClickToSeek.state,
-            enableAutoResumeOnPlaybackError:
-              state.enableAutoResumeOnPlaybackError.state,
-            enablePauseOverlay: state.enablePauseOverlay.state,
-            customTheme: {
-              activeTheme: state.customTheme.state,
-              savedCustomThemes: state.savedCustomThemes.state,
-              hiddenDefaultThemes: state.hiddenDefaultThemes.state,
-            },
+    try {
+      if (account && backendUrl) {
+        if (
+          state.appLanguage.changed ||
+          state.theme.changed ||
+          state.proxyUrls.changed ||
+          state.febboxKey.changed ||
+          state.debridToken.changed ||
+          state.debridService.changed ||
+          state.enableThumbnails.changed ||
+          state.enableAutoplay.changed ||
+          state.enableSkipCredits.changed ||
+          state.enableAutoSkipSegments.changed ||
+          state.enableDiscover.changed ||
+          state.enableFeatured.changed ||
+          state.enableDetailsModal.changed ||
+          state.enableImageLogos.changed ||
+          state.sourceOrder.changed ||
+          state.enableSourceOrder.changed ||
+          state.lastSuccessfulSource.changed ||
+          state.enableLastSuccessfulSource.changed ||
+          state.proxyTmdb.changed ||
+          state.enableCarouselView.changed ||
+          state.enableMinimalCards.changed ||
+          state.forceCompactEpisodeView.changed ||
+          state.enableLowPerformanceMode.changed ||
+          state.enableHoldToBoost.changed ||
+          state.homeSectionOrder.changed ||
+          state.manualSourceSelection.changed ||
+          state.enableDoubleClickToSeek.changed ||
+          state.enableAutoResumeOnPlaybackError.changed ||
+          state.enablePauseOverlay.changed ||
+          state.customTheme.changed
+        ) {
+          try {
+            await updateSettings(backendUrl, account, {
+              applicationLanguage: state.appLanguage.state,
+              applicationTheme: state.theme.state,
+              proxyUrls: state.proxyUrls.state?.filter((v) => v !== "") ?? null,
+              febboxKey: state.febboxKey.state,
+              debridToken: state.debridToken.state,
+              debridService: state.debridService.state,
+              enableThumbnails: state.enableThumbnails.state,
+              enableAutoplay: state.enableAutoplay.state,
+              enableSkipCredits: state.enableSkipCredits.state,
+              enableAutoSkipSegments: state.enableAutoSkipSegments.state,
+              enableDiscover: state.enableDiscover.state,
+              enableFeatured: state.enableFeatured.state,
+              enableDetailsModal: state.enableDetailsModal.state,
+              enableImageLogos: state.enableImageLogos.state,
+              sourceOrder: state.sourceOrder.state,
+              enableSourceOrder: state.enableSourceOrder.state,
+              lastSuccessfulSource: state.lastSuccessfulSource.state,
+              enableLastSuccessfulSource: state.enableLastSuccessfulSource.state,
+              proxyTmdb: state.proxyTmdb.state,
+              enableCarouselView: state.enableCarouselView.state,
+              enableMinimalCards: state.enableMinimalCards.state,
+              forceCompactEpisodeView: state.forceCompactEpisodeView.state,
+              enableLowPerformanceMode: state.enableLowPerformanceMode.state,
+              enableHoldToBoost: state.enableHoldToBoost.state,
+              homeSectionOrder: state.homeSectionOrder.state,
+              manualSourceSelection: state.manualSourceSelection.state,
+              enableDoubleClickToSeek: state.enableDoubleClickToSeek.state,
+              enableAutoResumeOnPlaybackError:
+                state.enableAutoResumeOnPlaybackError.state,
+              enablePauseOverlay: state.enablePauseOverlay.state,
+              customTheme: {
+                activeTheme: state.customTheme.state,
+                savedCustomThemes: state.savedCustomThemes.state,
+                hiddenDefaultThemes: state.hiddenDefaultThemes.state,
+              },
+            });
+          } catch (settingsError) {
+            console.error("Failed to save settings:", settingsError);
+            // Don't re-throw - let the app continue so other settings can still save
+          }
+        }
+
+        if (state.deviceName.changed) {
+          const newDeviceName = await encryptData(
+            state.deviceName.state,
+            base64ToBuffer(account.seed),
+          );
+          await updateSession(backendUrl, account, {
+            deviceName: newDeviceName,
           });
-        } catch (error) {
-          console.error("Failed to save settings:", error);
-          throw error;
+          updateDeviceName(newDeviceName);
+        }
+
+        if (state.nickname.changed) {
+          await editUser(backendUrl, account, {
+            nickname: state.nickname.state,
+          });
+          updateNickname(state.nickname.state);
+        }
+
+        if (state.profile.changed && state.profile.state) {
+          await editUser(backendUrl, account, {
+            profile: state.profile.state,
+          });
+          updateProfile(state.profile.state);
         }
       }
-      if (state.deviceName.changed) {
-        const newDeviceName = await encryptData(
-          state.deviceName.state,
-          base64ToBuffer(account.seed),
-        );
-        await updateSession(backendUrl, account, {
-          deviceName: newDeviceName,
-        });
-        updateDeviceName(newDeviceName);
-      }
-      if (state.nickname.changed) {
-        await editUser(backendUrl, account, {
-          nickname: state.nickname.state,
-        });
-        updateNickname(state.nickname.state);
-      }
-      if (state.profile.changed && state.profile.state) {
-        await editUser(backendUrl, account, {
-          profile: state.profile.state,
-        });
+
+      // Update local state regardless of backend success
+      setEnableThumbnails(state.enableThumbnails.state);
+      setEnableAutoplay(state.enableAutoplay.state);
+      setEnableSkipCredits(state.enableSkipCredits.state);
+      setEnableAutoSkipSegments(state.enableAutoSkipSegments.state);
+      setEnableDiscover(state.enableDiscover.state);
+      setEnableFeatured(state.enableFeatured.state);
+      setEnableDetailsModal(state.enableDetailsModal.state);
+      setEnableImageLogos(state.enableImageLogos.state);
+      setSourceOrder(state.sourceOrder.state);
+      setEnableSourceOrder(state.enableSourceOrder.state);
+      setLastSuccessfulSource(state.lastSuccessfulSource.state);
+      setEnableLastSuccessfulSource(state.enableLastSuccessfulSource.state);
+      setAppLanguage(state.appLanguage.state);
+      setTheme(state.theme.state);
+      setSubStyling(state.subtitleStyling.state);
+      setProxySet(state.proxyUrls.state?.filter((v) => v !== "") ?? null);
+      setFebboxKey(state.febboxKey.state);
+      setdebridToken(state.debridToken.state);
+      setdebridService(state.debridService.state);
+      setTIDBKey(state.tidbKey.state);
+      setProxyTmdb(state.proxyTmdb.state);
+      setEnableCarouselView(state.enableCarouselView.state);
+      setEnableMinimalCards(state.enableMinimalCards.state);
+      setForceCompactEpisodeView(state.forceCompactEpisodeView.state);
+      setEnableLowPerformanceMode(state.enableLowPerformanceMode.state);
+      setEnableHoldToBoost(state.enableHoldToBoost.state);
+      setHomeSectionOrder(state.homeSectionOrder.state);
+      setManualSourceSelection(state.manualSourceSelection.state);
+      setEnableDoubleClickToSeek(state.enableDoubleClickToSeek.state);
+      setEnableAutoResumeOnPlaybackError(
+        state.enableAutoResumeOnPlaybackError.state,
+      );
+      setEnablePauseOverlay(state.enablePauseOverlay.state);
+      setCustomTheme(state.customTheme.state);
+      setCustomThemeBaseline(state.customTheme.state);
+      useThemeStore.setState({
+        savedCustomThemes: state.savedCustomThemes.state,
+        hiddenDefaultThemes: state.hiddenDefaultThemes.state,
+      });
+
+      if (state.profile.state) {
         updateProfile(state.profile.state);
       }
-    }
 
-    setEnableThumbnails(state.enableThumbnails.state);
-    setEnableAutoplay(state.enableAutoplay.state);
-    setEnableSkipCredits(state.enableSkipCredits.state);
-    setEnableAutoSkipSegments(state.enableAutoSkipSegments.state);
-    setEnableDiscover(state.enableDiscover.state);
-    setEnableFeatured(state.enableFeatured.state);
-    setEnableDetailsModal(state.enableDetailsModal.state);
-    setEnableImageLogos(state.enableImageLogos.state);
-    setSourceOrder(state.sourceOrder.state);
-    setEnableSourceOrder(state.enableSourceOrder.state);
-    setLastSuccessfulSource(state.lastSuccessfulSource.state);
-    setEnableLastSuccessfulSource(state.enableLastSuccessfulSource.state);
-    setAppLanguage(state.appLanguage.state);
-    setTheme(state.theme.state);
-    setSubStyling(state.subtitleStyling.state);
-    setProxySet(state.proxyUrls.state?.filter((v) => v !== "") ?? null);
-    setEnableSourceOrder(state.enableSourceOrder.state);
-    setFebboxKey(state.febboxKey.state);
-    setdebridToken(state.debridToken.state);
-    setdebridService(state.debridService.state);
-    setTIDBKey(state.tidbKey.state);
-    setProxyTmdb(state.proxyTmdb.state);
-    setEnableCarouselView(state.enableCarouselView.state);
-    setEnableMinimalCards(state.enableMinimalCards.state);
-    setForceCompactEpisodeView(state.forceCompactEpisodeView.state);
-    setEnableLowPerformanceMode(state.enableLowPerformanceMode.state);
-    setEnableHoldToBoost(state.enableHoldToBoost.state);
-    setHomeSectionOrder(state.homeSectionOrder.state);
-    setManualSourceSelection(state.manualSourceSelection.state);
-    setEnableDoubleClickToSeek(state.enableDoubleClickToSeek.state);
-    setEnableAutoResumeOnPlaybackError(
-      state.enableAutoResumeOnPlaybackError.state,
-    );
-    setEnablePauseOverlay(state.enablePauseOverlay.state);
-    setCustomTheme(state.customTheme.state);
-    setCustomThemeBaseline(state.customTheme.state);
-    useThemeStore.setState({
-      savedCustomThemes: state.savedCustomThemes.state,
-      hiddenDefaultThemes: state.hiddenDefaultThemes.state,
-    });
-
-    if (state.profile.state) {
-      updateProfile(state.profile.state);
-    }
-
-    // when backend url gets changed, show confirmation and log the user out (only if logged in)
-    if (state.backendUrl.changed) {
-      let url = state.backendUrl.state;
-      if (url && !url.startsWith("http://") && !url.startsWith("https://")) {
-        url = `https://${url}`;
+      // when backend url gets changed, show confirmation and log the user out (only if logged in)
+      if (state.backendUrl.changed) {
+        let url = state.backendUrl.state;
+        if (url && !url.startsWith("http://") && !url.startsWith("https://")) {
+          url = `https://${url}`;
+        }
+        if (account) {
+          // User is logged in - show confirmation
+          setPendingBackendChange(url);
+          backendChangeModal.show();
+          return;
+        }
+        // User is not logged in - just update without confirmation
+        setBackendUrl(url);
       }
-      if (account) {
-        // User is logged in - show confirmation
-        setPendingBackendChange(url);
-        backendChangeModal.show();
-        return;
-      }
-      // User is not logged in - just update without confirmation
-      setBackendUrl(url);
+    } catch (error) {
+      console.error("Unexpected error in saveChanges:", error);
     }
   }, [
     account,

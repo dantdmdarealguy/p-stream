@@ -108,6 +108,15 @@ function putSettings(
   account: AccountWithToken,
   settings: SettingsInput,
 ) {
+  // Log the settings being sent (without sensitive values) for debugging
+  const settingsKeys = Object.keys(settings).filter(
+    (k) => settings[k as keyof typeof settings] !== undefined,
+  );
+  console.log(
+    `[putSettings] Sending ${settingsKeys.length} fields to backend`,
+    settingsKeys,
+  );
+
   return ofetch<SettingsResponse>(`/users/${account.userId}/settings`, {
     method: "PUT",
     body: settings,
@@ -123,7 +132,7 @@ export async function updateSettings(
 ) {
   try {
     console.log(
-      `Attempting to save settings with debridService: ${settings.debridService}`,
+      `[Settings] Attempt 1: Saving with debridService: ${settings.debridService}, debridToken: ${settings.debridToken ? "SET" : "UNSET"}`,
     );
     return await putSettings(url, account, settings);
   } catch (error) {
@@ -132,17 +141,23 @@ export async function updateSettings(
       error.statusCode !== 400 ||
       settings.debridService !== "torbox"
     ) {
-      console.error("Settings update failed (not a Torbox 400 error):", error);
+      console.error(
+        `[Settings] Error (not Torbox 400): ${error instanceof FetchError ? error.statusCode : "unknown"}`,
+        error,
+      );
       throw error;
     }
 
     console.warn(
-      "Got 400 error for Torbox settings, trying compatibility fallback 1: removing debridService",
+      "[Settings] Got 400 for Torbox settings, trying fallback 1: removing debridService",
     );
 
     try {
       const { debridService: _unsupportedService, ...compatSettings } =
         settings;
+      console.log(
+        `[Settings] Attempt 2: Saving without debridService, debridToken: ${compatSettings.debridToken ? "SET" : "UNSET"}`,
+      );
       return await putSettings(url, account, compatSettings);
     } catch (compatError) {
       if (
@@ -150,14 +165,14 @@ export async function updateSettings(
         compatError.statusCode !== 400
       ) {
         console.error(
-          "Fallback 1 failed with non-400 error:",
+          `[Settings] Fallback 1 failed with status: ${compatError instanceof FetchError ? compatError.statusCode : "unknown"}`,
           compatError,
         );
         throw compatError;
       }
 
       console.warn(
-        "Fallback 1 still returned 400, trying fallback 2: removing debridService and debridToken",
+        "[Settings] Fallback 1 returned 400, trying fallback 2: removing debridService and debridToken",
       );
 
       const {
@@ -165,6 +180,9 @@ export async function updateSettings(
         debridToken: _unsupportedToken,
         ...legacySafeSettings
       } = settings;
+      console.log(
+        "[Settings] Attempt 3: Saving without debridService or debridToken",
+      );
       return putSettings(url, account, legacySafeSettings);
     }
   }
