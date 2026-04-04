@@ -278,144 +278,144 @@ export function PauseOverlay() {
         }`}
       >
         {/* Main content – left-center aligned, vertically anchored near bottom */}
-      <div className="flex-1 flex items-end pb-28 md:pb-36">
-        <div className="ml-10 md:ml-24 lg:ml-32 max-w-lg lg:max-w-2xl">
-          {/* "You are watching" label */}
-          <p className="text-sm text-white/70 mb-3 tracking-wide uppercase">
-            {t("player.pauseOverlay.youAreWatching", "You are watching")}
-          </p>
-
-          {/* Title / Logo */}
-          {logoUrl ? (
-            <img
-              src={logoUrl}
-              alt={meta.title}
-              className="mb-4 max-h-36 object-contain drop-shadow-lg"
-            />
-          ) : (
-            <h1 className="mb-3 text-4xl lg:text-5xl font-bold text-white drop-shadow-lg">
-              {meta.title}
-            </h1>
-          )}
-
-          {/* Season / Episode info */}
-          {meta.type === "show" && meta.season && meta.episode && (
-            <p className="text-lg text-white/70 mb-1">
-              {t("media.episodeDisplay", {
-                season: meta.season.number,
-                episode: meta.episode.number,
-              })}
+        <div className="flex-1 flex items-end pb-28 md:pb-36">
+          <div className="ml-10 md:ml-24 lg:ml-32 max-w-lg lg:max-w-2xl">
+            {/* "You are watching" label */}
+            <p className="text-sm text-white/70 mb-3 tracking-wide uppercase">
+              {t("player.pauseOverlay.youAreWatching", "You are watching")}
             </p>
-          )}
 
-          {/* Episode title */}
-          {meta.type === "show" && meta.episode?.title && (
-            <h2 className="mb-3 text-2xl font-semibold text-white drop-shadow-md">
-              {meta.episode.title}
-            </h2>
-          )}
+            {/* Title / Logo */}
+            {logoUrl ? (
+              <img
+                src={logoUrl}
+                alt={meta.title}
+                className="mb-4 max-h-36 object-contain drop-shadow-lg"
+              />
+            ) : (
+              <h1 className="mb-3 text-4xl lg:text-5xl font-bold text-white drop-shadow-lg">
+                {meta.title}
+              </h1>
+            )}
 
-          {/* Description */}
-          {overview && (
-            <p className="text-sm lg:text-base text-white/70 drop-shadow-md line-clamp-3 mb-4 max-w-xl">
-              {overview}
-            </p>
-          )}
+            {/* Season / Episode info */}
+            {meta.type === "show" && meta.season && meta.episode && (
+              <p className="text-lg text-white/70 mb-1">
+                {t("media.episodeDisplay", {
+                  season: meta.season.number,
+                  episode: meta.episode.number,
+                })}
+              </p>
+            )}
 
-          {/* Rating + Runtime */}
-          <div className="flex items-center gap-2 text-sm text-white/80">
-            {details.voteAverage !== null && details.voteAverage > 0 && (
-              <>
-                <span className="text-yellow-400">⭐</span>
-                <span>{details.voteAverage.toFixed(1)}</span>
-              </>
+            {/* Episode title */}
+            {meta.type === "show" && meta.episode?.title && (
+              <h2 className="mb-3 text-2xl font-semibold text-white drop-shadow-md">
+                {meta.episode.title}
+              </h2>
             )}
-            {details.runtime && details.runtime > 0 && (
-              <>
-                {details.voteAverage !== null && details.voteAverage > 0 && (
-                  <span className="text-white/40">·</span>
-                )}
-                <span>{formatRuntime(details.runtime)}</span>
-              </>
+
+            {/* Description */}
+            {overview && (
+              <p className="text-sm lg:text-base text-white/70 drop-shadow-md line-clamp-3 mb-4 max-w-xl">
+                {overview}
+              </p>
             )}
-            {duration > 0 && !details.runtime && (
-              <>
-                {details.voteAverage !== null && details.voteAverage > 0 && (
-                  <span className="text-white/40">·</span>
-                )}
-                <span>{formatRuntime(Math.round(duration / 60))}</span>
-              </>
-            )}
+
+            {/* Rating + Runtime */}
+            <div className="flex items-center gap-2 text-sm text-white/80">
+              {details.voteAverage !== null && details.voteAverage > 0 && (
+                <>
+                  <span className="text-yellow-400">⭐</span>
+                  <span>{details.voteAverage.toFixed(1)}</span>
+                </>
+              )}
+              {details.runtime && details.runtime > 0 && (
+                <>
+                  {details.voteAverage !== null && details.voteAverage > 0 && (
+                    <span className="text-white/40">·</span>
+                  )}
+                  <span>{formatRuntime(details.runtime)}</span>
+                </>
+              )}
+              {duration > 0 && !details.runtime && (
+                <>
+                  {details.voteAverage !== null && details.voteAverage > 0 && (
+                    <span className="text-white/40">·</span>
+                  )}
+                  <span>{formatRuntime(Math.round(duration / 60))}</span>
+                </>
+              )}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Centered playback controls */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="flex items-center gap-6 md:gap-10 pointer-events-auto">
-          {/* Skip backward 10 s */}
-          <button
-            type="button"
-            aria-label={t("player.controls.skipBack", "Skip back 10 seconds")}
-            onClick={handleSkipBackward}
-            className="flex flex-col items-center gap-1 text-white/80 hover:text-white active:scale-90 transition-all"
-          >
-            <Icon
-              icon={Icons.SKIP_BACKWARD}
-              className="text-3xl md:text-4xl drop-shadow"
-            />
-            <span className="text-xs font-medium">10</span>
-          </button>
+        {/* Centered playback controls */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="flex items-center gap-6 md:gap-10 pointer-events-auto">
+            {/* Skip backward 10 s */}
+            <button
+              type="button"
+              aria-label={t("player.controls.skipBack", "Skip back 10 seconds")}
+              onClick={handleSkipBackward}
+              className="flex flex-col items-center gap-1 text-white/80 hover:text-white active:scale-90 transition-all"
+            >
+              <Icon
+                icon={Icons.SKIP_BACKWARD}
+                className="text-3xl md:text-4xl drop-shadow"
+              />
+              <span className="text-xs font-medium">10</span>
+            </button>
 
-          {/* Play / Resume button */}
-          <button
-            type="button"
-            aria-label={t("player.controls.play", "Play")}
-            onClick={handleResume}
-            className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 active:scale-90 transition-all shadow-2xl"
-          >
-            <Icon
-              icon={Icons.PLAY}
-              className="text-3xl md:text-4xl text-white drop-shadow"
-            />
-          </button>
+            {/* Play / Resume button */}
+            <button
+              type="button"
+              aria-label={t("player.controls.play", "Play")}
+              onClick={handleResume}
+              className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 active:scale-90 transition-all shadow-2xl"
+            >
+              <Icon
+                icon={Icons.PLAY}
+                className="text-3xl md:text-4xl text-white drop-shadow"
+              />
+            </button>
 
-          {/* Skip forward 10 s */}
-          <button
-            type="button"
-            aria-label={t(
-              "player.controls.skipForward",
-              "Skip forward 10 seconds",
-            )}
-            onClick={handleSkipForward}
-            className="flex flex-col items-center gap-1 text-white/80 hover:text-white active:scale-90 transition-all"
-          >
-            <Icon
-              icon={Icons.SKIP_FORWARD}
-              className="text-3xl md:text-4xl drop-shadow"
-            />
-            <span className="text-xs font-medium">10</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Progress bar + time – sits above the player's own control bar */}
-      {duration > 0 && (
-        <div className="absolute bottom-16 md:bottom-20 left-0 right-0 px-10 md:px-16 pointer-events-none">
-          {/* Time labels */}
-          <div className="flex justify-between text-xs text-white/60 mb-1.5 font-mono">
-            <span>{formattedTime}</span>
-            <span>{formattedDuration}</span>
-          </div>
-          {/* Thin progress track */}
-          <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-white/70 rounded-full transition-[width] duration-500"
-              style={{ width: `${progressPct}%` }}
-            />
+            {/* Skip forward 10 s */}
+            <button
+              type="button"
+              aria-label={t(
+                "player.controls.skipForward",
+                "Skip forward 10 seconds",
+              )}
+              onClick={handleSkipForward}
+              className="flex flex-col items-center gap-1 text-white/80 hover:text-white active:scale-90 transition-all"
+            >
+              <Icon
+                icon={Icons.SKIP_FORWARD}
+                className="text-3xl md:text-4xl drop-shadow"
+              />
+              <span className="text-xs font-medium">10</span>
+            </button>
           </div>
         </div>
-      )}
+
+        {/* Progress bar + time – sits above the player's own control bar */}
+        {duration > 0 && (
+          <div className="absolute bottom-16 md:bottom-20 left-0 right-0 px-10 md:px-16 pointer-events-none">
+            {/* Time labels */}
+            <div className="flex justify-between text-xs text-white/60 mb-1.5 font-mono">
+              <span>{formattedTime}</span>
+              <span>{formattedDuration}</span>
+            </div>
+            {/* Thin progress track */}
+            <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-white/70 rounded-full transition-[width] duration-500"
+                style={{ width: `${progressPct}%` }}
+              />
+            </div>
+          </div>
+        )}
 
         {/* "Paused" indicator – bottom right, above controls */}
         <div className="absolute bottom-20 right-8 md:right-12">

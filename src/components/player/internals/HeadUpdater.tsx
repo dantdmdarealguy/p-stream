@@ -17,24 +17,18 @@ export function HeadUpdater() {
       })
     : "";
 
-  const title = isShow
-    ? `${meta.title} - ${humanizedEpisodeId}`
-    : meta.title;
+  const title = isShow ? `${meta.title} - ${humanizedEpisodeId}` : meta.title;
 
   const year = meta.releaseYear ? ` (${meta.releaseYear})` : "";
   const displayTitle = isShow ? title : `${meta.title}${year}`;
   const pageTitle = `${displayTitle} - P-Stream`;
 
   const description =
-    meta.overview ||
-    `Watch ${meta.title} on P-Stream for free, with no ads.`;
+    meta.overview || `Watch ${meta.title} on P-Stream for free, with no ads.`;
 
   // Use absolute URL for OG image (required by most social platforms)
-  const origin =
-    typeof window !== "undefined" ? window.location.origin : "";
-  const imageUrl = meta.poster
-    ? meta.poster
-    : `${origin}/embed-preview.png`;
+  const origin = typeof window !== "undefined" ? window.location.origin : "";
+  const imageUrl = meta.poster ? meta.poster : `${origin}/embed-preview.png`;
 
   const ogType = isShow ? "video.tv_show" : "video.movie";
 
