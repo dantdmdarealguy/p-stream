@@ -1,6 +1,17 @@
 {
   "rewrites": [
     {
+      "source": "/media/:path*",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i).*(Discordbot|Twitterbot|facebookexternalhit|LinkedInBot|Slackbot|TelegramBot|WhatsApp|bot|crawl|spider|curl|wget|python-requests|Go-http-client).+"
+        }
+      ],
+      "destination": "/api/embed?media=:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/"
     }
