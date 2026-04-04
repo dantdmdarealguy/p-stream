@@ -29,14 +29,18 @@ export function HeadUpdater() {
     meta.overview ||
     `Watch ${meta.title} on P-Stream for free, with no ads.`;
 
-  // Poster is already resolved and stored in the player meta
-  const imageUrl = meta.poster || "/embed-preview.png";
+  // Use absolute URL for OG image (required by most social platforms)
+  const origin =
+    typeof window !== "undefined" ? window.location.origin : "";
+  const imageUrl = meta.poster
+    ? meta.poster
+    : `${origin}/embed-preview.png`;
 
   const ogType = isShow ? "video.tv_show" : "video.movie";
 
   return (
     <Helmet>
-      <title>{title}</title>
+      <title>{pageTitle}</title>
       <meta name="description" content={description} />
 
       {/* Open Graph */}

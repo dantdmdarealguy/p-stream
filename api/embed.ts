@@ -136,8 +136,18 @@ export default async function handler(req: any, res: any) {
     const displayTitle = year ? `${title} (${year})` : title;
     const pageTitle = `${displayTitle} - P-Stream`;
 
+    // Build absolute base URL from the incoming request for OG tags
+    const proto =
+      (req.headers["x-forwarded-proto"] as string) ||
+      (req.connection?.encrypted ? "https" : "http");
+    const host = req.headers.host as string;
+    const baseUrl = host ? `${proto}://${host}` : "";
+
     // Safely embed the redirect target in HTML/JS contexts
     const safeRedirect = encodeURI(redirectTarget);
+    const absolutePageUrl = baseUrl ? `${baseUrl}${redirectTarget}` : redirectTarget;
+    const absoluteImageUrl =
+      imageUrl.startsWith("http") ? imageUrl : `${baseUrl}${imageUrl}`;
 
     const html = `<!DOCTYPE html>
 <html lang="en">
@@ -150,19 +160,19 @@ export default async function handler(req: any, res: any) {
   <meta property="og:title" content="${escapeHtml(pageTitle)}">
   <meta property="og:description" content="${escapeHtml(overview)}">
   <meta property="og:type" content="${escapeHtml(ogType)}">
-  <meta property="og:image" content="${escapeHtml(imageUrl)}">
+  <meta property="og:image" content="${escapeHtml(absoluteImageUrl)}">
   <meta property="og:site_name" content="P-Stream">
-  <meta property="og:url" content="${escapeHtml(redirectTarget)}">
+  <meta property="og:url" content="${escapeHtml(absolutePageUrl)}">
 
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(pageTitle)}">
   <meta name="twitter:description" content="${escapeHtml(overview)}">
-  <meta name="twitter:image" content="${escapeHtml(imageUrl)}">
+  <meta name="twitter:image" content="${escapeHtml(absoluteImageUrl)}">
 
   <!-- Redirect humans to the actual SPA page immediately -->
   <meta http-equiv="refresh" content="0;url=${escapeHtml(safeRedirect)}">
-  <link rel="canonical" href="${escapeHtml(redirectTarget)}">
+  <link rel="canonical" href="${escapeHtml(absolutePageUrl)}">
 </head>
 <body>
   <script>window.location.replace(${JSON.stringify(safeRedirect)});</script>
