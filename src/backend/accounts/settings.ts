@@ -112,7 +112,7 @@ function putSettings(
   const settingsKeys = Object.keys(settings).filter(
     (k) => settings[k as keyof typeof settings] !== undefined,
   );
-  console.log(
+  console.info(
     `[putSettings] Sending ${settingsKeys.length} fields to backend`,
     settingsKeys,
   );
@@ -131,7 +131,7 @@ export async function updateSettings(
   settings: SettingsInput,
 ) {
   try {
-    console.log(
+    console.info(
       `[Settings] Attempt 1: Saving with debridService: ${settings.debridService}, debridToken: ${settings.debridToken ? "SET" : "UNSET"}`,
     );
     return await putSettings(url, account, settings);
@@ -155,7 +155,7 @@ export async function updateSettings(
     try {
       const { debridService: _unsupportedService, ...compatSettings } =
         settings;
-      console.log(
+      console.info(
         `[Settings] Attempt 2: Saving without debridService, debridToken: ${compatSettings.debridToken ? "SET" : "UNSET"}`,
       );
       return await putSettings(url, account, compatSettings);
@@ -180,7 +180,7 @@ export async function updateSettings(
         debridToken: _unsupportedToken,
         ...legacySafeSettings
       } = settings;
-      console.log(
+      console.info(
         "[Settings] Attempt 3: Saving without debridService or debridToken",
       );
       return putSettings(url, account, legacySafeSettings);
