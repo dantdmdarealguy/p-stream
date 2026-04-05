@@ -81,7 +81,7 @@ function parseDebridStreamsLocally(body?: unknown): DebridParsedStream[] {
   if (!Array.isArray(payload)) return [];
 
   return payload
-    .map((item) => {
+    .map((item): DebridParsedStream | null => {
       const stream = item as TorrentParseInput;
       if (!stream?.url) return null;
       const title =
@@ -95,9 +95,9 @@ function parseDebridStreamsLocally(body?: unknown): DebridParsedStream[] {
         codec: parseCodec(inspectionText),
         audio: parseAudio(inspectionText),
         container: parseContainer(inspectionText),
-      } satisfies DebridParsedStream;
+      };
     })
-    .filter((stream): stream is DebridParsedStream => Boolean(stream));
+    .filter((stream): stream is DebridParsedStream => stream !== null);
 }
 
 function makeLoadbalancedList(getter: () => string[]) {
@@ -173,7 +173,8 @@ export function makeLoadBalancedSimpleProxyFetcher() {
         statusCode: 200,
         headers: new Headers(),
         finalUrl: a,
-        body: parseDebridStreamsLocally(b.body),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        body: parseDebridStreamsLocally(b.body) as any,
       };
     }
 

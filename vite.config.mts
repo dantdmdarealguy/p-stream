@@ -139,9 +139,6 @@ export default defineConfig(({ mode }) => {
             if (id.includes("locales") && !id.includes("en.json")) {
               return "locales";
             }
-            if (id.includes("react-dom")) {
-              return "react-dom";
-            }
             if (id.includes("Icon.tsx")) {
               return "Icons";
             }
