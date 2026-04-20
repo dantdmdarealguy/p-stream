@@ -68,8 +68,13 @@ export function useMediaCasting() {
     if (!isChromecastAvailable) return;
     try {
       cast.framework.CastContext.getInstance().requestSession();
-    } catch {
-      // Picker may throw if already connecting — safe to ignore.
+    } catch (err) {
+      // `requestSession` throws when the user dismisses the picker or a
+      // session is already in progress — both are expected non-fatal cases.
+      // Log anything else so genuinely unexpected errors are not silently lost.
+      if (!(err instanceof Error) || !err.message.includes("cancel")) {
+        console.warn("[useMediaCasting] requestSession error:", err);
+      }
     }
   }, [isChromecastAvailable]);
 
