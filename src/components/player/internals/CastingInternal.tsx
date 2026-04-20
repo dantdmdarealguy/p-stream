@@ -24,6 +24,7 @@ export function CastingInternal() {
   const time = usePlayerStore((s) => s.progress.time);
   const metaTitle = usePlayerStore((s) => s.meta?.title);
   const metaType = usePlayerStore((s) => s.meta?.type);
+  const metaPoster = usePlayerStore((s) => s.meta?.poster);
 
   const dataRef = useRef({
     controller,
@@ -32,6 +33,7 @@ export function CastingInternal() {
     time,
     metaTitle,
     metaType,
+    metaPoster,
     caption,
   });
   useEffect(() => {
@@ -42,9 +44,19 @@ export function CastingInternal() {
       time,
       metaTitle,
       metaType,
+      metaPoster,
       caption,
     };
-  }, [controller, player, instance, time, metaTitle, metaType, caption]);
+  }, [
+    controller,
+    player,
+    instance,
+    time,
+    metaTitle,
+    metaType,
+    metaPoster,
+    caption,
+  ]);
 
   useEffect(() => {
     if (isCasting) {
@@ -61,6 +73,7 @@ export function CastingInternal() {
         newDisplay.setMeta({
           title: dataRef.current.metaTitle ?? "",
           type: mediaItemTypeToMediaType(dataRef.current.metaType ?? "movie"),
+          poster: dataRef.current.metaPoster,
         });
         newDisplay.setCaption(dataRef.current.caption);
         setDisplay(newDisplay);
@@ -77,8 +90,9 @@ export function CastingInternal() {
     display?.setMeta({
       title: dataRef.current.metaTitle ?? "",
       type: mediaItemTypeToMediaType(dataRef.current.metaType ?? "movie"),
+      poster: dataRef.current.metaPoster,
     });
-  }, [metaTitle, metaType, display]);
+  }, [metaTitle, metaType, metaPoster, display]);
 
   const connectionChanged = useCallback(
     (e: cast.framework.RemotePlayerChangedEvent) => {
