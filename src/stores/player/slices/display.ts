@@ -95,6 +95,11 @@ export const createDisplaySlice: MakeSlice<DisplaySlice> = (set, get) => ({
         s.interface.canAirplay = canAirplay;
       });
     });
+    newDisplay.on("airplayconnected", (connected) => {
+      set((s) => {
+        s.interface.isAirplaying = connected;
+      });
+    });
     newDisplay.on("playbackrate", (rate) => {
       set((s) => {
         s.mediaPlaying.playbackRate = rate;

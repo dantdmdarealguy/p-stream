@@ -114,6 +114,9 @@ export function makeChromecastDisplayInterface(
 
     const metaData = new chrome.cast.media.GenericMediaMetadata();
     metaData.title = meta.title;
+    if (meta.poster) {
+      metaData.images = [new chrome.cast.Image(meta.poster)];
+    }
 
     let contentUrl = processCdnLink(source.url);
 
@@ -252,7 +255,9 @@ export function makeChromecastDisplayInterface(
     },
     setMeta(data) {
       meta = data;
-      setSource();
+      // Do not call setSource() here — meta is captured lazily in setupSource()
+      // when load() is called. Re-triggering setSource() on every title/type
+      // change would reload the remote media from the start.
     },
 
     pause() {

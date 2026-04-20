@@ -5,6 +5,7 @@ import { isSafari } from "@/utils/detectFeatures";
 
 export function Airplay() {
   const canAirplay = usePlayerStore((s) => s.interface.canAirplay);
+  const isAirplaying = usePlayerStore((s) => s.interface.isAirplaying);
   const display = usePlayerStore((s) => s.display);
   const source = usePlayerStore((s) => s.source);
 
@@ -31,6 +32,7 @@ export function Airplay() {
     <VideoPlayerButton
       onClick={() => display?.startAirplay()}
       icon={Icons.AIRPLAY}
+      className={isAirplaying ? "text-primary-300" : undefined}
     />
   );
 }

@@ -514,6 +514,20 @@ export function makeVideoElementDisplayInterface(): DisplayInterface {
       },
     );
     videoElement.addEventListener(
+      "webkitcurrentplaybacktargetiswirelesschanged",
+      (e: Event) => {
+        const target = e.currentTarget as
+          | (HTMLVideoElement & {
+              webkitCurrentPlaybackTargetIsWireless?: boolean;
+            })
+          | null;
+        emit(
+          "airplayconnected",
+          !!target?.webkitCurrentPlaybackTargetIsWireless,
+        );
+      },
+    );
+    videoElement.addEventListener(
       "webkitpresentationmodechanged",
       webkitPresentationModeChange,
     );

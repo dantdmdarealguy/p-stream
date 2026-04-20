@@ -49,6 +49,7 @@ export type DisplayInterfaceEvents = {
   changedaudiotrack: AudioTrack | null;
   needstrack: boolean;
   canairplay: boolean;
+  airplayconnected: boolean;
   playbackrate: number;
   error: DisplayError;
 };
@@ -63,6 +64,7 @@ export interface qualityChangeOptions {
 export interface DisplayMeta {
   title: string;
   type: MWMediaType;
+  poster?: string;
 }
 
 export interface DisplayCaption {
