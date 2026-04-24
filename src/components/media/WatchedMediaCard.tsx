@@ -69,7 +69,7 @@ export function WatchedMediaCard(props: WatchedMediaCardProps) {
       style={style}
       {...attributes}
       {...listeners}
-      className={isDragging ? "pointer-events-none touch-none" : "touch-none"}
+      className={isDragging ? "pointer-events-none touch-none" : props.editable ? "touch-none" : ""}
     >
       <MediaCard
         media={props.media}
