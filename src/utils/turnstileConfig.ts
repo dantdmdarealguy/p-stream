@@ -1,9 +1,20 @@
+type RuntimeConfigWindow = typeof globalThis & {
+  __CONFIG__?: {
+    VITE_TURNSTILE_SITE_KEY?: string;
+  };
+};
+
 export function getTurnstileSiteKey(): string {
-  const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY?.trim();
+  const runtimeConfig = globalThis as RuntimeConfigWindow;
+  const siteKey =
+    import.meta.env.VITE_TURNSTILE_SITE_KEY?.trim() ??
+    runtimeConfig.__CONFIG__?.VITE_TURNSTILE_SITE_KEY?.trim();
+
   if (!siteKey) {
     throw new Error(
-      "Missing VITE_TURNSTILE_SITE_KEY. Set it to your Cloudflare Turnstile widget site key.",
+      "Missing Turnstile site key. Set VITE_TURNSTILE_SITE_KEY in build-time env or provide window.__CONFIG__.VITE_TURNSTILE_SITE_KEY at runtime.",
     );
   }
+
   return siteKey;
 }
