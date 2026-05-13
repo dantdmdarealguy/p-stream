@@ -7,8 +7,8 @@ import { conf } from "@/setup/config";
 import type { PlayerMeta } from "@/stores/player/slices/source";
 import { usePlayerStore } from "@/stores/player/store";
 import { usePreferencesStore } from "@/stores/preferences";
-import { TURNSTILE_SITE_KEY } from "@/utils/turnstileConfig";
 import { getTurnstileToken } from "@/utils/turnstile";
+import { TURNSTILE_SITE_KEY } from "@/utils/turnstileConfig";
 
 // Thanks Nemo for this API
 const THE_INTRO_DB_BASE_URL = "https://api.theintrodb.org/v2";
