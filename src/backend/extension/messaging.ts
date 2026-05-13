@@ -83,6 +83,11 @@ export function isExtensionActiveCached(): boolean {
   return activeExtension;
 }
 
+/**
+ * Override the cached extension-active flag.
+ * This is used by runtime fallback paths when relay-based extension requests fail
+ * so future provider requests stop routing through extension-only fetchers.
+ */
 export function setExtensionActiveCached(active: boolean): void {
   activeExtension = active;
 }

@@ -205,12 +205,15 @@ function makeFinalHeaders(
 export function makeExtensionFetcher() {
   const fallbackFetcher = makeLoadBalancedSimpleProxyFetcher();
   const fetcher: Fetcher = async (url, ops) => {
+    const body = convertBodyToObject(ops.body);
+    const bodyType = getBodyTypeFromBody(ops.body);
+
     try {
       const result = await sendExtensionRequest<any>({
         url,
         ...ops,
-        body: convertBodyToObject(ops.body),
-        bodyType: getBodyTypeFromBody(ops.body),
+        body,
+        bodyType,
       });
       if (!result?.success) {
         throw new Error(`extension error: ${result?.error}`);
@@ -222,7 +225,13 @@ export function makeExtensionFetcher() {
         statusCode: res.statusCode,
         headers: makeFinalHeaders(ops.readHeaders, res.headers),
       };
-    } catch {
+    } catch (error) {
+      if (
+        !(error instanceof Error) ||
+        !error.message.startsWith("extension error:")
+      ) {
+        throw error;
+      }
       setExtensionActiveCached(false);
       return fallbackFetcher(url, ops);
     }
