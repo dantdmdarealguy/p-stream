@@ -4,7 +4,10 @@ import {
   setM3U8ProxyUrl,
 } from "@p-stream/providers";
 
-import { sendExtensionRequest } from "@/backend/extension/messaging";
+import {
+  sendExtensionRequest,
+  setExtensionActiveCached,
+} from "@/backend/extension/messaging";
 import { getApiToken, setApiToken } from "@/backend/helpers/providerApi";
 import { getM3U8ProxyUrls, getProxyUrls } from "@/utils/proxyUrls";
 
@@ -200,21 +203,38 @@ function makeFinalHeaders(
 }
 
 export function makeExtensionFetcher() {
+  const fallbackFetcher = makeLoadBalancedSimpleProxyFetcher();
   const fetcher: Fetcher = async (url, ops) => {
-    const result = await sendExtensionRequest<any>({
-      url,
-      ...ops,
-      body: convertBodyToObject(ops.body),
-      bodyType: getBodyTypeFromBody(ops.body),
-    });
-    if (!result?.success) throw new Error(`extension error: ${result?.error}`);
-    const res = result.response;
-    return {
-      body: res.body,
-      finalUrl: res.finalUrl,
-      statusCode: res.statusCode,
-      headers: makeFinalHeaders(ops.readHeaders, res.headers),
-    };
+    const body = convertBodyToObject(ops.body);
+    const bodyType = getBodyTypeFromBody(ops.body);
+
+    try {
+      const result = await sendExtensionRequest<any>({
+        url,
+        ...ops,
+        body,
+        bodyType,
+      });
+      if (!result?.success) {
+        throw new Error(`extension error: ${result?.error}`);
+      }
+      const res = result.response;
+      return {
+        body: res.body,
+        finalUrl: res.finalUrl,
+        statusCode: res.statusCode,
+        headers: makeFinalHeaders(ops.readHeaders, res.headers),
+      };
+    } catch (error) {
+      if (
+        !(error instanceof Error) ||
+        !error.message.startsWith("extension error:")
+      ) {
+        throw error;
+      }
+      setExtensionActiveCached(false);
+      return fallbackFetcher(url, ops);
+    }
   };
   return fetcher;
 }

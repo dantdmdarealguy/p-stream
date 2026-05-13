@@ -37,12 +37,8 @@ async function sendMessage<MessageKey extends keyof MessagesMetadata>(
       name: message,
       body: payload,
     })
-      .then((res) => {
-        activeExtension = true;
-        resolve(res);
-      })
+      .then((res) => resolve(res))
       .catch(() => {
-        activeExtension = false;
         resolve(null);
       });
   });
@@ -70,11 +66,30 @@ export async function extensionInfo(): Promise<
   MessagesMetadata["hello"]["res"] | null
 > {
   const message = await sendMessage("hello", undefined, 500);
+  if (
+    message?.success &&
+    message.allowed &&
+    message.hasPermission &&
+    isAllowedExtensionVersion(message.version)
+  ) {
+    activeExtension = true;
+  } else {
+    activeExtension = false;
+  }
   return message;
 }
 
 export function isExtensionActiveCached(): boolean {
   return activeExtension;
+}
+
+/**
+ * Override the cached extension-active flag.
+ * This is used by runtime fallback paths when relay-based extension requests fail
+ * so future provider requests stop routing through extension-only fetchers.
+ */
+export function setExtensionActiveCached(active: boolean): void {
+  activeExtension = active;
 }
 
 export async function isExtensionActive(): Promise<boolean> {
