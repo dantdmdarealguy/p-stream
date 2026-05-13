@@ -37,12 +37,8 @@ async function sendMessage<MessageKey extends keyof MessagesMetadata>(
       name: message,
       body: payload,
     })
-      .then((res) => {
-        activeExtension = true;
-        resolve(res);
-      })
+      .then((res) => resolve(res))
       .catch(() => {
-        activeExtension = false;
         resolve(null);
       });
   });
@@ -70,6 +66,16 @@ export async function extensionInfo(): Promise<
   MessagesMetadata["hello"]["res"] | null
 > {
   const message = await sendMessage("hello", undefined, 500);
+  if (
+    message?.success &&
+    message.allowed &&
+    message.hasPermission &&
+    isAllowedExtensionVersion(message.version)
+  ) {
+    activeExtension = true;
+  } else {
+    activeExtension = false;
+  }
   return message;
 }
 
