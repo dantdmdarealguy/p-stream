@@ -1,7 +1,7 @@
 import { conf } from "@/setup/config";
 import { SimpleCache } from "@/utils/cache";
 import { getTurnstileToken } from "@/utils/turnstile";
-import { TURNSTILE_SITE_KEY } from "@/utils/turnstileConfig";
+import { getTurnstileSiteKey } from "@/utils/turnstileConfig";
 
 import { getMediaDetails } from "./tmdb";
 import { TMDBContentTypes, TMDBMovieData } from "./types/tmdb";
@@ -54,7 +54,7 @@ const getFreshTurnstileToken = async (): Promise<{
 
   // Get new token from Cloudflare
   try {
-    const token = await getTurnstileToken(TURNSTILE_SITE_KEY);
+    const token = await getTurnstileToken(getTurnstileSiteKey());
 
     // Store token in cookie with expiration
     if (typeof window !== "undefined") {

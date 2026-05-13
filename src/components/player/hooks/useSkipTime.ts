@@ -8,7 +8,7 @@ import type { PlayerMeta } from "@/stores/player/slices/source";
 import { usePlayerStore } from "@/stores/player/store";
 import { usePreferencesStore } from "@/stores/preferences";
 import { getTurnstileToken } from "@/utils/turnstile";
-import { TURNSTILE_SITE_KEY } from "@/utils/turnstileConfig";
+import { getTurnstileSiteKey } from "@/utils/turnstileConfig";
 
 // Thanks Nemo for this API
 const THE_INTRO_DB_BASE_URL = "https://api.theintrodb.org/v2";
@@ -169,7 +169,7 @@ export function useSkipTime() {
       try {
         const apiUrl = `${FED_SKIPS_BASE_URL}/${meta.imdbId}/${meta.season?.number}/${meta.episode?.number}`;
 
-        const turnstileToken = await getTurnstileToken(TURNSTILE_SITE_KEY);
+        const turnstileToken = await getTurnstileToken(getTurnstileSiteKey());
         if (!turnstileToken) return null;
 
         const response = await fetch(apiUrl, {

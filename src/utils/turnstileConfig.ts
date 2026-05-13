@@ -1,4 +1,9 @@
-const DEFAULT_TURNSTILE_SITE_KEY = "0x4AAAAAAB6ocCCpurfWRZyC";
-
-export const TURNSTILE_SITE_KEY =
-  import.meta.env.VITE_TURNSTILE_SITE_KEY?.trim() || DEFAULT_TURNSTILE_SITE_KEY;
+export function getTurnstileSiteKey(): string {
+  const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY?.trim();
+  if (!siteKey) {
+    throw new Error(
+      "Missing VITE_TURNSTILE_SITE_KEY. Set it to your Cloudflare Turnstile widget site key.",
+    );
+  }
+  return siteKey;
+}
