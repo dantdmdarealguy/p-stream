@@ -83,6 +83,10 @@ export function isExtensionActiveCached(): boolean {
   return activeExtension;
 }
 
+export function setExtensionActiveCached(active: boolean): void {
+  activeExtension = active;
+}
+
 export async function isExtensionActive(): Promise<boolean> {
   const info = await extensionInfo();
   if (!info?.success) return false;
