@@ -11,6 +11,11 @@ overrides:
   crypto-js@<4.2.0: '>=4.2.0'
   rollup: 4.43.0
 
+patchedDependencies:
+  '@p-stream/providers':
+    hash: 3ye6rq7nealvxauo76oizgwgm4
+    path: patches/@p-stream__providers.patch
+
 importers:
 
   .:
@@ -44,7 +49,7 @@ importers:
         version: 1.8.0
       '@p-stream/providers':
         specifier: github:xp-technologies-dev/providers#production
-        version: https://codeload.github.com/xp-technologies-dev/providers/tar.gz/0cec62538f1aee5bb785b89f26ca76bac87ce796
+        version: https://codeload.github.com/xp-technologies-dev/providers/tar.gz/0cec62538f1aee5bb785b89f26ca76bac87ce796(patch_hash=3ye6rq7nealvxauo76oizgwgm4)
       '@plasmohq/messaging':
         specifier: ^0.6.2
         version: 0.6.2(react@18.3.1)
@@ -1182,7 +1187,6 @@ packages:
 
   '@p-stream/providers@https://codeload.github.com/xp-technologies-dev/providers/tar.gz/0cec62538f1aee5bb785b89f26ca76bac87ce796':
     resolution: {tarball: https://codeload.github.com/xp-technologies-dev/providers/tar.gz/0cec62538f1aee5bb785b89f26ca76bac87ce796}
-    name: '@p-stream/providers'
     version: 3.2.0
 
   '@pkgjs/parseargs@0.11.0':
@@ -5479,7 +5483,7 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@p-stream/providers@https://codeload.github.com/xp-technologies-dev/providers/tar.gz/0cec62538f1aee5bb785b89f26ca76bac87ce796':
+  '@p-stream/providers@https://codeload.github.com/xp-technologies-dev/providers/tar.gz/0cec62538f1aee5bb785b89f26ca76bac87ce796(patch_hash=3ye6rq7nealvxauo76oizgwgm4)':
     dependencies:
       abort-controller: 3.0.0
       cheerio: 1.0.0-rc.12

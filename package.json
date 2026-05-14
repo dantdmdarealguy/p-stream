@@ -135,6 +135,9 @@
     "workbox-window": "^7.3.0"
   },
   "pnpm": {
+    "patchedDependencies": {
+      "@p-stream/providers": "patches/@p-stream__providers.patch"
+    },
     "overrides": {
       "get-func-name@<2.0.1": ">=2.0.1",
       "postcss@<8.4.31": ">=8.4.31",
