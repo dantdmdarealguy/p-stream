@@ -1,0 +1,32 @@
+diff --git a/lib/index.js b/lib/index.js
+index 0f71f42..5ac423d 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -1069,13 +1069,6 @@ async function comboScraper$y(ctx) {
+   var _a;
+   const userToken = getUserToken$2();
+   if (!userToken) throw new NotFoundError("Requires a user token!");
+-  let turnstileToken;
+-  try {
+-    turnstileToken = await getTurnstileToken("0x4AAAAAABgPwhrOT6x6sTjI");
+-  } catch (error) {
+-    alert("FED API Turnstile verification failed. Please refresh the page and try again.");
+-    throw new NotFoundError(`Turnstile verification failed: ${error}`);
+-  }
+   ctx.progress(50);
+   const name = ctx.media.title;
+   let apiUrl2 = `${BASE_URL$3}/fedapi?name=${encodeURIComponent(name)}&year=${ctx.media.releaseYear}&ui=${encodeURIComponent(userToken)}`;
+@@ -1239,13 +1232,6 @@ async function comboScraper$x(ctx) {
+   const userToken = getUserToken$1();
+   if (!userToken) throw new NotFoundError("Requires a user token!");
+   const region = getRegion();
+-  let turnstileToken;
+-  try {
+-    turnstileToken = await getTurnstileToken("0x4AAAAAABgPwhrOT6x6sTjI");
+-  } catch (error) {
+-    alert("FED DB Turnstile verification failed. Please refresh the page and try again.");
+-    throw new NotFoundError(`Turnstile verification failed: ${error}`);
+-  }
+   ctx.progress(50);
+   const apiUrl2 = ctx.media.type === "movie" ? `${BASE_URL$2}/movie/${ctx.media.tmdbId}` : `${BASE_URL$2}/tv/${ctx.media.tmdbId}/${ctx.media.season.number}/${ctx.media.episode.number}`;
+   const data = await ctx.fetcher(apiUrl2);
