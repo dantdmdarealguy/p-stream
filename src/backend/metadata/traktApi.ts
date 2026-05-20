@@ -381,7 +381,9 @@ export const getCuratedMovieLists = async (): Promise<CuratedMovieList[]> => {
     try {
       const response = await fetchFromTrakt(config.endpoint);
       const movieTmdbIds = Array.isArray(response?.movie_tmdb_ids)
-        ? response.movie_tmdb_ids
+        ? response.movie_tmdb_ids.filter(
+            (id): id is number => typeof id === "number" && Number.isFinite(id),
+          )
         : [];
 
       if (!movieTmdbIds.length) {
@@ -407,7 +409,9 @@ export const getMovieDetailsForIds = async (
   tmdbIds: number[],
   limit: number = 50,
 ): Promise<TMDBMovieData[]> => {
-  const limitedIds = tmdbIds.slice(0, limit);
+  const limitedIds = tmdbIds
+    .filter((id): id is number => typeof id === "number" && Number.isFinite(id))
+    .slice(0, limit);
   const movieDetails: TMDBMovieData[] = [];
 
   // Process in smaller batches to avoid overwhelming the API

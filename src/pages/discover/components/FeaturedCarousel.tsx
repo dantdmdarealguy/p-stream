@@ -234,14 +234,19 @@ export function FeaturedCarousel({
                 : [];
             }
 
-            if (!tmdbIds.length) {
+            const validTmdbIds = tmdbIds.filter(
+              (id): id is number =>
+                typeof id === "number" && Number.isFinite(id),
+            );
+
+            if (!validTmdbIds.length) {
               throw new Error(
                 `Trakt discover returned empty TMDB ID list for ${effectiveCategory}`,
               );
             }
 
             // Then fetch full details for each movie/show to get external_ids
-            const detailPromises = tmdbIds.map((id) =>
+            const detailPromises = validTmdbIds.map((id) =>
               get<any>(
                 `/${effectiveCategory === "movies" ? "movie" : "tv"}/${id}`,
                 {
