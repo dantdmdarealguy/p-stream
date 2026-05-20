@@ -219,12 +219,23 @@ export function FeaturedCarousel({
           // First try to get IDs from Trakt discover endpoint
           try {
             const discoverData = await getDiscoverContent();
+            if (!discoverData) {
+              throw new Error("Trakt discover returned null response");
+            }
 
             let tmdbIds: number[] = [];
             if (effectiveCategory === "movies") {
-              tmdbIds = discoverData.movie_tmdb_ids;
+              tmdbIds = Array.isArray(discoverData.movie_tmdb_ids)
+                ? discoverData.movie_tmdb_ids
+                : [];
             } else {
-              tmdbIds = discoverData.tv_tmdb_ids;
+              tmdbIds = Array.isArray(discoverData.tv_tmdb_ids)
+                ? discoverData.tv_tmdb_ids
+                : [];
+            }
+
+            if (!tmdbIds.length) {
+              throw new Error("Trakt discover returned no TMDB IDs");
             }
 
             // Then fetch full details for each movie/show to get external_ids
