@@ -58,6 +58,12 @@ interface IMDbRatingData {
   votes: number;
 }
 
+const hasValidFeaturedMediaId = (item: FeaturedMedia): boolean =>
+  typeof item?.id === "number" && Number.isFinite(item.id);
+
+const sanitizeFeaturedMedia = (items: FeaturedMedia[]): FeaturedMedia[] =>
+  items.filter(hasValidFeaturedMediaId);
+
 function FeaturedCarouselSkeleton({ shorter }: { shorter?: boolean }) {
   return (
     <div
@@ -265,7 +271,9 @@ export function FeaturedCarousel({
             }));
 
             // Take the first SLIDE_QUANTITY items
-            setMedia(mediaItems.slice(0, SLIDE_QUANTITY));
+            setMedia(
+              sanitizeFeaturedMedia(mediaItems).slice(0, SLIDE_QUANTITY),
+            );
           } catch (traktError) {
             console.error(
               "Falling back to TMDB method",
@@ -302,7 +310,9 @@ export function FeaturedCarousel({
               const shuffledMovies = [...allMovies].sort(
                 () => 0.5 - Math.random(),
               );
-              setMedia(shuffledMovies.slice(0, SLIDE_QUANTITY));
+              setMedia(
+                sanitizeFeaturedMedia(shuffledMovies).slice(0, SLIDE_QUANTITY),
+              );
             } else if (effectiveCategory === "tvshows") {
               // First get the list of popular shows
               const listData = await get<any>("/tv/popular", {
@@ -331,7 +341,9 @@ export function FeaturedCarousel({
               const shuffledShows = [...allShows].sort(
                 () => 0.5 - Math.random(),
               );
-              setMedia(shuffledShows.slice(0, SLIDE_QUANTITY));
+              setMedia(
+                sanitizeFeaturedMedia(shuffledShows).slice(0, SLIDE_QUANTITY),
+              );
             }
           }
         } else if (effectiveCategory === "editorpicks") {
@@ -389,7 +401,7 @@ export function FeaturedCarousel({
             type: "show" as const,
           }));
 
-          setMedia([...movies, ...shows]);
+          setMedia(sanitizeFeaturedMedia([...movies, ...shows]));
         }
       } catch (error) {
         console.error("Error fetching featured media:", error);

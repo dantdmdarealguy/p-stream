@@ -72,6 +72,9 @@ export {
   TV_PROVIDERS,
 };
 
+const hasValidDiscoverMediaId = (item: any): item is DiscoverMedia =>
+  typeof item?.id === "number" && Number.isFinite(item.id);
+
 export function useDiscoverOptions(mediaType: MediaType) {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -597,9 +600,12 @@ export function useDiscoverMedia({
 
     try {
       const data = await attemptFetch(contentType);
+      const safeResults = Array.isArray(data.results)
+        ? data.results.filter(hasValidDiscoverMediaId)
+        : [];
       setMedia((prevMedia) => {
         // If page is 1, replace the media array, otherwise append
-        return page === 1 ? data.results : [...prevMedia, ...data.results];
+        return page === 1 ? safeResults : [...prevMedia, ...safeResults];
       });
       setHasMore(data.hasMore);
     } catch (err) {
@@ -611,12 +617,15 @@ export function useDiscoverMedia({
         console.info(`Falling back from ${contentType} to ${fallbackType}`);
         try {
           const fallbackData = await attemptFetch(fallbackType);
+          const safeFallbackResults = Array.isArray(fallbackData.results)
+            ? fallbackData.results.filter(hasValidDiscoverMediaId)
+            : [];
           setActualContentType(fallbackType); // Set actual content type to fallback
           setMedia((prevMedia) => {
             // If page is 1, replace the media array, otherwise append
             return page === 1
-              ? fallbackData.results
-              : [...prevMedia, ...fallbackData.results];
+              ? safeFallbackResults
+              : [...prevMedia, ...safeFallbackResults];
           });
           setHasMore(fallbackData.hasMore);
           setError(null); // Clear error if fallback succeeds
