@@ -27,6 +27,9 @@ export interface UsePersonalRecommendationsReturn {
   hasRecommendations: boolean;
 }
 
+const hasValidDiscoverMediaId = (item: DiscoverMedia): boolean =>
+  typeof item?.id === "number" && Number.isFinite(item.id);
+
 function getHistorySources(
   items: Record<string, { type: "movie" | "show"; watchedAt: number }>,
 ): HistorySource[] {
@@ -107,7 +110,7 @@ export function usePersonalRecommendations({
         bookmarkList,
         excludeIds,
       );
-      setMedia(results);
+      setMedia(results.filter(hasValidDiscoverMediaId));
     } catch (err) {
       setError((err as Error).message);
       setMedia([]);

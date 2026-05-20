@@ -58,6 +58,12 @@ interface IMDbRatingData {
   votes: number;
 }
 
+const hasValidFeaturedMediaId = (item: FeaturedMedia): boolean =>
+  typeof item?.id === "number" && Number.isFinite(item.id);
+
+const sanitizeFeaturedMedia = (items: FeaturedMedia[]): FeaturedMedia[] =>
+  items.filter(hasValidFeaturedMediaId);
+
 function FeaturedCarouselSkeleton({ shorter }: { shorter?: boolean }) {
   return (
     <div
@@ -219,16 +225,34 @@ export function FeaturedCarousel({
           // First try to get IDs from Trakt discover endpoint
           try {
             const discoverData = await getDiscoverContent();
+            if (!discoverData) {
+              throw new Error("Trakt discover returned no response");
+            }
 
             let tmdbIds: number[] = [];
             if (effectiveCategory === "movies") {
-              tmdbIds = discoverData.movie_tmdb_ids;
+              tmdbIds = Array.isArray(discoverData.movie_tmdb_ids)
+                ? discoverData.movie_tmdb_ids
+                : [];
             } else {
-              tmdbIds = discoverData.tv_tmdb_ids;
+              tmdbIds = Array.isArray(discoverData.tv_tmdb_ids)
+                ? discoverData.tv_tmdb_ids
+                : [];
+            }
+
+            const validTmdbIds = tmdbIds.filter(
+              (id): id is number =>
+                typeof id === "number" && Number.isFinite(id),
+            );
+
+            if (!validTmdbIds.length) {
+              throw new Error(
+                `Trakt discover returned empty TMDB ID list for ${effectiveCategory}`,
+              );
             }
 
             // Then fetch full details for each movie/show to get external_ids
-            const detailPromises = tmdbIds.map((id) =>
+            const detailPromises = validTmdbIds.map((id) =>
               get<any>(
                 `/${effectiveCategory === "movies" ? "movie" : "tv"}/${id}`,
                 {
@@ -247,7 +271,9 @@ export function FeaturedCarousel({
             }));
 
             // Take the first SLIDE_QUANTITY items
-            setMedia(mediaItems.slice(0, SLIDE_QUANTITY));
+            setMedia(
+              sanitizeFeaturedMedia(mediaItems).slice(0, SLIDE_QUANTITY),
+            );
           } catch (traktError) {
             console.error(
               "Falling back to TMDB method",
@@ -284,7 +310,9 @@ export function FeaturedCarousel({
               const shuffledMovies = [...allMovies].sort(
                 () => 0.5 - Math.random(),
               );
-              setMedia(shuffledMovies.slice(0, SLIDE_QUANTITY));
+              setMedia(
+                sanitizeFeaturedMedia(shuffledMovies).slice(0, SLIDE_QUANTITY),
+              );
             } else if (effectiveCategory === "tvshows") {
               // First get the list of popular shows
               const listData = await get<any>("/tv/popular", {
@@ -313,7 +341,9 @@ export function FeaturedCarousel({
               const shuffledShows = [...allShows].sort(
                 () => 0.5 - Math.random(),
               );
-              setMedia(shuffledShows.slice(0, SLIDE_QUANTITY));
+              setMedia(
+                sanitizeFeaturedMedia(shuffledShows).slice(0, SLIDE_QUANTITY),
+              );
             }
           }
         } else if (effectiveCategory === "editorpicks") {
@@ -371,7 +401,7 @@ export function FeaturedCarousel({
             type: "show" as const,
           }));
 
-          setMedia([...movies, ...shows]);
+          setMedia(sanitizeFeaturedMedia([...movies, ...shows]));
         }
       } catch (error) {
         console.error("Error fetching featured media:", error);
