@@ -220,7 +220,7 @@ export function FeaturedCarousel({
           try {
             const discoverData = await getDiscoverContent();
             if (!discoverData) {
-              throw new Error("Trakt discover returned null response");
+              throw new Error("Trakt discover returned no response");
             }
 
             let tmdbIds: number[] = [];
@@ -235,7 +235,9 @@ export function FeaturedCarousel({
             }
 
             if (!tmdbIds.length) {
-              throw new Error("Trakt discover returned no TMDB IDs");
+              throw new Error(
+                `Trakt discover returned empty TMDB ID list for ${effectiveCategory}`,
+              );
             }
 
             // Then fetch full details for each movie/show to get external_ids
