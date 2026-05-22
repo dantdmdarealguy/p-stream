@@ -604,8 +604,10 @@ export function useDiscoverMedia({
         ? data.results.filter(hasValidDiscoverMediaId)
         : [];
       setMedia((prevMedia) => {
-        // If page is 1, replace the media array, otherwise append
-        return page === 1 ? safeResults : [...prevMedia, ...safeResults];
+        const valid = data.results.filter(
+          (item: DiscoverMedia) => item.id != null,
+        );
+        return page === 1 ? valid : [...prevMedia, ...valid];
       });
       setHasMore(data.hasMore);
     } catch (err) {
@@ -622,10 +624,10 @@ export function useDiscoverMedia({
             : [];
           setActualContentType(fallbackType); // Set actual content type to fallback
           setMedia((prevMedia) => {
-            // If page is 1, replace the media array, otherwise append
-            return page === 1
-              ? safeFallbackResults
-              : [...prevMedia, ...safeFallbackResults];
+            const valid = fallbackData.results.filter(
+              (item: DiscoverMedia) => item.id != null,
+            );
+            return page === 1 ? valid : [...prevMedia, ...valid];
           });
           setHasMore(fallbackData.hasMore);
           setError(null); // Clear error if fallback succeeds

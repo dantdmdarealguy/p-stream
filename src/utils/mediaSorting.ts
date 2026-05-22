@@ -7,13 +7,16 @@ export type SortOption =
   | "title-asc"
   | "title-desc"
   | "year-asc"
-  | "year-desc";
+  | "year-desc"
+  | "length-asc"
+  | "length-desc";
 
 export function sortMediaItems(
   items: MediaItem[],
   sortBy: SortOption,
   bookmarks?: Record<string, BookmarkMediaItem>,
   progressItems?: Record<string, ProgressMediaItem>,
+  runtimeData?: Record<string, number>,
 ): MediaItem[] {
   const sorted = [...items];
 
@@ -87,8 +90,37 @@ export function sortMediaItems(
       break;
     }
 
+    case "length-asc": {
+      const movies = sorted.filter((i) => i.type === "movie");
+      const shows = sorted.filter((i) => i.type === "show");
+      const byLen = (a: MediaItem, b: MediaItem) => {
+        const lenA = runtimeData?.[a.id] ?? Number.MAX_SAFE_INTEGER;
+        const lenB = runtimeData?.[b.id] ?? Number.MAX_SAFE_INTEGER;
+        if (lenA === lenB) return (a.title ?? "").localeCompare(b.title ?? "");
+        return lenA - lenB;
+      };
+      movies.sort(byLen);
+      shows.sort(byLen);
+      sorted.splice(0, sorted.length, ...movies, ...shows);
+      break;
+    }
+
+    case "length-desc": {
+      const movies = sorted.filter((i) => i.type === "movie");
+      const shows = sorted.filter((i) => i.type === "show");
+      const byLen = (a: MediaItem, b: MediaItem) => {
+        const lenA = runtimeData?.[a.id] ?? -1;
+        const lenB = runtimeData?.[b.id] ?? -1;
+        if (lenA === lenB) return (a.title ?? "").localeCompare(b.title ?? "");
+        return lenB - lenA;
+      };
+      movies.sort(byLen);
+      shows.sort(byLen);
+      sorted.splice(0, sorted.length, ...movies, ...shows);
+      break;
+    }
+
     default: {
-      // Fallback to date sorting for unknown sort options
       sorted.sort((a, b) => {
         const bookmarkA = bookmarks?.[a.id];
         const bookmarkB = bookmarks?.[b.id];
@@ -104,7 +136,7 @@ export function sortMediaItems(
           progressB?.updatedAt ?? 0,
         );
 
-        return dateB - dateA; // Newest first
+        return dateB - dateA;
       });
       break;
     }
