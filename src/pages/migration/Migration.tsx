@@ -1,7 +1,7 @@
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { Icon, Icons } from "@/components/Icon";
+import { Icons } from "@/components/Icon";
 import { Stepper } from "@/components/layout/Stepper";
 import { BiggerCenterContainer } from "@/components/layout/ThinContainer";
 import { VerticalLine } from "@/components/layout/VerticalLine";
@@ -25,25 +25,6 @@ export function MigrationPage() {
         <Paragraph className="max-w-[360px]">
           {t("migration.start.explainer")}
         </Paragraph>
-
-        <div className="w-full bg-pill-background bg-opacity-50 border border-white border-opacity-10 rounded-xl px-5 py-4 mb-6 flex gap-3 items-start">
-          <Icon
-            icon={Icons.CIRCLE_QUESTION}
-            className="text-type-dimmed text-lg mt-0.5 shrink-0"
-          />
-          <p className="text-sm text-type-dimmed">
-            Need to export your data from the original P-Stream first?{" "}
-            <a
-              href="https://pstream-export-visualizer.vercel.app/"
-              target="_blank"
-              rel="noreferrer"
-              className="text-type-link underline hover:opacity-80 transition-opacity"
-            >
-              Use this tool to export your account data
-            </a>{" "}
-            before migrating.
-          </p>
-        </div>
 
         <div className="w-full flex flex-col md:flex-row gap-3">
           <Card

@@ -1,0 +1,36 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH and deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/p-stream
+            git pull origin production
+            ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+
+            PROVIDERS_SHA=$(git ls-remote git@github.com:xp-technologies-dev/private-providers.git main | awk '{print $1}')
+            echo "[deploy] Pinning providers to $PROVIDERS_SHA"
+
+            node -e "
+              const fs = require('fs');
+              const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+              pkg.dependencies['@p-stream/providers'] = 'github:xp-technologies-dev/private-providers#' + '$PROVIDERS_SHA';
+              fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+            "
+
+            rm -rf node_modules/@p-stream node_modules/.pnpm/@p-stream*
+            pnpm install --no-frozen-lockfile
+            pnpm build
+            pm2 restart pstream

@@ -167,8 +167,17 @@ export function makeVideoElementDisplayInterface(): DisplayInterface {
         }
       }
     } else {
-      hls.currentLevel = -1;
-      hls.loadLevel = -1;
+       // Good job fucking up auto qualities on non standarts so i have to make this fix
+      const sortedLevels = sortLevelsByQuality(hls.levels);
+      const topLevel = sortedLevels[0];
+      const topIndex = topLevel ? hls.levels.indexOf(topLevel) : -1;
+      if (topIndex !== -1) {
+        hls.startLevel = topIndex;
+        hls.nextLevel = topIndex;
+      } else {
+        hls.currentLevel = -1;
+        hls.loadLevel = -1;
+      }
     }
     // For manual quality selection, wait for LEVEL_SWITCHED to emit quality
     // to avoid showing intermediate states when HLS switches away from unplayable levels

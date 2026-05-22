@@ -18,6 +18,7 @@ export function sortMedia(
   sortBy: SortOption,
   bookmarks?: Record<string, BookmarkMediaItem>,
   progressItems?: Record<string, ProgressMediaItem>,
+  runtimeData?: Record<string, number>,
 ): MediaItem[] {
-  return sortMediaItems(items, sortBy, bookmarks, progressItems);
+  return sortMediaItems(items, sortBy, bookmarks, progressItems, runtimeData);
 }

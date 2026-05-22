@@ -18,7 +18,7 @@ import { usePlayerStore } from "@/stores/player/store";
 import { usePreferencesStore } from "@/stores/preferences";
 import { useWatchPartyStore } from "@/stores/watchParty";
 
-import { ScrapingPartInterruptButton, Tips } from "./ScrapingPart";
+import { ScrapingPartInterruptButton} from "./ScrapingPart";
 
 export interface PlayerPartProps {
   children?: ReactNode;
@@ -174,7 +174,7 @@ export function PlayerPart(props: PlayerPartProps) {
       </Player.TopControls>
 
       <Player.BottomControls show={showTargets}>
-        {status !== playerStatus.PLAYING && !manualSourceSelection && <Tips />}
+        {/*status !== playerStatus.PLAYING && !manualSourceSelection && <Tips />*/}
         <div className="flex items-center justify-center space-x-3 h-full">
           {status === playerStatus.SCRAPING ? (
             <ScrapingPartInterruptButton />

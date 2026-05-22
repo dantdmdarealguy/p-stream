@@ -10,6 +10,8 @@ import { Listbox } from "@headlessui/react";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { getMediaDetails } from "@/backend/metadata/tmdb";
+import { TMDBContentTypes } from "@/backend/metadata/types/tmdb";
 import { EditButton } from "@/components/buttons/EditButton";
 import { Dropdown, OptionItem } from "@/components/form/Dropdown";
 import { Icon, Icons } from "@/components/Icon";
@@ -58,6 +60,7 @@ export function BookmarksPart({
     const saved = localStorage.getItem("__MW::bookmarksSort");
     return (saved as SortOption) || "date";
   });
+  const [runtimeData, setRuntimeData] = useState<Record<string, number>>({});
   const [activeFolderModal, setActiveFolderModal] = useState<string | null>(
     null,
   );
@@ -73,6 +76,34 @@ export function BookmarksPart({
   useEffect(() => {
     localStorage.setItem("__MW::bookmarksSort", sortBy);
   }, [sortBy]);
+
+  useEffect(() => {
+    if (sortBy !== "length-asc" && sortBy !== "length-desc") return;
+    const ids = Object.keys(bookmarks);
+    const missing = ids.filter((id) => !(id in runtimeData));
+    if (missing.length === 0) return;
+
+    Promise.all(
+      missing.map(async (id) => {
+        const type = bookmarks[id].type === "movie" ? TMDBContentTypes.MOVIE : TMDBContentTypes.TV;
+        try {
+          const data = await getMediaDetails(id, type, false);
+          const value = type === TMDBContentTypes.MOVIE
+            ? (data as any).runtime ?? 0
+            : (data as any).number_of_episodes ?? 0;
+          return [id, value] as [string, number];
+        } catch {
+          return [id, 0] as [string, number];
+        }
+      }),
+    ).then((results) => {
+      setRuntimeData((prev: Record<string, number>) => {
+        const next = { ...prev };
+        results.forEach(([id, val]) => { next[id] = val; });
+        return next;
+      });
+    });
+  }, [sortBy, bookmarks, runtimeData]);
 
   const { allGroups, rootMediaItems } = useMemo(() => {
     const list = getList(bookmarks);
@@ -103,9 +134,9 @@ export function BookmarksPart({
 
     return {
       allGroups: sortedGroups,
-      rootMediaItems: sortMedia(rootItems, sortBy, bookmarks, progressItems),
+      rootMediaItems: sortMedia(rootItems, sortBy, bookmarks, progressItems, runtimeData),
     };
-  }, [bookmarks, groupOrder, sortBy, progressItems]);
+  }, [bookmarks, groupOrder, sortBy, progressItems, runtimeData]);
 
   useEffect(() => {
     onItemsChange(Object.keys(bookmarks).length > 0);
@@ -163,6 +194,8 @@ export function BookmarksPart({
     { id: "title-desc", name: t("home.bookmarks.sorting.options.titleDesc") },
     { id: "year-asc", name: t("home.bookmarks.sorting.options.yearAsc") },
     { id: "year-desc", name: t("home.bookmarks.sorting.options.yearDesc") },
+    { id: "length-asc", name: t("home.bookmarks.sorting.options.lengthAsc") },
+    { id: "length-desc", name: t("home.bookmarks.sorting.options.lengthDesc") },
   ];
 
   const selectedSortOption =
