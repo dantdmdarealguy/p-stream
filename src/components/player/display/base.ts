@@ -167,7 +167,7 @@ export function makeVideoElementDisplayInterface(): DisplayInterface {
         }
       }
     } else {
-      // Good job fucking up auto qualities on non standarts so i have to make this fix
+      // Good job fucking up auto qualities on non standards so i have to make this fix
       const sortedLevels = sortLevelsByQuality(hls.levels);
       const topLevel = sortedLevels[0];
       const topIndex = topLevel ? hls.levels.indexOf(topLevel) : -1;
