@@ -85,12 +85,16 @@ export function BookmarksPart({
 
     Promise.all(
       missing.map(async (id) => {
-        const type = bookmarks[id].type === "movie" ? TMDBContentTypes.MOVIE : TMDBContentTypes.TV;
+        const type =
+          bookmarks[id].type === "movie"
+            ? TMDBContentTypes.MOVIE
+            : TMDBContentTypes.TV;
         try {
           const data = await getMediaDetails(id, type, false);
-          const value = type === TMDBContentTypes.MOVIE
-            ? (data as any).runtime ?? 0
-            : (data as any).number_of_episodes ?? 0;
+          const value =
+            type === TMDBContentTypes.MOVIE
+              ? ((data as any).runtime ?? 0)
+              : ((data as any).number_of_episodes ?? 0);
           return [id, value] as [string, number];
         } catch {
           return [id, 0] as [string, number];
@@ -99,7 +103,9 @@ export function BookmarksPart({
     ).then((results) => {
       setRuntimeData((prev: Record<string, number>) => {
         const next = { ...prev };
-        results.forEach(([id, val]) => { next[id] = val; });
+        results.forEach(([id, val]) => {
+          next[id] = val;
+        });
         return next;
       });
     });
@@ -134,7 +140,13 @@ export function BookmarksPart({
 
     return {
       allGroups: sortedGroups,
-      rootMediaItems: sortMedia(rootItems, sortBy, bookmarks, progressItems, runtimeData),
+      rootMediaItems: sortMedia(
+        rootItems,
+        sortBy,
+        bookmarks,
+        progressItems,
+        runtimeData,
+      ),
     };
   }, [bookmarks, groupOrder, sortBy, progressItems, runtimeData]);
 
