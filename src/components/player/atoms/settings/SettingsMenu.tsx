@@ -8,6 +8,7 @@ import { useCaptions } from "@/components/player/hooks/useCaptions";
 import { Menu } from "@/components/player/internals/ContextMenu";
 import { useOverlayRouter } from "@/hooks/useOverlayRouter";
 import { usePlayerStore } from "@/stores/player/store";
+import { usePreferencesStore } from "@/stores/preferences";
 import { qualityToString } from "@/stores/player/utils/qualities";
 import { useSubtitleStore } from "@/stores/subtitles";
 import { getPrettyLanguageNameFromLocale } from "@/utils/language";
@@ -24,6 +25,10 @@ export function SettingsMenu({ id }: { id: string }) {
   const currentSourceId = usePlayerStore((s) => s.sourceId);
   const currentEmbedId = usePlayerStore(
     (s) => (s as any).embedId as string | null,
+  );
+  const enableStatsOverlay = usePreferencesStore((s) => s.enableStatsOverlay);
+  const setEnableStatsOverlay = usePreferencesStore(
+    (s) => s.setEnableStatsOverlay,
   );
   const sourceName = useMemo(() => {
     if (!currentSourceId) return "...";
@@ -147,6 +152,16 @@ export function SettingsMenu({ id }: { id: string }) {
           }
         >
           {t("player.menus.settings.enableSubtitles")}
+        </Menu.Link>
+        <Menu.Link
+          rightSide={
+            <Toggle
+              enabled={enableStatsOverlay}
+              onClick={() => setEnableStatsOverlay(!enableStatsOverlay)}
+            />
+          }
+        >
+          {t("player.menus.settings.statsForNerds", "Stats for Nerds")}
         </Menu.Link>
         <Menu.ChevronLink onClick={() => router.navigate("/playback")}>
           {t("player.menus.settings.playbackItem")}
