@@ -28,7 +28,7 @@
     "help": "Tidak dapat mencari jawaban? <0>Dapatkan dukungan di sini.</0>",
     "searchPlaceholder": "Pencarian FAQ...",
     "q6": {
-      "body": "Belum ada. Tapi bisa kamu install sebagai PWA (Progressive Web App). Pada IOS, menggunakan safari → Share → Tambahkan ke Home Screen. APK tersedia dalam Fluxer dan masih experiment, tidak direkomendasikan.",
+      "body": "Belum ada. Tapi bisa kamu install sebagai PWA (Progressive Web App). Pada IOS, menggunakan safari → Share → Tambahkan ke Home Screen. APK tersedia dalam Discord dan masih experiment, tidak direkomendasikan.",
       "title": "Apakah ada aplikasi P-Stream?",
       "section": "Umum"
     },
@@ -59,7 +59,7 @@
     },
     "q5": {
       "title": "Bagaimana saya bisa mengetahui lebih lanjut?",
-      "body": "P-Stream memiliki Fluxer server yang bisa diakses melalui header dihalaman ini!",
+      "body": "P-Stream memiliki Discord server yang bisa diakses melalui header dihalaman ini!",
       "section": "Umum"
     },
     "q7": {
@@ -160,7 +160,7 @@
       "disclaimerText": "P-Stream tidak menyimpan berkas media apapun, aplikasi ini hanya menampilkan tautan dari pihak ketiga. Sengketa hukum harus diajukan langsung kepada penyedia pihak ketiga. P-Stream tidak bertanggung jawab atas berkas media yang ditampilkan oleh penyedia pihak ketiga."
     },
     "links": {
-      "fluxer": "Fluxer",
+      "discord": "Discord",
       "legal": "Legal / DMCA",
       "github": "GitHub"
     },

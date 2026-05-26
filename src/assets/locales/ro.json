@@ -20,7 +20,7 @@
       "title": "Ce se întâmplă cu datele mele?"
     },
     "q5": {
-      "body": "P-Stream are un server de Fluxer care poate fi găsit în antetul acestei pagini!",
+      "body": "P-Stream are un server de Discord care poate fi găsit în antetul acestei pagini!",
       "title": "Cum pot afla mai multe?"
     }
   },
@@ -93,7 +93,7 @@
       "disclaimerText": "P-Stream nu găzduiește niciun fișier, ci doar trimite la servicii terțe. Problemele juridice ar trebui abordate cu gazdele și furnizorii de fișiere. P-Stream nu este responsabil pentru niciun fișier media afișat de furnizorii de video."
     },
     "links": {
-      "fluxer": "Fluxer",
+      "discord": "Discord",
       "legal": "Legal / DMCA",
       "github": "GitHub",
       "funding": "Ajută-ne",

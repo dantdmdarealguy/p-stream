@@ -20,7 +20,7 @@
     "title": "Om P-Stream",
     "help": "Hittar du inget svar? <0>Få support här.</0>",
     "q6": {
-      "body": "Inte än, men du kan installera den som en PWA (Progressive Web App). På iOS, gå in på Safari → Dela → Lägg till på startskärmen. På Android, gå in på Chrome → 3 punkter → Lägg till på startskärmen. En experimentell APK finns tillgänglig via vår Fluxer, men den rekommenderas inte.",
+      "body": "Inte än, men du kan installera den som en PWA (Progressive Web App). På iOS, gå in på Safari → Dela → Lägg till på startskärmen. På Android, gå in på Chrome → 3 punkter → Lägg till på startskärmen. En experimentell APK finns tillgänglig via vår Discord, men den rekommenderas inte.",
       "title": "Finns det en P-stream-app?",
       "section": "allmänt"
     },
@@ -54,7 +54,7 @@
     },
     "q5": {
       "title": "Hur kan jag få veta mer?",
-      "body": "P-Stream har en Fluxer-server som kan hittas högst upp på sidan!",
+      "body": "P-Stream har en Discord-server som kan hittas högst upp på sidan!",
       "section": "allmänt"
     },
     "q7": {
@@ -88,7 +88,7 @@
       "section": "uppspelning"
     },
     "q20": {
-      "body": "FED API är vår privata scraper som hämtar strömmar direkt från Febbox. Varje gratis Febbox-konto inkluderar 100 GB/månad med obegränsad bandbredd, och vi använder din UI-token för att hämta innehåll som om du själv tittade på det. Installationen är enklast via en webbläsare på dator, men instruktioner för mobil finns på vår Fluxer.",
+      "body": "FED API är vår privata scraper som hämtar strömmar direkt från Febbox. Varje gratis Febbox-konto inkluderar 100 GB/månad med obegränsad bandbredd, och vi använder din UI-token för att hämta innehåll som om du själv tittade på det. Installationen är enklast via en webbläsare på dator, men instruktioner för mobil finns på vår Discord.",
       "title": "Vad är FED API?",
       "section": "anslutningar"
     },
@@ -215,7 +215,7 @@
       "disclaimerText": "P-Stream hostar inga filer utan länkar endast till filer från tredje part. Eventuella juridiska frågor bör tas upp med källorna till materialet. P-Stream varken ansvarar eller styr över de mediefiler som visas."
     },
     "links": {
-      "fluxer": "Fluxer",
+      "discord": "Discord",
       "legal": "Legal / DMCA",
       "github": "GitHub",
       "twitter": "Twitter",
@@ -572,7 +572,7 @@
         "7": "Håll ned SHIFT och tryck på titeln för att kopiera länken med tid!",
         "8": "Ställ in en anpassad undertextfärg!",
         "9": "Migrera ditt konto till en ny backend i inställningarna!",
-        "10": "Joina Fluxer servern!",
+        "10": "Joina Discord servern!",
         "11": "Använd [ och ] för att justera undertextens timing!",
         "12": "Tryck på MELLANSLAG eller K för att spela/pausa!",
         "13": "Använd vänster och höger piltangent för att hoppa 5 sekunder!",
@@ -873,7 +873,7 @@
             "fedapi": "Valfritt: Febbox token",
             "fedapiDescription": "Ta med ditt eget GRATIS Febbox-konto för att få tillgång till FED API och CIA API, de bästa källorna med 4K-kvalitet, Dolby Atmos, hoppa över intro och snabbast laddningstider! Mycket rekommenderat alternativ!"
           },
-          "outro": "Om du har fler frågor om hur det här fungerar, fråga gärna på <0>P-Stream Fluxer</0> servern!",
+          "outro": "Om du har fler frågor om hur det här fungerar, fråga gärna på <0>P-Stream Discord</0> servern!",
           "proxy": "2. Proxy",
           "default": "3. Standard Setup",
           "defaultDescription": "Använder P-Streams inbyggda proxy. Det är det enklaste alternativet men kan vara långsammare på grund av delad bandbredd.",

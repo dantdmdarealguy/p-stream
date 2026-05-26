@@ -12,8 +12,8 @@ export function SupportInfoModal({ id }: { id: string }) {
         <p className="text-type-secondary">{t("home.support.explanation")}</p>
         <p className="text-type-secondary">
           {t("home.support.explanation2")}{" "}
-          <MwLink url="https://discord.gg/wmbWfk4SGy">
-            {t("home.support.fluxer")}
+          <MwLink url="https://fluxer.gg/VLEQLVSM">
+            {t("home.support.discord")}
           </MwLink>
         </p>
         <div className="text-xs text-type-dimmed text-center">

@@ -8,6 +8,4 @@ The latest version of P-Stream is the only version that is supported, as it is t
 
 You can contact the P-Stream maintainers to report a vulnerability:
 
-- Report the vulnerability in the [P-Stream Fluxer server](https://fluxer.gg/rEBQ3B8E)
-
-Fluxer is an OSS Discord alternative
+- Report the vulnerability in the [P-Stream Discord server](https://docs.pstream.mov/links/discord)

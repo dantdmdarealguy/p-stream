@@ -16,7 +16,7 @@
     },
     "title": "Acerca de P-Stream",
     "q5": {
-      "body": "¡P-Stream tiene un servidor de Fluxer que se puede encontrar en el encabezado de esta página!",
+      "body": "¡P-Stream tiene un servidor de Discord que se puede encontrar en el encabezado de esta página!",
       "title": "¿Cómo puedo obtener más información?"
     },
     "q4": {
@@ -93,7 +93,7 @@
       "disclaimerText": "P-Stream no aloja ningún archivo, simplemente enlaza a servicios de terceros. Los problemas legales deben ser tratados con los proveedores de archivos y servicios. P-Stream no se hace responsable de los archivos multimedia mostrados por los proveedores de vídeo."
     },
     "links": {
-      "fluxer": "Fluxer",
+      "discord": "Discord",
       "legal": "Legal / DMCA",
       "github": "GitHub",
       "twitter": "Twitter",
@@ -294,7 +294,7 @@
           "options": "Tus Opciones:",
           "extensionDescription": "La extensión te brinda acceso a la mayoría de las fuentes. Actúa como un proxy local y puede manejar sitios que necesitan cookies especiales o encabezados para cargar.",
           "proxy": "2. Proxy",
-          "outro": "¡Si tienes más preguntas en cómo esto funciona, siéntete libre de preguntar en el <0>P-Stream Fluxer</0> servidor!"
+          "outro": "¡Si tienes más preguntas en cómo esto funciona, siéntete libre de preguntar en el <0>P-Stream Discord</0> servidor!"
         },
         "title": "Comprender una configuración",
         "recommended": {

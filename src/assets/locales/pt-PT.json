@@ -21,7 +21,7 @@
     "q5": {
       "section": "geral",
       "title": "Como posso saber mais?",
-      "body": "O P-Stream tem um servidor no Fluxer, que podes encontrar no topo desta página!"
+      "body": "O P-Stream tem um servidor no Discord, que podes encontrar no topo desta página!"
     },
     "q25": {
       "section": "linguagem",
@@ -34,7 +34,7 @@
       "section": "pesquisa"
     },
     "q6": {
-      "body": "Ainda não, mas podes instalá-lo como uma PWA (Progressive Web App). No iOS, usa o Safari → Partilhar → Adicionar ao Ecrã Principal. No Android, usa o Chrome → 3 pontos → Adicionar ao Ecrã Principal. Há um APK experimental disponível no nosso Fluxer, mas não é recomendado.",
+      "body": "Ainda não, mas podes instalá-lo como uma PWA (Progressive Web App). No iOS, usa o Safari → Partilhar → Adicionar ao Ecrã Principal. No Android, usa o Chrome → 3 pontos → Adicionar ao Ecrã Principal. Há um APK experimental disponível no nosso Discord, mas não é recomendado.",
       "title": "Existe alguma app do P-Stream?",
       "section": "geral"
     },
@@ -64,7 +64,7 @@
       "section": "reprodução"
     },
     "q20": {
-      "body": "A FED API é o nosso scraper privado que obtém streams diretamente do Febbox. Cada conta gratuita do Febbox inclui 100 GB/mês de largura de banda ilimitada, e usamos o teu token de interface para fazer a pesquisa como se estivesses a ver o conteúdo pessoalmente. A configuração é mais fácil através do navegador no computador, mas há instruções para telemóvel disponíveis no nosso Fluxer.",
+      "body": "A FED API é o nosso scraper privado que obtém streams diretamente do Febbox. Cada conta gratuita do Febbox inclui 100 GB/mês de largura de banda ilimitada, e usamos o teu token de interface para fazer a pesquisa como se estivesses a ver o conteúdo pessoalmente. A configuração é mais fácil através do navegador no computador, mas há instruções para telemóvel disponíveis no nosso Discord.",
       "title": "O que é o FED API?",
       "section": "conexões"
     },
@@ -207,7 +207,7 @@
       "disclaimerText": "P-Stream não hospeda quaisquer ficheiros, apenas faz ligações para serviços de terceiros. Problemas legais devem ser tratados com os anfitriões e fornecedores de ficheiros. O P-Stream não é responsável por quaisquer ficheiros multimédia mostrados pelos fornecedores de vídeo."
     },
     "links": {
-      "fluxer": "Fluxer",
+      "discord": "Discord",
       "legal": "Legal / DMCA",
       "github": "GitHub",
       "twitter": "Twitter",

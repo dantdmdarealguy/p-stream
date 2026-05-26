@@ -93,7 +93,7 @@
       "disclaimerText": "Nota: P-Stream non ospita alcun file ma visualizza solo il contenuto di fornitori di terze parti. Le questioni legali dovrebbero essere affrontate con loro."
     },
     "links": {
-      "fluxer": "Fluxer",
+      "discord": "Discord",
       "legal": "Legal / DMCA",
       "github": "GitHub",
       "twitter": "Twitter",
@@ -624,7 +624,7 @@
     "title": "Supporto",
     "text": "P-Stream è progettato per essere il più intuitivo possibile. Tuttavia, le persone hanno ancora domande e problemi. Questa pagina è qui per aiutare a risolvere queste carenze",
     "q1": {
-      "body": "Be', puoi unirti al <0>Fluxer di P-Stream</0> ufficiale e porre domande lì oppure puoi inviare un'e-mail a quella fornita in fondo a questa pagina.",
+      "body": "Be', puoi unirti al <0>Discord di P-Stream</0> ufficiale e porre domande lì oppure puoi inviare un'e-mail a quella fornita in fondo a questa pagina.",
       "title": "Dove posso ottenere aiuto?"
     }
   },
