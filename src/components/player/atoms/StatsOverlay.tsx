@@ -31,7 +31,7 @@ function collectStats(
   const buffered = video.buffered;
   let bufferAhead = 0;
   if (buffered.length > 0 && !Number.isNaN(video.currentTime)) {
-    for (let i = 0; i < buffered.length; i++) {
+    for (let i = 0; i < buffered.length; i += 1) {
       if (
         buffered.start(i) <= video.currentTime &&
         buffered.end(i) >= video.currentTime

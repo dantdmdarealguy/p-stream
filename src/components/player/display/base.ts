@@ -18,12 +18,12 @@ import {
   isUrlAlreadyProxied,
 } from "@/components/player/utils/proxy";
 import { useLanguageStore } from "@/stores/language";
-import { usePreferencesStore } from "@/stores/preferences";
 import {
   LoadableSource,
   SourceQuality,
   getPreferredQuality,
 } from "@/stores/player/utils/qualities";
+import { usePreferencesStore } from "@/stores/preferences";
 import { processCdnLink } from "@/utils/cdn";
 import {
   canChangeVolume,
@@ -955,8 +955,7 @@ export function makeVideoElementDisplayInterface(): DisplayInterface {
     },
     getHlsStats() {
       if (!hls) return null;
-      const level =
-        hls.currentLevel >= 0 ? hls.levels[hls.currentLevel] : null;
+      const level = hls.currentLevel >= 0 ? hls.levels[hls.currentLevel] : null;
       return {
         bandwidth: hls.bandwidthEstimate,
         levelBitrate: level?.bitrate ?? null,

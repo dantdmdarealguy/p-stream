@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { BrandPill } from "@/components/layout/BrandPill";
 import { Player } from "@/components/player";
 import { SkipSegmentButton } from "@/components/player/atoms/SkipSegmentButton";
+import { StatsOverlay } from "@/components/player/atoms/StatsOverlay";
 import { ThumbsFeedback } from "@/components/player/atoms/ThumbsFeedback";
 import { WatchPartyStatus } from "@/components/player/atoms/WatchPartyStatus";
 import { useShouldShowControls } from "@/components/player/hooks/useShouldShowControls";
@@ -12,7 +13,6 @@ import {
   useSkipTime,
 } from "@/components/player/hooks/useSkipTime";
 import { PauseOverlay } from "@/components/player/overlays/PauseOverlay";
-import { StatsOverlay } from "@/components/player/atoms/StatsOverlay";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { PlayerMeta, playerStatus } from "@/stores/player/slices/source";
 import { usePlayerStore } from "@/stores/player/store";
