@@ -23,6 +23,7 @@ import {
   SourceQuality,
   getPreferredQuality,
 } from "@/stores/player/utils/qualities";
+import { usePreferencesStore } from "@/stores/preferences";
 import { processCdnLink } from "@/utils/cdn";
 import {
   canChangeVolume,
@@ -51,6 +52,23 @@ const qualityThresholds = [
   { minHeight: 420, quality: "480" as SourceQuality },
   { minHeight: 0, quality: "360" as SourceQuality },
 ];
+
+const DEFAULT_BUFFER_CONFIG = {
+  maxBufferLength: 120,
+  maxMaxBufferLength: 240,
+};
+
+const ADAPTIVE_BUFFER_CONFIG = {
+  maxBufferLength: 300,
+  maxMaxBufferLength: 600,
+  maxBufferSize: 120 * 1000 * 1000,
+};
+
+function getBufferConfig() {
+  return usePreferencesStore.getState().enableAdaptiveBuffer
+    ? ADAPTIVE_BUFFER_CONFIG
+    : DEFAULT_BUFFER_CONFIG;
+}
 
 function hlsLevelToQuality(level?: Level): SourceQuality | null {
   if (!level?.height) return null;
@@ -198,8 +216,7 @@ export function makeVideoElementDisplayInterface(): DisplayInterface {
       if (!hls) {
         hls = new Hls({
           autoStartLoad: true,
-          maxBufferLength: 120, // 120 seconds
-          maxMaxBufferLength: 240,
+          ...getBufferConfig(),
           abrEwmaDefaultEstimate: 5 * 1000 * 1000, // 5 Mbps default bandwidth estimate for better ABR decisions
           fragLoadPolicy: {
             default: {

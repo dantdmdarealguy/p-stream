@@ -826,7 +826,8 @@
         "title": "Playback settings",
         "disabled": "(Disabled in watch party)",
         "speedBoosted": "2x",
-        "speedUnboosted": "{{speed}}x"
+        "speedUnboosted": "{{speed}}x",
+        "adaptiveBufferLabel": "Adaptive buffer"
       },
       "quality": {
         "automaticLabel": "Automatic quality",
