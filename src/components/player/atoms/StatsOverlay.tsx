@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { usePlayerStore } from "@/stores/player/store";
 
@@ -22,7 +23,14 @@ function collectStats(
     videoCodec: string | null;
   } | null,
 ): Stats {
-  const quality = video.getVideoPlaybackQuality();
+  let quality: VideoPlaybackQuality | null = null;
+  if (typeof video.getVideoPlaybackQuality === "function") {
+    try {
+      quality = video.getVideoPlaybackQuality();
+    } catch {
+      quality = null;
+    }
+  }
   const resolution =
     video.videoWidth && video.videoHeight
       ? `${video.videoWidth}×${video.videoHeight}`
@@ -64,6 +72,7 @@ function collectStats(
 }
 
 export function StatsOverlay() {
+  const { t } = useTranslation();
   const showStatsOverlay = usePlayerStore((s) => s.interface.showStatsOverlay);
   const display = usePlayerStore((s) => s.display);
   const [stats, setStats] = useState<Stats | null>(null);
@@ -91,21 +100,30 @@ export function StatsOverlay() {
   if (!showStatsOverlay || !stats) return null;
 
   const rows: [string, string][] = [
-    ["Resolution", stats.resolution],
-    ["Codec", stats.codec],
-    ["Bandwidth", stats.bandwidth],
-    ["Level Bitrate", stats.bitrate],
-    ["Buffer Health", stats.bufferHealth],
-    ["Dropped / Total", `${stats.droppedFrames} / ${stats.totalFrames}`],
-    ["Playback Rate", stats.playbackRate],
-    ["Volume", stats.volume],
+    [t("player.statsOverlay.resolution", "Resolution"), stats.resolution],
+    [t("player.statsOverlay.codec", "Codec"), stats.codec],
+    [t("player.statsOverlay.bandwidth", "Bandwidth"), stats.bandwidth],
+    [t("player.statsOverlay.levelBitrate", "Level Bitrate"), stats.bitrate],
+    [
+      t("player.statsOverlay.bufferHealth", "Buffer Health"),
+      stats.bufferHealth,
+    ],
+    [
+      t("player.statsOverlay.droppedTotal", "Dropped / Total"),
+      `${stats.droppedFrames} / ${stats.totalFrames}`,
+    ],
+    [
+      t("player.statsOverlay.playbackRate", "Playback Rate"),
+      stats.playbackRate,
+    ],
+    [t("player.statsOverlay.volume", "Volume"), stats.volume],
   ];
 
   return (
     <div className="absolute top-4 right-4 z-50 pointer-events-none">
       <div className="bg-black/80 text-white text-xs font-mono rounded-lg px-3 py-2 min-w-[220px] space-y-0.5">
         <p className="font-bold text-sm mb-1 text-video-context-light">
-          Stats for Nerds
+          {t("player.statsOverlay.title", "Stats for Nerds")}
         </p>
         {rows.map(([label, value]) => (
           <div key={label} className="flex justify-between gap-4">

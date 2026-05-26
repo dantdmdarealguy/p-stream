@@ -771,6 +771,18 @@
       "device": "device",
       "enabled": "Casting to device 🎬"
     },
+    "statsOverlay": {
+      "title": "Stats for Nerds",
+      "toggle": "Toggle stats overlay",
+      "resolution": "Resolution",
+      "codec": "Codec",
+      "bandwidth": "Bandwidth",
+      "levelBitrate": "Level Bitrate",
+      "bufferHealth": "Buffer Health",
+      "droppedTotal": "Dropped / Total",
+      "playbackRate": "Playback Rate",
+      "volume": "Volume"
+    },
     "menus": {
       "downloads": {
         "button": "Attempt download",
