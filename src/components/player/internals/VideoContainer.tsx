@@ -72,6 +72,9 @@ function VideoElement() {
   const enableNativeSubtitles = usePreferencesStore(
     (s) => s.enableNativeSubtitles,
   );
+  const enableAdaptiveBuffer = usePreferencesStore(
+    (s) => s.enableAdaptiveBuffer,
+  );
   const trackObjectUrl = useObjectUrl(
     () => (srtData ? convertSubtitlesToObjectUrl(srtData) : null),
     [srtData],
@@ -86,6 +89,11 @@ function VideoElement() {
       display.processVideoElement(videoEl.current);
     }
   }, [display, videoEl]);
+
+  // sync adaptive buffer setting with the display interface
+  useEffect(() => {
+    display?.updateAdaptiveBuffer(enableAdaptiveBuffer);
+  }, [display, enableAdaptiveBuffer]);
 
   // Control track visibility based on setting
   useEffect(() => {
