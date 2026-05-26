@@ -18,6 +18,7 @@ import {
   isUrlAlreadyProxied,
 } from "@/components/player/utils/proxy";
 import { useLanguageStore } from "@/stores/language";
+import { usePreferencesStore } from "@/stores/preferences";
 import {
   LoadableSource,
   SourceQuality,
@@ -196,10 +197,12 @@ export function makeVideoElementDisplayInterface(): DisplayInterface {
       if (!Hls.isSupported())
         throw new Error("HLS not supported. Update your browser. 🤦‍♂️");
       if (!hls) {
+        const adaptiveBuffer =
+          usePreferencesStore.getState().enableAdaptiveBuffer;
         hls = new Hls({
           autoStartLoad: true,
-          maxBufferLength: 120, // 120 seconds
-          maxMaxBufferLength: 240,
+          maxBufferLength: adaptiveBuffer ? 600 : 120, // 120 seconds default, 600 when adaptive buffer enabled
+          maxMaxBufferLength: adaptiveBuffer ? 1200 : 240,
           abrEwmaDefaultEstimate: 5 * 1000 * 1000, // 5 Mbps default bandwidth estimate for better ABR decisions
           fragLoadPolicy: {
             default: {
@@ -944,6 +947,21 @@ export function makeVideoElementDisplayInterface(): DisplayInterface {
         label: audioTrack.name,
         language: audioTrack.lang ?? "unknown",
       });
+    },
+    updateAdaptiveBuffer(enabled) {
+      if (!hls) return;
+      hls.config.maxBufferLength = enabled ? 600 : 120;
+      hls.config.maxMaxBufferLength = enabled ? 1200 : 240;
+    },
+    getHlsStats() {
+      if (!hls) return null;
+      const level =
+        hls.currentLevel >= 0 ? hls.levels[hls.currentLevel] : null;
+      return {
+        bandwidth: hls.bandwidthEstimate,
+        levelBitrate: level?.bitrate ?? null,
+        videoCodec: level?.videoCodec ?? null,
+      };
     },
   };
 }
