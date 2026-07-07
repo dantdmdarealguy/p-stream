@@ -51,9 +51,11 @@ function readConnectionStats(): NetworkStats {
   if (!connection) return DEFAULT_NETWORK_STATS;
   return {
     effectiveType: connection.effectiveType ?? null,
-    downlink: typeof connection.downlink === "number" ? connection.downlink : null,
+    downlink:
+      typeof connection.downlink === "number" ? connection.downlink : null,
     rtt: typeof connection.rtt === "number" ? connection.rtt : null,
-    saveData: typeof connection.saveData === "boolean" ? connection.saveData : null,
+    saveData:
+      typeof connection.saveData === "boolean" ? connection.saveData : null,
   };
 }
 
@@ -179,23 +181,15 @@ export function StatsOverlay() {
     videoStats.droppedFrames === null
       ? "unknown"
       : `${videoStats.droppedFrames}${
-          videoStats.totalFrames !== null
-            ? ` / ${videoStats.totalFrames}`
-            : ""
+          videoStats.totalFrames !== null ? ` / ${videoStats.totalFrames}` : ""
         }`;
   const resolutionLabel =
     videoStats.width && videoStats.height
       ? `${videoStats.width}x${videoStats.height}`
       : "unknown";
   const codecLabel =
-    videoStats.videoCodec ||
-    videoStats.audioCodec ||
-    videoStats.codecSet
-      ? [
-          videoStats.videoCodec,
-          videoStats.audioCodec,
-          videoStats.codecSet,
-        ]
+    videoStats.videoCodec || videoStats.audioCodec || videoStats.codecSet
+      ? [videoStats.videoCodec, videoStats.audioCodec, videoStats.codecSet]
           .filter(Boolean)
           .join(" / ")
       : "unknown";
@@ -223,7 +217,10 @@ export function StatsOverlay() {
           <div className="text-[0.6rem] uppercase tracking-wide text-type-secondary">
             Video
           </div>
-          <StatRow label="Current Bitrate" value={formatBitrate(videoStats.bitrate)} />
+          <StatRow
+            label="Current Bitrate"
+            value={formatBitrate(videoStats.bitrate)}
+          />
           <StatRow label="Buffer Ahead" value={bufferLabel} />
           <StatRow label="Dropped Frames" value={droppedFramesLabel} />
           <StatRow label="Resolution" value={resolutionLabel} />

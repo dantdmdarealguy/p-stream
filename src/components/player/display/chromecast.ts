@@ -4,8 +4,8 @@ import fscreen from "fscreen";
 
 import { MWMediaType } from "@/backend/metadata/types/mw";
 import {
-  DisplayDebugInfo,
   DisplayCaption,
+  DisplayDebugInfo,
   DisplayInterface,
   DisplayInterfaceEvents,
   DisplayMeta,

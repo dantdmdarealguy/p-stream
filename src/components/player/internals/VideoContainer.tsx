@@ -75,31 +75,10 @@ function VideoElement() {
   const enableAdaptiveBuffer = usePreferencesStore(
     (s) => s.enableAdaptiveBuffer,
   );
-<<<<<<< HEAD
-  const redisplaySource = usePlayerStore((s) => s.redisplaySource);
-  const status = usePlayerStore((s) => s.status);
-  const progressTime = usePlayerStore((s) => s.progress.time);
-  const lastTimeRef = useRef(0);
-  const hasAdaptiveBufferInitialized = useRef(false);
-=======
->>>>>>> origin/production
   const trackObjectUrl = useObjectUrl(
     () => (srtData ? convertSubtitlesToObjectUrl(srtData) : null),
     [srtData],
   );
-
-  useEffect(() => {
-    lastTimeRef.current = progressTime;
-  }, [progressTime]);
-
-  useEffect(() => {
-    if (!hasAdaptiveBufferInitialized.current) {
-      hasAdaptiveBufferInitialized.current = true;
-      return;
-    }
-    if (!source || status !== playerStatus.PLAYING) return;
-    redisplaySource(lastTimeRef.current ?? 0);
-  }, [enableAdaptiveBuffer, redisplaySource, source, status]);
 
   // Use native tracks when the setting is enabled
   const shouldUseNativeTrack = enableNativeSubtitles && source !== null;

@@ -54,23 +54,6 @@ const qualityThresholds = [
   { minHeight: 0, quality: "360" as SourceQuality },
 ];
 
-const DEFAULT_BUFFER_CONFIG = {
-  maxBufferLength: 120,
-  maxMaxBufferLength: 240,
-};
-
-const ADAPTIVE_BUFFER_CONFIG = {
-  maxBufferLength: 300,
-  maxMaxBufferLength: 600,
-  maxBufferSize: 120 * 1000 * 1000,
-};
-
-function getBufferConfig() {
-  return usePreferencesStore.getState().enableAdaptiveBuffer
-    ? ADAPTIVE_BUFFER_CONFIG
-    : DEFAULT_BUFFER_CONFIG;
-}
-
 function hlsLevelToQuality(level?: Level): SourceQuality | null {
   if (!level?.height) return null;
 
@@ -242,12 +225,8 @@ export function makeVideoElementDisplayInterface(): DisplayInterface {
           usePreferencesStore.getState().enableAdaptiveBuffer;
         hls = new Hls({
           autoStartLoad: true,
-<<<<<<< HEAD
-          ...getBufferConfig(),
-=======
           maxBufferLength: adaptiveBuffer ? 600 : 120, // 120 seconds default, 600 when adaptive buffer enabled
           maxMaxBufferLength: adaptiveBuffer ? 1200 : 240,
->>>>>>> origin/production
           abrEwmaDefaultEstimate: 5 * 1000 * 1000, // 5 Mbps default bandwidth estimate for better ABR decisions
           fragLoadPolicy: {
             default: {
