@@ -18,7 +18,7 @@
       "body": "Alle oplysninger synkroniseres til sudo-backend, som er anderledes end community-backend og hostes selvstændigt af mig, men alle er velkomne til at bruge den."
     },
     "q5": {
-      "body": "P-Stream har en Fluxer server, som kan findes i toppen af den side!",
+      "body": "P-Stream har en Discord server, som kan findes i toppen af den side!",
       "title": "Hvordan kan jeg finde ud af mere?"
     },
     "title": "Om P-Stream (^▽^)",
@@ -93,7 +93,7 @@
       "disclaimerText": "Bemærk: P-Stream hoster ikke selv nogen filer, men viser i stedet kun indhold fra tredjepartsudbydere. Lovmæssige forhold bør afklares med dem."
     },
     "links": {
-      "fluxer": "Fluxer",
+      "discord": "Discord",
       "legal": "Legal / DMCA",
       "github": "GitHub",
       "twitter": "Twitter"
@@ -461,7 +461,7 @@
   "support": {
     "title": "Support",
     "q1": {
-      "body": "Du kan deltage i den officielle <0>P-Stream fluxer</0> og stille spørgsmål der, eller du kan sende en e-mail til den, der er angivet nederst på denne side.",
+      "body": "Du kan deltage i den officielle <0>P-Stream discord</0> og stille spørgsmål der, eller du kan sende en e-mail til den, der er angivet nederst på denne side.",
       "title": "Hvor kan jeg få hjælp?"
     },
     "q2": {

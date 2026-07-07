@@ -20,7 +20,7 @@
       "title": "E quanto aos meus dados e tudo mais?"
     },
     "q5": {
-      "body": "O P-Stream tem um servidor no Fluxer que pode ser encontrado no topo desta página!",
+      "body": "O P-Stream tem um servidor no Discord que pode ser encontrado no topo desta página!",
       "title": "Como posso saber mais?"
     }
   },
@@ -93,7 +93,7 @@
       "disclaimerText": "P-Stream não hospeda nenhum arquivo, apenas fornece links para serviços de terceiros. Questões legais devem ser tratadas com os hosts de arquivos e provedores. P-Stream não é responsável por quaisquer arquivos de mídia exibidos pelos provedores de vídeo."
     },
     "links": {
-      "fluxer": "Fluxer",
+      "discord": "Discord",
       "legal": "Legal / DMCA",
       "github": "GitHub",
       "twitter": "Twitter",
@@ -296,7 +296,7 @@
           "proxy": "2. Proxy",
           "default": "3. Configuração padrão",
           "defaultDescription": "Usa o proxy embutido do P-Stream. É a opção mais fácil, mas pode ser mais lento devido à largura de banda compartilhada.",
-          "outro": "Se tiver mais dúvidas sobre como isto funciona, sinta-se à vontade para perguntar no servidor do <0>P-Stream Fluxer</0>!"
+          "outro": "Se tiver mais dúvidas sobre como isto funciona, sinta-se à vontade para perguntar no servidor do <0>P-Stream Discord</0>!"
         },
         "button": "Mais informação",
         "title": "Entendendo a configuração",

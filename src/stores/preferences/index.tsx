@@ -32,6 +32,7 @@ export interface PreferencesStore {
   debridService: string;
   tidbKey: string | null;
   enableLowPerformanceMode: boolean;
+  enableAdaptiveBuffer: boolean;
   enableNativeSubtitles: boolean;
   enableHoldToBoost: boolean;
   homeSectionOrder: string[];
@@ -40,7 +41,6 @@ export interface PreferencesStore {
   enableAutoResumeOnPlaybackError: boolean;
   enableNumberKeySeeking: boolean;
   enablePauseOverlay: boolean;
-  enableAdaptiveBuffer: boolean;
   enableGamepadControls: boolean;
   gamepadMapping: Record<string, string>;
   keyboardShortcuts: KeyboardShortcuts;
@@ -69,6 +69,7 @@ export interface PreferencesStore {
   setdebridService(v: string): void;
   setTIDBKey(v: string | null): void;
   setEnableLowPerformanceMode(v: boolean): void;
+  setEnableAdaptiveBuffer(v: boolean): void;
   setEnableNativeSubtitles(v: boolean): void;
   setEnableHoldToBoost(v: boolean): void;
   setHomeSectionOrder(v: string[]): void;
@@ -77,7 +78,6 @@ export interface PreferencesStore {
   setEnableAutoResumeOnPlaybackError(v: boolean): void;
   setEnableNumberKeySeeking(v: boolean): void;
   setEnablePauseOverlay(v: boolean): void;
-  setEnableAdaptiveBuffer(v: boolean): void;
   setEnableGamepadControls(v: boolean): void;
   setGamepadMapping(v: Record<string, string>): void;
   setKeyboardShortcuts(v: KeyboardShortcuts): void;
@@ -110,6 +110,7 @@ export const usePreferencesStore = create(
       debridService: "realdebrid",
       tidbKey: null,
       enableLowPerformanceMode: false,
+      enableAdaptiveBuffer: false,
       enableNativeSubtitles: false,
       enableHoldToBoost: true,
       homeSectionOrder: ["watching", "bookmarks"],
@@ -118,7 +119,6 @@ export const usePreferencesStore = create(
       enableAutoResumeOnPlaybackError: true,
       enableNumberKeySeeking: true,
       enablePauseOverlay: false,
-      enableAdaptiveBuffer: false,
       enableGamepadControls: false,
       gamepadMapping: {},
       keyboardShortcuts: DEFAULT_KEYBOARD_SHORTCUTS,
@@ -247,6 +247,11 @@ export const usePreferencesStore = create(
           }
         });
       },
+      setEnableAdaptiveBuffer(v) {
+        set((s) => {
+          s.enableAdaptiveBuffer = v;
+        });
+      },
       setEnableNativeSubtitles(v) {
         set((s) => {
           s.enableNativeSubtitles = v;
@@ -285,11 +290,6 @@ export const usePreferencesStore = create(
       setEnablePauseOverlay(v) {
         set((s) => {
           s.enablePauseOverlay = v;
-        });
-      },
-      setEnableAdaptiveBuffer(v) {
-        set((s) => {
-          s.enableAdaptiveBuffer = v;
         });
       },
       setEnableGamepadControls(v) {

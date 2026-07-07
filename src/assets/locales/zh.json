@@ -20,7 +20,7 @@
       "title": "那我的数据呢？"
     },
     "q5": {
-      "body": "P-Stream 有一个 Fluxer 服务器，可在本页上方找到！",
+      "body": "P-Stream 有一个 Discord 服务器，可在本页上方找到！",
       "title": "如何了解更多信息？"
     }
   },
@@ -93,7 +93,7 @@
       "disclaimerText": "请注意：P-Stream 本身不托管任何文件，只提供第三方提供商的内容。如有法律问题，请与它们联系。"
     },
     "links": {
-      "fluxer": "Fluxer",
+      "discord": "Discord",
       "legal": "Legal / DMCA",
       "github": "GitHub",
       "twitter": "X (Formerly Twitter)"
@@ -761,7 +761,7 @@
     "text": "P-Stream 的设计尽可能方便用户使用。但是人们仍然会有疑问和问题，本页将帮助解决这些问题",
     "q1": {
       "title": "我可以在哪获取帮助？",
-      "body": "您可以加入 <0>P-Stream 官方 Fluxer</0> 并在那里提问，也可以向本页底部的电子邮件地址发送邮件。"
+      "body": "您可以加入 <0>P-Stream 官方 Discord</0> 并在那里提问，也可以向本页底部的电子邮件地址发送邮件。"
     }
   },
   "jip": {
@@ -772,7 +772,7 @@
     "title": "Jip",
     "text": "P-Stream 并不是大风刮来的，它主要是由一个人（一个非常史诗般的人）创造的。",
     "q1": {
-      "body": "您可以加入 <0>P-Stream 官方 Fluxer</0> 并在那里提问，也可以向本页底部的电子邮件地址发送邮件。",
+      "body": "您可以加入 <0>P-Stream 官方 Discord</0> 并在那里提问，也可以向本页底部的电子邮件地址发送邮件。",
       "title": "我可以在哪获取帮助？"
     }
   },

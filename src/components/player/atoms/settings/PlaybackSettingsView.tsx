@@ -256,6 +256,10 @@ export function PlaybackSettingsView({ id }: { id: string }) {
     saveAutoplaySetting(newValue);
   }, [enableAutoplay, setEnableAutoplay, saveAutoplaySetting]);
 
+  const handleAdaptiveBufferToggle = useCallback(() => {
+    setEnableAdaptiveBuffer(!enableAdaptiveBuffer);
+  }, [enableAdaptiveBuffer, setEnableAdaptiveBuffer]);
+
   // Force 1x speed in watch party
   useEffect(() => {
     if (isInWatchParty && display && playbackRate !== 1) {
@@ -290,6 +294,16 @@ export function PlaybackSettingsView({ id }: { id: string }) {
       </Menu.Section>
       <Menu.Section>
         <div className="space-y-4 mt-3">
+          <Menu.Link
+            rightSide={
+              <Toggle
+                enabled={enableAdaptiveBuffer}
+                onClick={handleAdaptiveBufferToggle}
+              />
+            }
+          >
+            {t("player.menus.playback.adaptiveBufferLabel", "Adaptive buffer")}
+          </Menu.Link>
           {canShowAutoplay && (
             <Menu.Link
               rightSide={
@@ -314,16 +328,6 @@ export function PlaybackSettingsView({ id }: { id: string }) {
               {t("settings.preferences.thumbnailLabel")}
             </Menu.Link>
           )}
-          <Menu.Link
-            rightSide={
-              <Toggle
-                enabled={enableAdaptiveBuffer}
-                onClick={() => setEnableAdaptiveBuffer(!enableAdaptiveBuffer)}
-              />
-            }
-          >
-            {t("player.menus.playback.adaptiveBufferLabel", "Adaptive Buffer")}
-          </Menu.Link>
         </div>
       </Menu.Section>
     </>

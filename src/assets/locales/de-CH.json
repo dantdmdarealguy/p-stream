@@ -25,7 +25,7 @@
     },
     "q5": {
       "title": "Wie chani me usefende?",
-      "body": "P-Stream het en Fluxer server, me fendet en zoberscht of de Website!",
+      "body": "P-Stream het en Discord server, me fendet en zoberscht of de Website!",
       "section": "generel"
     },
     "q9": {
@@ -34,7 +34,7 @@
       "section": "suech"
     },
     "q6": {
-      "body": "Momentan noni, aber du chasch en PWA (Progressive Web App) installiere. Of iOS, benotz Safari → Share → Add to Home Screen. Of Andriod, benotz Chrome → 3 dots → Add to Home Screen. En Beta fonere APK esch of üsem Fluxer verfüegbar, aber es werd net empfole.",
+      "body": "Momentan noni, aber du chasch en PWA (Progressive Web App) installiere. Of iOS, benotz Safari → Share → Add to Home Screen. Of Andriod, benotz Chrome → 3 dots → Add to Home Screen. En Beta fonere APK esch of üsem Discord verfüegbar, aber es werd net empfole.",
       "title": "Gets en P-Stream app?",
       "section": "generel"
     },
@@ -165,7 +165,7 @@
       "disclaimerText": "Bitte beacht: P-Stream host kei Date selber, sondern zeigt nor Inhalt vo Drittabieter a. Rechtlichi Froge sete metem Abieter klärt werde."
     },
     "links": {
-      "fluxer": "Fluxer",
+      "discord": "Discord",
       "legal": "Legal / DMCA",
       "github": "GitHub",
       "twitter": "Zwetschere",
@@ -366,7 +366,7 @@
           "extension": "1. Erwiterig",
           "proxy": "2. Proxy",
           "proxyDescription": "Dr Proxy scrape Medien vo andere Websites. Er umgoh Browser-Einschränkige (wie CORS), um s’Scrape z’ermögliche.",
-          "outro": "Wenn du meh Froge hesch, wie das funktioniert, chasch gärn uf em <0>P-Stream Fluxer\\</0>-Server frage!"
+          "outro": "Wenn du meh Froge hesch, wie das funktioniert, chasch gärn uf em <0>P-Stream Discord\\</0>-Server frage!"
         },
         "button": "Me Info",
         "title": "Es Setup versto",
@@ -589,7 +589,7 @@
         "6": "Halt Lesezeichä, um sie z'ändere oder z'lösche!",
         "8": "Wähl en eigeni Ontertetel Farb!",
         "9": "Migrier dis Konto zonere neue Backend i de Einstellungen!",
-        "10": "Tret em Fluxer bi!",
+        "10": "Tret em Discord bi!",
         "11": "Bruch [ und ], om d‘Ontertitel-Ziit z'ändere!",
         "14": "Benotz J ond L zom 10 sekonde z'Skipe!",
         "15": "Dröck F, om Vollbeld ei- oder uszschalte!",
@@ -939,7 +939,7 @@
   "support": {
     "title": "Support",
     "q1": {
-      "body": "Nun, du chasch em Officiele <0>P-Stream-Fluxer</0> biträte ond det Froge stelle oder du chasch en Email schecke a d‘Adresse ganz onte uf dere Site.",
+      "body": "Nun, du chasch em Officiele <0>P-Stream-Discord</0> biträte ond det Froge stelle oder du chasch en Email schecke a d‘Adresse ganz onte uf dere Site.",
       "title": "Wo chani Helf hole?"
     },
     "q2": {
@@ -951,7 +951,7 @@
   "jip": {
     "q1": {
       "title": "Wo bechomi helf?",
-      "body": "Nun, du chasch em Officielle <0>P-Stream-Fluxer</0> biträte ond det Froge stelle oder en Email at adresse wo onde a dere Site esch, schribe."
+      "body": "Nun, du chasch em Officielle <0>P-Stream-Discord</0> biträte ond det Froge stelle oder en Email at adresse wo onde a dere Site esch, schribe."
     },
     "q2": {
       "title": "Wo chani en Fehler oder en Bug mälde?",

@@ -20,7 +20,7 @@
       "title": "Entä tietoni ja muut asiat?"
     },
     "q5": {
-      "body": "P-Streamilla on Fluxer-palvelin, jonka löydät tämän sivun yläosasta!",
+      "body": "P-Streamilla on Discord-palvelin, jonka löydät tämän sivun yläosasta!",
       "title": "Miten voin saada lisätietoa?"
     }
   },
@@ -93,7 +93,7 @@
       "disclaimerText": "P-Stream ei isännöi tiedostoja, se vain linkittää kolmannen osapuolen palveluihin. Lakiasioista tulee ottaa yhteyttä tiedostoisäntään ja palveluntarjoajiin. P-Stream ei ole vastuussa videontarjoajien näyttämistä mediatiedostoista."
     },
     "links": {
-      "fluxer": "Fluxer",
+      "discord": "Discord",
       "legal": "Legal / DMCA",
       "github": "GitHub",
       "twitter": "Twitter",

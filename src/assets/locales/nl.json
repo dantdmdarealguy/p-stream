@@ -20,7 +20,7 @@
       "title": "Hoe zit het met mijn gegevens en dergelijke?"
     },
     "q5": {
-      "body": "P-Stream heeft een Fluxer server die je bovenaan in deze pagina kunt vinden!",
+      "body": "P-Stream heeft een Discord server die je bovenaan in deze pagina kunt vinden!",
       "title": "Hoe kan ik meer te weten komen?"
     }
   },
@@ -93,7 +93,7 @@
       "disclaimerText": "P-Stream host geen bestanden, maar linkt alleen naar diensten van derden. Juridische kwesties moeten worden opgenomen met de bestandshosts en providers. P-Stream is niet verantwoordelijk voor mediabestanden die worden getoond door de videoproviders."
     },
     "links": {
-      "fluxer": "Fluxer",
+      "discord": "Discord",
       "legal": "Legal / DMCA",
       "github": "Github",
       "twitter": "Twitter / X"
@@ -744,7 +744,7 @@
       "title": "Hoe kan ik een bug of probleem melden?"
     },
     "q1": {
-      "body": "Je kunt lid worden van de officiële <0>P‑Stream Fluxer</0> en daar vragen stellen, of je kunt een e‑mail sturen naar het adres onderaan deze pagina.",
+      "body": "Je kunt lid worden van de officiële <0>P‑Stream Discord</0> en daar vragen stellen, of je kunt een e‑mail sturen naar het adres onderaan deze pagina.",
       "title": "Waar kan ik hulp krijgen?"
     }
   },
@@ -782,7 +782,7 @@
     },
     "text": "P‑Stream is niet zomaar uit een kokosnootboom gevallen, het is grotendeels door één persoon gemaakt (en niet zomaar één, maar een zeer epische).",
     "q1": {
-      "body": "Je kunt lid worden van de officiële <0>P‑Stream Fluxer</0> en daar vragen stellen, of je kunt een e‑mail sturen naar het adres onderaan deze pagina.",
+      "body": "Je kunt lid worden van de officiële <0>P‑Stream Discord</0> en daar vragen stellen, of je kunt een e‑mail sturen naar het adres onderaan deze pagina.",
       "title": "Waar kan ik hulp krijgen?"
     },
     "title": "Over de maker"

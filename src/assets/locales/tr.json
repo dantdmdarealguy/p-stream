@@ -24,7 +24,7 @@
       "section": "genel"
     },
     "q5": {
-      "body": "P-Stream’in bir Fluxer sunucusu var, sayfanın en üst kısmına bak!",
+      "body": "P-Stream’in bir Discord sunucusu var, sayfanın en üst kısmına bak!",
       "title": "Daha fazlasını nasıl bulabilirim?"
     },
     "help": "Bir cevap bulamıyor musunuz? <0>Buradan destek alın.</0>",
@@ -106,7 +106,7 @@
       "disclaimerText": "P-Stream herhangi bir dosya barındırmaz, yalnızca 3. parti hizmetlere bağlantı verir. Yasal meseleler, dosya barındırıcıları ve sağlayıcıları ile görüşülmelidir. P-Stream, video sağlayıcıları tarafından gösterilen hiçbir medya dosyasından sorumlu değildir."
     },
     "links": {
-      "fluxer": "Fluxer",
+      "discord": "Discord",
       "legal": "Legal / DMCA",
       "github": "GitHub",
       "twitter": "Twitter",

@@ -80,9 +80,8 @@ export function Footer() {
               {t("footer.links.github")}
             </FooterLink>
           )}
-          {/* TODO: remove discord text */}
           <FooterLink icon={Icons.DISCORD} href={conf().DISCORD_LINK}>
-            {t("footer.links.fluxer")}/Discord
+            {t("footer.links.discord")}
           </FooterLink>
           <div className="inline md:hidden">
             <Legal />

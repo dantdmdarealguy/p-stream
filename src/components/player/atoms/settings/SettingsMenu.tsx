@@ -25,6 +25,8 @@ export function SettingsMenu({ id }: { id: string }) {
   const currentEmbedId = usePlayerStore(
     (s) => (s as any).embedId as string | null,
   );
+  const showStatsOverlay = usePlayerStore((s) => s.interface.showStatsOverlay);
+  const setShowStatsOverlay = usePlayerStore((s) => s.setShowStatsOverlay);
   const sourceName = useMemo(() => {
     if (!currentSourceId) return "...";
     const source = getCachedMetadata().find(
@@ -147,6 +149,16 @@ export function SettingsMenu({ id }: { id: string }) {
           }
         >
           {t("player.menus.settings.enableSubtitles")}
+        </Menu.Link>
+        <Menu.Link
+          rightSide={
+            <Toggle
+              enabled={showStatsOverlay}
+              onClick={() => setShowStatsOverlay(!showStatsOverlay)}
+            />
+          }
+        >
+          {t("player.menus.settings.statsForNerds", "Stats for Nerds")}
         </Menu.Link>
         <Menu.ChevronLink onClick={() => router.navigate("/playback")}>
           {t("player.menus.settings.playbackItem")}

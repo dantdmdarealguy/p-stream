@@ -10,7 +10,7 @@ Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) to keep our community ap
   - [Contents](#contents)
   - [New contributor guide](#new-contributor-guide)
   - [Requesting a feature or reporting a bug](#requesting-a-feature-or-reporting-a-bug)
-    - [Fluxer Server](#fluxer-server)
+    - [Discord Server](#discord-server)
     - [GitHub Issues](#github-issues)
   - [Before you start!](#before-you-start)
   - [Contributing](#contributing)
@@ -31,16 +31,14 @@ To get an overview of the project, read the [README](README.md). Here are some r
 
 There are two places where to request features or report bugs:
 
-- The P-Stream Fluxer server
+- The P-Stream Discord server
 - GitHub Issues
 
-### Fluxer Server
+### Discord Server
 
-If you do not have a GitHub account or want to discuss a feature or bug with us before making an issue, you can join our Fluxer server.
+If you do not have a GitHub account or want to discuss a feature or bug with us before making an issue, you can join our Discord server.
 
-Fluxer is an OSS Discord alternative.
-
-<!-- <a href="https://fluxer.gg/rEBQ3B8E"><img src="https://fluxer.com/api/guilds/1267558147682205738/widget.png?style=banner2" alt="Fluxer Server"></a> -->
+<a href="https://docs.pstream.mov/links/discord"><img src="https://discord.com/api/guilds/1267558147682205738/widget.png?style=banner2" alt="Discord Server"></a>
 
 ### GitHub Issues
 

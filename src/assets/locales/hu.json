@@ -19,7 +19,7 @@
     },
     "q5": {
       "title": "Hol tudhatok meg többet?",
-      "body": "Van a P-Stream-nek egy Fluxer szervere, amit megtalálhatsz ennek az oldalnak a fejlécén!"
+      "body": "Van a P-Stream-nek egy Discord szervere, amit megtalálhatsz ennek az oldalnak a fejlécén!"
     },
     "title": "P-Stream-ről",
     "description": "P-Stream egy mellékágja(forkja) a movie-webnek, amelynek fennmaradása biztosítva van a movie-web.app leállása után is. P-Stream egy privát, \"self-hosted\" VPS-en fut. Az oldalt veszteségesen futtatom;nincsenek reklámok a szabad/ingyenes médiában való hitem miatt."
@@ -93,7 +93,7 @@
       "disclaimerText": "Felhívjuk figyelmedet, hogy a P-Stream nem tárol fájlokat, hanem csak harmadik fél szolgáltatóinak tartalmát jeleníti meg. Jogi kérdésekkel közvetlenül hozzájuk kell fordulni."
     },
     "links": {
-      "fluxer": "Fluxer",
+      "discord": "Discord",
       "legal": "Legal / DMCA",
       "github": "GitHub",
       "twitter": "Twitter",
@@ -389,7 +389,7 @@
             "fedapi": "Továbbiak: FED API (privát) token",
             "fedapiDescription": "Hozd az INGYENES Febbox fioókodat, hogy hozzáférést nyerj a FED API (privát-hoz), a legjobb forrás 4K minőséggel, Dolby Atmos hatással, intro átugrással, és a leggyorsabb betöltési sebességekkel! Nagyon ajánlott opció!"
           },
-          "outro": "Ha több kérdésed van, hogy ez hogyan működik, nyugodtan kérdezz a <0>P-Stream Fluxer</0> szerveren!",
+          "outro": "Ha több kérdésed van, hogy ez hogyan működik, nyugodtan kérdezz a <0>P-Stream Discord</0> szerveren!",
           "defaultDescription": "A P-Stream beépített proxy-ját használja. A legegyszerűbb opció, de lehet lassabb a megosztozott sávszélesség miatt.",
           "extensionDescription": "A bővítmény ad a elérhetőséget a legtöbb forráshoz. Egy lokális proxy-ként viselkedik, és tudja kezelni az olyan oldalakat, amiknek speciális sütik vagy \"header\"-ök kellenek a betöltéshez."
         },
@@ -625,7 +625,7 @@
         "3": "Koppints, és tartsd, vagy tartsd lenyomva a SHIFT-et a szélesképernyőért, teljes képernyő helyett!",
         "5": "Töltsd le a bővítményt több forrásért!",
         "9": "Vidd át a fiókod egy új backendre a beállításoknál!",
-        "10": "Csatlakozz a Fluxer szerverre!",
+        "10": "Csatlakozz a Discord szerverre!",
         "12": "Nyomd le a SPACE-t vagy a 'K'-t hogy lejátszd/megállítsd!",
         "13": "Használd a BAL és JOBB nyilakat, hogy ugorj 5 másodpercet!",
         "15": "Nyomd az F billenytűt, hogy ki/be kapcsold a teljes képernyőt!",
@@ -660,7 +660,7 @@
     "title": "Szupport",
     "text": "P-Stream minnél felhasználó barátabbnak van tervezve. De így is szoktak lenni kérdések, és problémák. Ez az oldal ezeknek a megoldására szolgál",
     "q1": {
-      "body": "Csatlakozhatsz a hivatalos <0>P-Stream fluxer</0> szerverhez, és ott kérdezhetsz, vagy írhatsz egy emailt az oldal alján található címre.",
+      "body": "Csatlakozhatsz a hivatalos <0>P-Stream discord</0> szerverhez, és ott kérdezhetsz, vagy írhatsz egy emailt az oldal alján található címre.",
       "title": "Hol kaphatok segítséget?"
     },
     "q2": {
@@ -673,7 +673,7 @@
     "text": "P-Stream nem került ide a semmiből, nem a fán termett, nagyrészt egy ember által lett csinálva (egy nagyon király ember által).",
     "q1": {
       "title": "Hol kaphatok segítséget?",
-      "body": "Csatlakozhatsz a hivatalos <0>P-Stream fluxer</0> szerverhez, és ott kérdezhetsz, vagy írhatsz egy emailt az oldal alján található címre."
+      "body": "Csatlakozhatsz a hivatalos <0>P-Stream discord</0> szerverhez, és ott kérdezhetsz, vagy írhatsz egy emailt az oldal alján található címre."
     },
     "q2": {
       "title": "Hol tudok jelenteni egy bugot, vagy egy hibát?",

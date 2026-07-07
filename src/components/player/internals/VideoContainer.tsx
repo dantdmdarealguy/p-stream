@@ -125,7 +125,7 @@ function VideoElement() {
       autoPlay
       playsInline
       ref={videoEl}
-      preload="metadata"
+      preload={enableAdaptiveBuffer ? "auto" : "metadata"}
       onContextMenu={(e) => e.preventDefault()}
     >
       {subtitleTrack}

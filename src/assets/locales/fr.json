@@ -24,7 +24,7 @@
       "section": "général"
     },
     "q5": {
-      "body": "P-Stream possède un serveur Fluxer qui peut être trouvé en-tête de page !",
+      "body": "P-Stream possède un serveur Discord qui peut être trouvé en-tête de page !",
       "title": "Comment puis-je en savoir plus ?",
       "section": "général"
     },
@@ -45,7 +45,7 @@
     "q6": {
       "section": "général",
       "title": "Y a-t-il une application P-Stream ?",
-      "body": "Pas encore, mais vous pouvez l'installer en tant que PWA (Progressive Web App). Sur iOS, utilisez Safari → Partager → Sur l'écran d'accueil. Sur Android, utilisez Chrome → 3 points → Ajouter à l'écran d'accueil. Un APK expérimental est disponible via notre Fluxer, mais il n'est pas recommendé."
+      "body": "Pas encore, mais vous pouvez l'installer en tant que PWA (Progressive Web App). Sur iOS, utilisez Safari → Partager → Sur l'écran d'accueil. Sur Android, utilisez Chrome → 3 points → Ajouter à l'écran d'accueil. Un APK expérimental est disponible via notre Discord, mais il n'est pas recommendé."
     },
     "q7": {
       "title": "Comment créer un compte ?",
@@ -104,7 +104,7 @@
     },
     "q20": {
       "title": "Qu'est-ce que l'API FED ?",
-      "body": "L'API FED est notre outil de récupération qui obtient des streams directement à partir de Febbox. Chaque compte Febbox gratuit inclut 100 Go par mois de bande passante illimitée, et nous utilisons votre token d'interface pour récupérer du contenu comme si vous le regardiez vous-même. La configuration la plus facile est avec un navigateur Internet sur ordinateur, mais des instructions pour mobiles sont disponibles sur notre Fluxer.",
+      "body": "L'API FED est notre outil de récupération qui obtient des streams directement à partir de Febbox. Chaque compte Febbox gratuit inclut 100 Go par mois de bande passante illimitée, et nous utilisons votre token d'interface pour récupérer du contenu comme si vous le regardiez vous-même. La configuration la plus facile est avec un navigateur Internet sur ordinateur, mais des instructions pour mobiles sont disponibles sur notre Discord.",
       "section": "connexions"
     },
     "q21": {
@@ -215,7 +215,7 @@
       "disclaimerText": "P-Stream ne stocke pas de fichiers, mais propose des liens vers des services externes. Les problèmes juridiques doivent être traités avec les fournisseurs et les hébergeurs de fichiers. Les fichiers multimédias diffusés par les fournisseurs de vidéos ne sont pas couverts par P-Stream."
     },
     "links": {
-      "fluxer": "Fluxer",
+      "discord": "Discord",
       "legal": "Legal / DMCA",
       "github": "GitHub",
       "twitter": "Twitter",
@@ -448,7 +448,7 @@
             "fedapi": "Optionnel : jeton API FED (privé)",
             "fedapiDescription": "Connectez votre propre compte gratuit Febbox pour accéder à l’API FED (privée), la meilleure source avec qualité 4K, Dolby Atmos, fonction sauter l’intro et des temps de chargement ultra rapides! Cette option est fortement recommandée."
           },
-          "outro": "Si vous avez d’autres questions sur le fonctionnement, n’hésitez pas à les poser sur le serveur <0>Fluxer de P-Stream</0> !",
+          "outro": "Si vous avez d’autres questions sur le fonctionnement, n’hésitez pas à les poser sur le serveur <0>Discord de P-Stream</0> !",
           "extension": "1. Extension",
           "options": "Vos Options :",
           "proxy": "2. Proxy",
@@ -645,7 +645,7 @@
       "tips": {
         "20": "Appuyez sur C pour activer ou désactiver les sous-titres !",
         "8": "Personnalisez la couleur des sous-titres !",
-        "10": "Rejoignez le Fluxer !"
+        "10": "Rejoignez le Discord !"
       }
     },
     "time": {
@@ -1084,7 +1084,7 @@
     "text": "P-Stream a été conçu pour être aussi simple et intuitif que possible. Cependant, il est normal que des questions ou des problèmes surviennent. Cette page est là pour vous aider à y répondre et à résoudre ces difficultés.",
     "title": "Centre d’aide",
     "q1": {
-      "body": "Vous pouvez rejoindre le <0>Fluxer officiel de P-Stream</0> pour poser vos questions, ou envoyer un e-mail à l’adresse indiquée en bas de cette page.",
+      "body": "Vous pouvez rejoindre le <0>Discord officiel de P-Stream</0> pour poser vos questions, ou envoyer un e-mail à l’adresse indiquée en bas de cette page.",
       "title": "Où puis-je obtenir de l’aide ?"
     }
   },
