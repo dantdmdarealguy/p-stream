@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { BrandPill } from "@/components/layout/BrandPill";
 import { Player } from "@/components/player";
 import { SkipSegmentButton } from "@/components/player/atoms/SkipSegmentButton";
+import { StatsOverlay } from "@/components/player/atoms/StatsOverlay";
 import { ThumbsFeedback } from "@/components/player/atoms/ThumbsFeedback";
 import { WatchPartyStatus } from "@/components/player/atoms/WatchPartyStatus";
 import { useShouldShowControls } from "@/components/player/hooks/useShouldShowControls";
@@ -217,6 +218,7 @@ export function PlayerPart(props: PlayerPartProps) {
             status === playerStatus.PLAYING ? (
               <Player.Captions />
             ) : null}
+            <Player.StatsForNerds />
             <Player.Settings />
             {isShifting || isHoldingFullscreen ? (
               <Player.Widescreen />
@@ -238,6 +240,7 @@ export function PlayerPart(props: PlayerPartProps) {
                 <Player.Captions />
               </div>
             ) : null}
+            <Player.StatsForNerds />
             <Player.Settings />
           </div>
           <div>

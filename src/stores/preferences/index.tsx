@@ -42,6 +42,7 @@ export interface PreferencesStore {
   enableAutoResumeOnPlaybackError: boolean;
   enableNumberKeySeeking: boolean;
   enablePauseOverlay: boolean;
+  enableAdaptiveBuffer: boolean;
   enableGamepadControls: boolean;
   gamepadMapping: Record<string, string>;
   keyboardShortcuts: KeyboardShortcuts;
@@ -80,6 +81,7 @@ export interface PreferencesStore {
   setEnableAutoResumeOnPlaybackError(v: boolean): void;
   setEnableNumberKeySeeking(v: boolean): void;
   setEnablePauseOverlay(v: boolean): void;
+  setEnableAdaptiveBuffer(v: boolean): void;
   setEnableGamepadControls(v: boolean): void;
   setGamepadMapping(v: Record<string, string>): void;
   setKeyboardShortcuts(v: KeyboardShortcuts): void;
@@ -122,6 +124,7 @@ export const usePreferencesStore = create(
       enableAutoResumeOnPlaybackError: true,
       enableNumberKeySeeking: true,
       enablePauseOverlay: false,
+      enableAdaptiveBuffer: false,
       enableGamepadControls: false,
       gamepadMapping: {},
       keyboardShortcuts: DEFAULT_KEYBOARD_SHORTCUTS,
@@ -298,6 +301,11 @@ export const usePreferencesStore = create(
       setEnablePauseOverlay(v) {
         set((s) => {
           s.enablePauseOverlay = v;
+        });
+      },
+      setEnableAdaptiveBuffer(v) {
+        set((s) => {
+          s.enableAdaptiveBuffer = v;
         });
       },
       setEnableGamepadControls(v) {

@@ -186,6 +186,12 @@ export function PlaybackSettingsView({ id }: { id: string }) {
   const setEnableThumbnails = usePreferencesStore((s) => s.setEnableThumbnails);
   const enableAutoplay = usePreferencesStore((s) => s.enableAutoplay);
   const setEnableAutoplay = usePreferencesStore((s) => s.setEnableAutoplay);
+  const enableAdaptiveBuffer = usePreferencesStore(
+    (s) => s.enableAdaptiveBuffer,
+  );
+  const setEnableAdaptiveBuffer = usePreferencesStore(
+    (s) => s.setEnableAdaptiveBuffer,
+  );
   const enableLowPerformanceMode = usePreferencesStore(
     (s) => s.enableLowPerformanceMode,
   );
@@ -331,6 +337,16 @@ export function PlaybackSettingsView({ id }: { id: string }) {
               {t("settings.preferences.thumbnailLabel")}
             </Menu.Link>
           )}
+          <Menu.Link
+            rightSide={
+              <Toggle
+                enabled={enableAdaptiveBuffer}
+                onClick={() => setEnableAdaptiveBuffer(!enableAdaptiveBuffer)}
+              />
+            }
+          >
+            {t("player.menus.playback.adaptiveBufferLabel", "Adaptive Buffer")}
+          </Menu.Link>
         </div>
       </Menu.Section>
     </>

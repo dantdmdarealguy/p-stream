@@ -361,5 +361,11 @@ export function makeChromecastDisplayInterface(
     changeAudioTrack() {
       // cant change audio tracks
     },
+    updateAdaptiveBuffer() {
+      // not applicable for chromecast
+    },
+    getHlsStats() {
+      return null;
+    },
   };
 }
