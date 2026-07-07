@@ -54,17 +54,6 @@ export type DisplayInterfaceEvents = {
   error: DisplayError;
 };
 
-export type DisplayDebugInfo = {
-  bitrate: number | null;
-  bandwidthEstimate: number | null;
-  level: number | null;
-  width: number | null;
-  height: number | null;
-  videoCodec: string | null;
-  audioCodec: string | null;
-  codecSet: string | null;
-};
-
 export interface qualityChangeOptions {
   source: LoadableSource | null;
   automaticQuality: boolean;
@@ -108,7 +97,6 @@ export interface DisplayInterface extends Listener<DisplayInterfaceEvents> {
   setPlaybackRate(rate: number): void;
   setMeta(meta: DisplayMeta): void;
   setCaption(caption: DisplayCaption | null): void;
-  getDebugInfo(): DisplayDebugInfo | null;
   getType(): DisplayType;
   getCaptionList(): CaptionListItem[];
   getSubtitleTracks(): MediaPlaylist[];

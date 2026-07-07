@@ -9,7 +9,6 @@ import { Menu } from "@/components/player/internals/ContextMenu";
 import { useOverlayRouter } from "@/hooks/useOverlayRouter";
 import { usePlayerStore } from "@/stores/player/store";
 import { qualityToString } from "@/stores/player/utils/qualities";
-import { usePreferencesStore } from "@/stores/preferences";
 import { useSubtitleStore } from "@/stores/subtitles";
 import { getPrettyLanguageNameFromLocale } from "@/utils/language";
 
@@ -26,10 +25,8 @@ export function SettingsMenu({ id }: { id: string }) {
   const currentEmbedId = usePlayerStore(
     (s) => (s as any).embedId as string | null,
   );
-  const enableStatsOverlay = usePreferencesStore((s) => s.enableStatsOverlay);
-  const setEnableStatsOverlay = usePreferencesStore(
-    (s) => s.setEnableStatsOverlay,
-  );
+  const showStatsOverlay = usePlayerStore((s) => s.interface.showStatsOverlay);
+  const setShowStatsOverlay = usePlayerStore((s) => s.setShowStatsOverlay);
   const sourceName = useMemo(() => {
     if (!currentSourceId) return "...";
     const source = getCachedMetadata().find(
@@ -156,8 +153,8 @@ export function SettingsMenu({ id }: { id: string }) {
         <Menu.Link
           rightSide={
             <Toggle
-              enabled={enableStatsOverlay}
-              onClick={() => setEnableStatsOverlay(!enableStatsOverlay)}
+              enabled={showStatsOverlay}
+              onClick={() => setShowStatsOverlay(!showStatsOverlay)}
             />
           }
         >

@@ -5,7 +5,6 @@ import fscreen from "fscreen";
 import { MWMediaType } from "@/backend/metadata/types/mw";
 import {
   DisplayCaption,
-  DisplayDebugInfo,
   DisplayInterface,
   DisplayInterfaceEvents,
   DisplayMeta,
@@ -213,18 +212,6 @@ export function makeChromecastDisplayInterface(
     off,
     getType() {
       return "casting";
-    },
-    getDebugInfo(): DisplayDebugInfo {
-      return {
-        bitrate: null,
-        bandwidthEstimate: null,
-        level: null,
-        width: null,
-        height: null,
-        videoCodec: null,
-        audioCodec: null,
-        codecSet: null,
-      };
     },
     destroy: () => {
       stopListening();

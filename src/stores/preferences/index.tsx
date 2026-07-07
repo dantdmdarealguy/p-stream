@@ -33,7 +33,6 @@ export interface PreferencesStore {
   tidbKey: string | null;
   enableLowPerformanceMode: boolean;
   enableAdaptiveBuffer: boolean;
-  enableStatsOverlay: boolean;
   enableNativeSubtitles: boolean;
   enableHoldToBoost: boolean;
   homeSectionOrder: string[];
@@ -71,7 +70,6 @@ export interface PreferencesStore {
   setTIDBKey(v: string | null): void;
   setEnableLowPerformanceMode(v: boolean): void;
   setEnableAdaptiveBuffer(v: boolean): void;
-  setEnableStatsOverlay(v: boolean): void;
   setEnableNativeSubtitles(v: boolean): void;
   setEnableHoldToBoost(v: boolean): void;
   setHomeSectionOrder(v: string[]): void;
@@ -113,7 +111,6 @@ export const usePreferencesStore = create(
       tidbKey: null,
       enableLowPerformanceMode: false,
       enableAdaptiveBuffer: false,
-      enableStatsOverlay: false,
       enableNativeSubtitles: false,
       enableHoldToBoost: true,
       homeSectionOrder: ["watching", "bookmarks"],
@@ -253,11 +250,6 @@ export const usePreferencesStore = create(
       setEnableAdaptiveBuffer(v) {
         set((s) => {
           s.enableAdaptiveBuffer = v;
-        });
-      },
-      setEnableStatsOverlay(v) {
-        set((s) => {
-          s.enableStatsOverlay = v;
         });
       },
       setEnableNativeSubtitles(v) {

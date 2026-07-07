@@ -7,7 +7,6 @@ import {
   setDomainRule,
 } from "@/backend/extension/messaging";
 import {
-  DisplayDebugInfo,
   DisplayInterface,
   DisplayInterfaceEvents,
 } from "@/components/player/display/displayInterface";
@@ -105,29 +104,6 @@ export function makeVideoElementDisplayInterface(): DisplayInterface {
     string,
     (value: void | PromiseLike<void>) => void
   >();
-
-  function buildDebugInfo(): DisplayDebugInfo {
-    const levelIndex =
-      hls && typeof hls.currentLevel === "number" && hls.currentLevel >= 0
-        ? hls.currentLevel
-        : null;
-    const level =
-      levelIndex !== null && hls?.levels?.[levelIndex]
-        ? hls.levels[levelIndex]
-        : null;
-    const width = level?.width ?? videoElement?.videoWidth ?? null;
-    const height = level?.height ?? videoElement?.videoHeight ?? null;
-    return {
-      bitrate: level?.bitrate ?? null,
-      bandwidthEstimate: hls?.bandwidthEstimate ?? null,
-      level: levelIndex,
-      width,
-      height,
-      videoCodec: (level as Level | null)?.videoCodec ?? null,
-      audioCodec: (level as Level | null)?.audioCodec ?? null,
-      codecSet: (level as Level | null)?.codecSet ?? null,
-    };
-  }
 
   function reportLevels() {
     if (!hls) return;
@@ -667,9 +643,6 @@ export function makeVideoElementDisplayInterface(): DisplayInterface {
     off,
     getType() {
       return "web";
-    },
-    getDebugInfo() {
-      return buildDebugInfo();
     },
     destroy: () => {
       destroyVideoElement();
