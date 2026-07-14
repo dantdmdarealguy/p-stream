@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Icon, Icons } from "@/components/Icon";
+import { useNotificationsStore } from "@/stores/notifications";
 
 import { DetailView } from "./DetailView";
 import { ListView } from "./ListView";
@@ -18,6 +19,11 @@ import {
 
 export function NotificationModal({ id }: NotificationModalProps) {
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
+  const inAppNotifications = useNotificationsStore((s) => s.inAppNotifications);
+  const setRssNotifications = useNotificationsStore(
+    (s) => s.setRssNotifications,
+  );
+  const syncReadToStore = useNotificationsStore((s) => s.setReadNotifications);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [readNotifications, setReadNotifications] = useState<Set<string>>(
@@ -194,6 +200,7 @@ export function NotificationModal({ id }: NotificationModalProps) {
       }
 
       setNotifications(allNotifications);
+      setRssNotifications(allNotifications);
 
       // Update read notifications after setting notifications
       if (autoReadGuids.length > 0) {
@@ -201,11 +208,13 @@ export function NotificationModal({ id }: NotificationModalProps) {
           const newReadSet = new Set(prevReadSet);
           autoReadGuids.forEach((guid) => newReadSet.add(guid));
 
+          const newReadArray = Array.from(newReadSet);
           // Update localStorage
           localStorage.setItem(
             "read-notifications",
-            JSON.stringify(Array.from(newReadSet)),
+            JSON.stringify(newReadArray),
           );
+          syncReadToStore(newReadArray);
 
           return newReadSet;
         });
@@ -220,7 +229,7 @@ export function NotificationModal({ id }: NotificationModalProps) {
     } finally {
       setLoading(false);
     }
-  }, [autoReadDays]);
+  }, [autoReadDays, setRssNotifications, syncReadToStore]);
 
   // Initial fetch
   useEffect(() => {
@@ -238,11 +247,10 @@ export function NotificationModal({ id }: NotificationModalProps) {
     newReadSet.add(guid);
     setReadNotifications(newReadSet);
 
+    const newReadArray = Array.from(newReadSet);
     // Save to localStorage
-    localStorage.setItem(
-      "read-notifications",
-      JSON.stringify(Array.from(newReadSet)),
-    );
+    localStorage.setItem("read-notifications", JSON.stringify(newReadArray));
+    syncReadToStore(newReadArray);
   };
 
   // Mark all as read
@@ -254,12 +262,14 @@ export function NotificationModal({ id }: NotificationModalProps) {
       "read-notifications",
       JSON.stringify(Array.from(newReadSet)),
     );
+    syncReadToStore(Array.from(newReadSet));
   };
 
   // Mark all as unread
   const markAllAsUnread = () => {
     setReadNotifications(new Set());
     localStorage.setItem("read-notifications", JSON.stringify([]));
+    syncReadToStore([]);
   };
 
   // Navigate to detail view
@@ -329,7 +339,10 @@ export function NotificationModal({ id }: NotificationModalProps) {
     }
   }, [notifications, readNotifications, currentView]);
 
-  const unreadCount = notifications.filter(
+  // Merge in-app notifications (newest first) with RSS notifications
+  const allNotifications = [...inAppNotifications, ...notifications];
+
+  const unreadCount = allNotifications.filter(
     (n) => !readNotifications.has(n.guid),
   ).length;
 
@@ -369,7 +382,7 @@ export function NotificationModal({ id }: NotificationModalProps) {
     >
       {currentView === "list" ? (
         <ListView
-          notifications={notifications}
+          notifications={allNotifications}
           readNotifications={readNotifications}
           unreadCount={unreadCount}
           loading={loading}
@@ -399,10 +412,12 @@ export function NotificationModal({ id }: NotificationModalProps) {
               const newReadSet = new Set(readNotifications);
               newReadSet.delete(selectedNotification.guid);
               setReadNotifications(newReadSet);
+              const newReadArray = Array.from(newReadSet);
               localStorage.setItem(
                 "read-notifications",
-                JSON.stringify(Array.from(newReadSet)),
+                JSON.stringify(newReadArray),
               );
+              syncReadToStore(newReadArray);
             } else {
               // Mark as read
               markAsRead(selectedNotification.guid);
